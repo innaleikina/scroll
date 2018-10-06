@@ -15,10 +15,10 @@ const userSchema = new Schema({
     required: true
   }, //encrypt!
   following: {
-    type: Schema.Types.ObjectId
+    type: Array
   },
   followers: {
-    type: Schema.Types.ObjectId
+    type: Array
   },
   post: [{
     type: Schema.Types.ObjectId,
