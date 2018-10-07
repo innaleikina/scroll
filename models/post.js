@@ -6,7 +6,10 @@ const postSchema = new Schema({
     type: String,
     required: true
   },
-  updated: { type: Date, default: Date.now },
+  updated: {
+    type: Date,
+    default: Date.now
+  },
   type: {
     type: String,
     required: true

@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    unique:true
   },
   username: {
     type: String,
@@ -23,10 +24,6 @@ const userSchema = new Schema({
   post: [{
     type: Schema.Types.ObjectId,
     ref: "Post"
-  }],
-  comment: [{
-    type: Schema.Types.ObjectId,
-    ref: "Comment"
   }],
   postsLiked: [{
     type: Schema.Types.ObjectId,
