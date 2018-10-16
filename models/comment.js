@@ -6,18 +6,14 @@ const commentSchema = new Schema({
     type: String,
     required: true
   },
-  date: {
+  updated: {
     type: Date,
-    required: true
+    default: Date.now
   },
   content: {
     type: String,
     required: true
-  },
-  post: [{
-    type: Schema.Types.ObjectId,
-    ref: "Post"
-  }]
+  }
 });
 
 const Comment = mongoose.model("Comment", commentSchema);
