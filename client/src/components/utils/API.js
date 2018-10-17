@@ -6,8 +6,8 @@ export default {
     return axios.get("/post/all");
   },
   // Gets the book with the given id
-  getArticle: function(id) {
-    return axios.get("/api/articles/" + id);
+  getPost: function(id) {
+    return axios.get("/post/" + id);
   },
   // Deletes the book with the given id
   deleteArticle: function(id) {
