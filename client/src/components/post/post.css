@@ -1,0 +1,5 @@
+.posts{
+    /* border:1px red solid; */
+    flex-direction: column;
+    display:flex;
+}

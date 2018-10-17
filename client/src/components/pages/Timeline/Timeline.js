@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {List, ListItem} from "../../list";
+import {Posts, PostItem} from "../../post";
 import API from "../../utils/API";
-
+import  "./timeline.css";
 
 
 class Timeline extends Component {
@@ -28,16 +28,16 @@ class Timeline extends Component {
 
   render() {
     return (
-        <div>
+        <div >
         <h3> Timeline </h3>
-        <List>
+        <Posts>
         {this.state.posts.map(post => (
-        <ListItem key={post._id}>
+        <PostItem key={post._id}>
            <p data-post={post._id}>{post.content}  by {post.author}  </p>
            {/* <Button onClick={() => this.deleteArticle(article._id)}> delete </Button> */}
-        </ListItem>
+        </PostItem>
         ))}
-    </List>
+    </Posts>
     </div>
     );
   }
