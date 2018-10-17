@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
   author: {
-    type: String,
-    required: true
+    type: Schema.Types.ObjectId,
+    ref: "User"
   },
   updated: {
     type: Date,

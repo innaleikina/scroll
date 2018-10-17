@@ -5,6 +5,7 @@ module.exports = {
   findAll: function (req, res) {
     db.Post
       .find(req.query)
+      .populate("author")
       .sort({
         date: -1
       })

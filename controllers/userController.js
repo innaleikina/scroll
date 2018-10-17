@@ -5,9 +5,8 @@ module.exports = {
     findAll: function (req, res) {
         db.User
             .find(req.query)
-            .populate(
-                "post"
-            ).populate("comment")
+            .populate("post")
+            .populate("comment")
             .sort({
                 date: -1
             })
