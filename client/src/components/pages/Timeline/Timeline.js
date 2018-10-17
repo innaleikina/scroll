@@ -7,7 +7,7 @@ import  "./timeline.css";
 class Timeline extends Component {
 
     state = {
-        posts: [],
+        posts: []
     }
 
     componentDidMount() {
@@ -19,9 +19,8 @@ class Timeline extends Component {
             .then(res =>
                 this.setState({
                     posts: res.data,
-                })
+                }, console.log(res.data))
             )
-            
             .catch(err => console.log(err));
     };
 
@@ -33,7 +32,7 @@ class Timeline extends Component {
         <Posts>
         {this.state.posts.map(post => (
         <PostItem key={post._id}>
-           <p data-post={post._id}>{post.content}  by {post.author}  </p>
+           <p data-post={post._id}>{post.content}  by {post.author.username}  </p>
            {/* <Button onClick={() => this.deleteArticle(article._id)}> delete </Button> */}
         </PostItem>
         ))}
