@@ -6,9 +6,9 @@ router.route("/all")
 
 
 router.route("/:id/:userid")
-// This route uses the post id
+
   .post(commentController.create)
-  // This route uses the user id
+
   .get(commentController.findById)
   // !!!!This route uses the COMMENT id!!!!!!
   router.route("/:id")
