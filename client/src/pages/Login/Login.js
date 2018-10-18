@@ -6,7 +6,9 @@ class Login extends Component {
   state = {
     name: "",
     email: "",
-    password: ""
+    password: "",
+    username: "",
+    passwordLogin: ""
   }
 
   handleInputChange = event => {
@@ -31,8 +33,17 @@ class Login extends Component {
     }
   };
 
+  handleLogin = event => {
+    event.preventDefault();
+    if (this.state.username && this.state.passwordLogin) {
+      console.log("loggin in");
+    }
+  }
+
   render() {
     return (
+      <div>
+      <h3>Sign Up Below:</h3>
       <form>
       <SignUp
         label="Name"
@@ -67,6 +78,33 @@ class Login extends Component {
       >
       </SubmitSignUp>
     </form>
+    <hr/>
+    <h3>Or Login:</h3>
+    <form>
+      <SignUp
+        label="Username/Email"
+        id="username"
+        placeholder="john@smith.com"
+        name="username"
+        value={this.state.username}
+        onChange={this.handleInputChange}
+      >
+      </SignUp>
+      <SignUp
+        label="Password"
+        id="passwordLogin"
+        placeholder="password"
+        name="passwordLogin"
+        value={this.state.passwordLogin}
+        onChange={this.handleInputChange}
+      >
+      </SignUp>
+      <SubmitSignUp
+      onClick={this.handleLogin}
+      >
+      </SubmitSignUp>
+    </form>
+    </div>
     )
   }
 };
