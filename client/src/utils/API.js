@@ -18,7 +18,8 @@ export default {
     return axios.post("/api/articles", articlesData);
   },
 
-  getAuthor: function(id) {
-    return axios.get("/user/" + id);
+  createUser: function(userData) {
+    console.log(userData);
+    return axios.post("/user", userData);
   }
 };

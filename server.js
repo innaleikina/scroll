@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const  routes = require('./routes');
+const routes = require('./routes');
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 

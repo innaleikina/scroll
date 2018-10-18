@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {SignUp, SubmitSignUp} from "../../components/SignUp";
+import API from "../../utils/API";
 
 class Login extends Component {
   state = {
@@ -19,9 +20,14 @@ class Login extends Component {
     event.preventDefault();
     if (this.state.name && this.state.email && this.state.password) {
       console.log("inputs working");
-    //   API.createUser(this.state.topic, this.state.startYr, this.state.endYr)
-    //     .then(res => this.setState({ articles: res.data.response.docs, topic: "", startYr: "", endYr: "" }, this.loadArticles))
-    //     .catch(err => console.log(err));
+      const newUser = {
+        name: this.state.name,
+        username: this.state.email,
+        password: this.state.password
+      }
+      API.createUser(newUser)
+        .then(res => console.log("created user"))
+        .catch(err => console.log(err));
     }
   };
 
@@ -51,6 +57,7 @@ class Login extends Component {
         id="password"
         placeholder="password"
         name="password"
+        type="password"
         value={this.state.password}
         onChange={this.handleInputChange}
       >

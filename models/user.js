@@ -16,7 +16,7 @@ const UserSchema = new Schema({
   passwordHash: {
     type: String,
     required: true
-  }, //encrypt!
+  },
   following: {
     type: Array
   },
