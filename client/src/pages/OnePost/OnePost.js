@@ -91,7 +91,7 @@ class OnePost extends Component {
           <h6> Comments </h6>
          {/* MAP FUNCTION TO GET COMMENTS */}
           {this.state.comments.map(comment => (
-          <div  key={comment._id}>
+          <div  key={comment}>
              <p  data-comment={comment._id}>{comment.content}  </p>
            </div>
            ))}
