@@ -24,7 +24,8 @@ export default {
     return axios.get("comment/", commentId);
   },
 
-  getAuthor: function(id) {
-    return axios.get("/user/" + id);
+  createUser: function(userData) {
+    console.log(userData);
+    return axios.post("/user", userData);
   }
 };

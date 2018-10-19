@@ -31,7 +31,6 @@ module.exports = {
       }, {
         new: true
       }))
-      
   },
   update: function (req, res) {
     db.Comment

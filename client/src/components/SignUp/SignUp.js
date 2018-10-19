@@ -1,22 +1,8 @@
 import React from "react";
 
-const SignUp = (props) => (
-<form>
+export const SignUp = (props) => (
   <div className="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
-    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+    <label>{props.label}</label>
+    <input type="text" className="form-control" id={props.id} placeholder={props.placeholder} {...props}/>
   </div>
-  <div className="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"/>
-  </div>
-  <div className="form-group form-check">
-    <input type="checkbox" clasclassNames="form-check-input" id="exampleCheck1"/>
-    <label className="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" className="btn btn-primary">Submit</button>
-</form>
 );
-
-export default SignUp;
