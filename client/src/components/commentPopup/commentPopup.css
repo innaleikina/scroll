@@ -1,0 +1,10 @@
+.pop-up{
+    height:200px;
+    width:300px;
+    border:1px red solid;
+    display:flex;
+    flex-direction:column;
+    justify-content: space-around;
+    align-items:center;
+    /* display:none; */
+}

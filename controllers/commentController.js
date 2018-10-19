@@ -18,21 +18,19 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
-    const userID = req.params.userid;
     const postID = req.params.id;
+    const userID = req.params.userid;
     db.Comment
       .create(req.body)
       .then(dbComment => db.Post.findOneAndUpdate({
-          _id: postID,
-        }, {
-          $push: {
-            comment: dbComment._id
-          }
-        }, {
-          new: true
-        }))
-      .then(dbComment => res.json(dbComment))
-      .catch(err => res.status(422).json(err));
+        _id: postID,
+      }, {
+        $push: {
+          comment: dbComment._id
+        }
+      }, {
+        new: true
+      }))
   },
   update: function (req, res) {
     db.Comment

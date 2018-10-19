@@ -6,16 +6,22 @@ export default {
     return axios.get("/post/all");
   },
   // Gets the book with the given id
-  getArticle: function(id) {
-    return axios.get("/api/articles/" + id);
+  getPost: function(id) {
+    return axios.get("/post/" + id);
+  },
+  deletePost: function(id) {
+    return axios.delete("/post/" + id);
+  },
+  
+  postComment: function(userid,id) {
+    return axios.post("/comment/" + userid +"/"+ id);
+
   },
   // Deletes the book with the given id
-  deleteArticle: function(id) {
-    return axios.delete("/api/articles/" + id);
-  },
+  
   // Saves a book to the database
-  saveArticle: function(articlesData) {
-    return axios.post("/api/articles", articlesData);
+  getComment: function(commentId) {
+    return axios.get("comment/", commentId);
   },
 
   createUser: function(userData) {

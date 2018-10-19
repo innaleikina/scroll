@@ -3,7 +3,6 @@ import {Posts, PostItem} from "../../components/post";
 import API from "../../utils/API";
 import "./timeline.css";
 
-
 class Timeline extends Component {
 
     state = {
@@ -31,8 +30,11 @@ class Timeline extends Component {
         <h3> Timeline </h3>
         <Posts>
         {this.state.posts.map(post => (
-        <PostItem key={post._id}>
-           <p data-post={post._id}>{post.content}  by {post.author.username}  </p>
+        <PostItem  key={post._id}>
+          {/* p wrapped in a with href to make going to the OpenPost page possible */}
+           <a href={`/post/${post._id}`}>
+                 <p  data-post={post._id}>{post.content}  by {post.author.username}  </p>
+           </a>
            {/* <Button onClick={() => this.deleteArticle(article._id)}> delete </Button> */}
         </PostItem>
         ))}
