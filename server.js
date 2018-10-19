@@ -30,18 +30,18 @@ passport.deserializeUser(function(userId, done) {
   User.findById(userId, (err, user) => done(err, user));
 });
 
-const local = new LocalStrategy((username, password, done) => {
-  User.findOne({ username })
-    .then(user => {
-      if (!user || !user.validPassword(password)) {
-        done(null, false, { message: "Invalid username/password" });
-      } else {
-        done(null, user);
-      }
-    })
-    .catch(e => done(e));
-});
-passport.use("local", local);
+// const local = new LocalStrategy((username, password, done) => {
+//   User.findOne({ username })
+//     .then(user => {
+//       if (!user || !user.validPassword(password)) {
+//         done(null, false, { message: "Invalid username/password" });
+//       } else {
+//         done(null, user);
+//       }
+//     })
+//     .catch(e => done(e));
+// });
+// passport.use("local", local);
 
 ////SETTING UP PASSPORT END---------------------------------------------------
 
