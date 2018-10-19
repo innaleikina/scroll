@@ -1,11 +1,9 @@
-
-
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Main from "./components/pages/Main";
-import Timeline from "./components/pages/Timeline";
-
+import Main from "./pages/Main";
+import Timeline from "./pages/Timeline";
 import {NavBar, NavItem} from "./components/nav";
+import Login from "./pages/Login";
 
 
 const App = () => (
@@ -21,6 +19,7 @@ const App = () => (
       <Switch>
       <Route exact path="/" component={Main} />
 
+        <Route exact path="/login" component={Login} />
         <Route exact path="/home" component={Timeline} />
         <Route exact path="/search" component={Main} />
         <Route exact path="/user" component={Main} />

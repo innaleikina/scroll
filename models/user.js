@@ -8,7 +8,7 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  username: {
+  email: {
     type: String,
     required: true,
     unique: true
@@ -16,7 +16,7 @@ const UserSchema = new Schema({
   passwordHash: {
     type: String,
     required: true
-  }, //encrypt!
+  },
   following: {
     type: Array
   },
