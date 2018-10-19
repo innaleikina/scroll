@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import API from "../../components/utils/API";
+import API from "../../utils/API";
 import  "./onePost.css";
 import {Button} from "../../components/form";
 import {CommentPopup} from "../../components/commentPopup";

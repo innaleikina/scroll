@@ -23,17 +23,13 @@ const UserSchema = new Schema({
   followers: {
     type: Array
   },
-  post: [{
-    type: Schema.Types.ObjectId,
-    ref: "Post"
-  }],
+  // post: [{
+  //   type: Schema.Types.ObjectId,
+  //   ref: "Post"
+  // }],
   postsLiked: [{
     type: Schema.Types.ObjectId,
     ref: "Post"
-  }],
-  comment: [{
-    type: Schema.Types.ObjectId,
-    ref: "Comment"
   }]
 });
 
