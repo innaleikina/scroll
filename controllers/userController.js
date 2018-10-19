@@ -6,7 +6,7 @@ module.exports = {
         db.User
             .find(req.query)
             .populate("post")
-            .populate("comment")
+            // .populate("comment")
             .sort({
                 date: -1
             })

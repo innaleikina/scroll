@@ -24,7 +24,7 @@ class Login extends Component {
       console.log("inputs working");
       const newUser = {
         name: this.state.name,
-        username: this.state.email,
+        email: this.state.email,
         password: this.state.password
       }
       API.createUser(newUser)
