@@ -5,6 +5,8 @@ import Timeline from "./pages/Timeline";
 import OnePost from "./pages/OnePost";
 import {NavBar, NavItem} from "./components/nav";
 import Login from "./pages/Login";
+import AddPost from "./pages/AddPost";
+
 
 
 const App = () => (
@@ -15,7 +17,7 @@ const App = () => (
          <NavItem>home </NavItem>
          <NavItem>search </NavItem>
          <NavItem>user profile</NavItem>
-         <NavItem>add new post</NavItem>
+         <NavItem>new post</NavItem>
        </NavBar>
       <Switch>
       <Route exact path="/" component={Main} />
@@ -24,6 +26,7 @@ const App = () => (
         <Route exact path="/home" component={Timeline} />
         <Route exact path="/search" component={Main} />
         <Route exact path="/user" component={Main} />
+        <Route exact path="/new post" component={AddPost} />
   
         {/* <Route component={NoMatch} /> */}
       </Switch>

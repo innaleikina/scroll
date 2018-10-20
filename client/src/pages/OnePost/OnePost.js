@@ -49,6 +49,7 @@ class OnePost extends Component {
       }
     }
    
+
     deletePost = event => {
         event.preventDefault();
         API.deletePost(this.state.postId);
