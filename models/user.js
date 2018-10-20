@@ -23,16 +23,13 @@ const UserSchema = new Schema({
   followers: {
     type: Array
   },
-  // post: [{
-  //   type: Schema.Types.ObjectId,
-  //   ref: "Post"
-  // }],
   postsLiked: [{
     type: Schema.Types.ObjectId,
     ref: "Post"
   }]
 });
 
+//bcrpyt - password encryption
 UserSchema.plugin(uniqueValidator);
 
 UserSchema.methods.validPassword = function(password) {
