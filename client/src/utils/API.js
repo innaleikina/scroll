@@ -13,8 +13,8 @@ export default {
     return axios.delete("/post/" + id);
   },
   
-  postComment: function(userid,id) {
-    return axios.post("/comment/" + userid +"/"+ id);
+  postComment: function(userid,id, commentData) {
+    return axios.post("/comment/" + userid +"/"+ id , commentData);
 
   },
   // Deletes the book with the given id

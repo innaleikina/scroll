@@ -3,12 +3,23 @@ const mongoose = require('mongoose');
 const routes = require('./routes');
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+// var bodyParser = require('body-parser')
+
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(express.urlencoded({ extended: true }));
+// // parse application/x-www-form-urlencoded
+// app.use(bodyParser.urlencoded({ extended: false}))
+ 
+// // parse application/json
+// app.use(bodyParser.json())
+
+
+app.use(express.urlencoded({ extended: false}));
 app.use(express.json());
+
 
 if(process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
