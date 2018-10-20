@@ -18,12 +18,15 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
+    console.log(req.body)
+    console.log(req.headers['content-type']);
+   
     const postID = req.params.id;
-    const userID = req.params.userid;
     db.Comment
       .create(req.body)
-      .then(dbComment => db.Post.findOneAndUpdate({
-        _id: postID,
+      .then(
+        dbComment => db.Post.findOneAndUpdate({
+        _id: postID
       }, {
         $push: {
           comment: dbComment._id
@@ -31,7 +34,9 @@ module.exports = {
       }, {
         new: true
       }))
-      .then(dbComment => res.json(dbComment))
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+
   },
   update: function (req, res) {
     db.Comment

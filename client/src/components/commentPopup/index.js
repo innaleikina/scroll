@@ -1,1 +1,1 @@
-export * from "./CommentPopup";
+export {default} from "./CommentPopup";
