@@ -25,7 +25,10 @@ export default {
   },
 
   createUser: function(userData) {
-    console.log(userData);
     return axios.post("/user", userData);
+  },
+
+  getUser: function(userLogin) {
+    return axios.post("/user/login", userLogin);
   }
 };

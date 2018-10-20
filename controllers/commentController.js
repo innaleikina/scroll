@@ -31,6 +31,7 @@ module.exports = {
       }, {
         new: true
       }))
+      .then(dbComment => res.json(dbComment))
   },
   update: function (req, res) {
     db.Comment
