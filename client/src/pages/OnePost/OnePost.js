@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import API from "../../components/utils/API";
+import API from "../../utils/API";
 import  "./onePost.css";
 import {Button} from "../../components/form";
-import {CommentPopup} from "../../components/commentPopup";
+import CommentPopup from "../../components/commentPopup";
 
 
 class OnePost extends Component {
@@ -13,7 +13,8 @@ class OnePost extends Component {
         userId: "",
         post:{},
         comments:[],
-        commentPopUpShown:false
+        commentPopUpShown:false,
+      
         //if false no render, if true, render 
 
     }
@@ -28,7 +29,7 @@ class OnePost extends Component {
                 this.setState({
                     post: res.data,
                     comments:res.data.comment,
-                    userId : res.data.author._id
+                    userId : res.data.author
                 }, console.log(res.data))
             )
             .catch(err => console.log(err));
@@ -47,33 +48,7 @@ class OnePost extends Component {
         })
       }
     }
-
-     handleInputChange = event => {
-        const {
-            name,
-            value
-        } = event.target;
-        this.setState({
-            [name]: value
-        });
-    };
-
-    saveComment = (event) => {
-        event.preventDefault();
-        var body = "comment dummy hard coded from front end"
-        API.postComment(this.state.userId,this.state.postId, );
-        console.log("comment posted");
-        API.getPost(this.state.postId)
-        .then(res =>
-            this.setState({
-             
-                comments:res.data.comment,
-            }, console.log(res.data))
-        )
-        .catch(err => console.log(err));
-       
-    }
-
+   
     deletePost = event => {
         event.preventDefault();
         API.deletePost(this.state.postId);
@@ -91,12 +66,12 @@ class OnePost extends Component {
           <h6> Comments </h6>
          {/* MAP FUNCTION TO GET COMMENTS */}
           {this.state.comments.map(comment => (
-          <div  key={comment}>
+          <div  key={comment._id}>
              <p  data-comment={comment._id}>{comment.content}  </p>
            </div>
            ))}
         {/* ======COMMENT MODULE (WILL MAKE OWN COMPONENT)======= */}
-         {this.state.commentPopUpShown ? <CommentPopup onChangeValue={this.handleInputChange} onClickButton={this.saveComment}/> : <div></div> }
+         {this.state.commentPopUpShown ? <CommentPopup  loadPost={this.loadPost} postId={this.state.postId} /> : <div></div> }
        
         {/* ======BUTTONS======= */}
           <h6> Buttons </h6>
