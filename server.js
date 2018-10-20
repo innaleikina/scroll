@@ -10,13 +10,6 @@ const LocalStrategy = require("passport-local").Strategy;
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// // parse application/x-www-form-urlencoded
-// app.use(bodyParser.urlencoded({ extended: false}))
- 
-// // parse application/json
-// app.use(bodyParser.json())
-
-
 app.use(express.urlencoded({ extended: false}));
 app.use(express.json());
 
