@@ -11,8 +11,8 @@ const App = () => (
   <Router>
     <div>
     <NavBar>
-         <h1> Scroll </h1>
-         <NavItem>home </NavItem>
+         <h1 ><a id="logo" href="/"> SCROLL </a></h1>
+         <NavItem>timeline </NavItem>
          <NavItem>search </NavItem>
          <NavItem>user profile</NavItem>
          <NavItem>add new post</NavItem>
@@ -21,7 +21,7 @@ const App = () => (
       <Route exact path="/" component={Main} />
         <Route exact path="/post/:id" component={OnePost} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/home" component={Timeline} />
+        <Route exact path="/timeline" component={Timeline} />
         <Route exact path="/search" component={Main} />
         <Route exact path="/user" component={Main} />
   

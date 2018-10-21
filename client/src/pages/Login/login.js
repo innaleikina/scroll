@@ -43,6 +43,7 @@ class Login extends Component {
         username: this.state.username,
         password: this.state.passwordLogin
       }
+      console.log(loginUser);
       //hit the API file, getUser method and pass the login user information
       API.getUser(loginUser)
         .then(res => console.log(res))

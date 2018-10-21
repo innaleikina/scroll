@@ -1,4 +1,58 @@
-ul{
+
+
+.nav-bar{
     display:flex;
     justify-content: space-around;
+    align-content: center;
+    padding:20px;
+    /* border:1px red solid; */
+    border-bottom:1px rgba(239, 130, 117,1) solid;
+    margin-bottom:80px;
+    font-family:"Oswald";    
+    margin-top:20px;
+}
+
+.nav-item{
+    font-family:"Oswald";
+    list-style-type: none;
+    /* border:1px red solid; */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+     font-size:22px;
+     letter-spacing:3px;
+     font-variant: small-caps;
+     text-decoration: none;
+     transition:.2s linear all;
+     padding-bottom:12px;
+}
+
+.nav-item:hover{
+    text-decoration: none;
+    border-bottom:.5px red solid;
+    padding-bottom:2px;
+}
+
+.nav-item>a{
+    color:rgba(136, 120, 128,1);
+    text-decoration: none;
+}
+
+#logo{
+    color:rgba(239, 130, 117,1);
+    text-transform: capitalize;
+    text-decoration: none;
+    transition:.2s linear all;
+    padding:5px;
+}
+
+#logo:hover{
+  border-bottom:1px rgba(239, 130, 117,1) solid;
+  padding:5px;
+  
+}
+
+#logo:active{
+    letter-spacing:3px;
 }

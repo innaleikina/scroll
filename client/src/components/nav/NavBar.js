@@ -4,7 +4,7 @@ import "./nav.css";
 export const NavBar = ({ children }) => {
   return (
     <nav >
-      <ul>
+      <ul className="nav-bar">
         {children}
       </ul>
     </nav>

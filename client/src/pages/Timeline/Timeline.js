@@ -33,7 +33,7 @@ class Timeline extends Component {
         <PostItem  key={post._id}>
           {/* p wrapped in a with href to make going to the OpenPost page possible */}
            <a href={`/post/${post._id}`}>
-                 <p  data-post={post._id}>{post.content}  by {post.author.email}  </p>
+                 <p  data-post={post._id}>{post.content}  by {post.author.name}  </p>
            </a>
            {/* <Button onClick={() => this.deleteArticle(article._id)}> delete </Button> */}
         </PostItem>
