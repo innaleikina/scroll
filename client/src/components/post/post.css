@@ -2,4 +2,55 @@
     /* border:1px red solid; */
     flex-direction: column;
     display:flex;
+    padding:0;
+    margin:5px;
+}
+
+.post-item{
+    /* margin-top:5px; */
+    margin-bottom:5px;
+    padding:10px;
+    text-align:start;
+    display:flex;
+    /* justify-content: space-between; */
+    height:auto;
+
+}
+.post-text{
+    width:90%;
+    border:7px rgba(136, 160, 150, 1) solid;
+    border-right:3.5px rgba(136, 160, 150, 1) solid;
+    font-size:13px;
+    padding:10px;
+}
+
+
+.post-text>a{
+    color:rgba(136, 120, 128, 1);
+    transition:.2s linear all;
+}
+
+.post-text>a:hover{
+   text-decoration:none;
+   color:rgba(239, 130 ,117, 1);
+}
+
+.post-data{
+    border:7px rgba(136, 160, 150, 1) solid;
+    border-left:3.5px rgba(136, 160, 150, 1) solid;
+    width:60px;
+    font-size:13px;
+    text-align:center;
+    padding-top:10px;
+}
+
+i{
+    margin-right:5px;
+    color:rgba(136, 120, 128, 1)
+}
+
+.post-author-name{
+    font-weight:bold;
+    font-size:14px;
+    color:rgba(239, 130 ,117, 1);
 }

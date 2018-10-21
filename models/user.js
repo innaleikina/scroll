@@ -26,7 +26,7 @@ const UserSchema = new Schema({
   postsLiked: [{
     type: Schema.Types.ObjectId,
     ref: "Post"
-  }]
+  }],
 });
 
 //bcrpyt - password encryption

@@ -5,13 +5,14 @@ import Timeline from "./pages/Timeline";
 import OnePost from "./pages/OnePost";
 import {NavBar, NavItem} from "./components/nav";
 import Login from "./pages/Login";
+import "./app.css";
 
 
 const App = () => (
   <Router>
     <div>
     <NavBar>
-         <h1 ><a id="logo" href="/"> SCROLL </a></h1>
+        
          <NavItem>timeline </NavItem>
          <NavItem>search </NavItem>
          <NavItem>user profile</NavItem>
