@@ -33,21 +33,10 @@ class Login extends Component {
     }
   };
 
-  //handling user login
   handleLogin = event => {
     event.preventDefault();
-    //if username and password inputs have been filled...
     if (this.state.username && this.state.passwordLogin) {
-      console.log("logging in");
-      const loginUser = {
-        username: this.state.username,
-        password: this.state.passwordLogin
-      }
-      console.log(loginUser);
-      //hit the API file, getUser method and pass the login user information
-      API.getUser(loginUser)
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+      console.log("loggin in");
     }
   }
 
