@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {SignUp, SubmitSignUp} from "../../components/SignUp";
-import API from "../../utils/API";
 
 class Login extends Component {
   state = {
@@ -18,102 +17,70 @@ class Login extends Component {
     });
   };
 
-  handleFormSubmit = event => {
-    event.preventDefault();
-    if (this.state.name && this.state.email && this.state.password) {
-      console.log("inputs working");
-      const newUser = {
-        name: this.state.name,
-        email: this.state.email,
-        password: this.state.password
-      }
-      API.createUser(newUser)
-        .then(res => console.log("created user"))
-        .catch(err => console.log(err));
-    }
-  };
-
-  //handling user login
-  handleLogin = event => {
-    event.preventDefault();
-    //if username and password inputs have been filled...
-    if (this.state.username && this.state.passwordLogin) {
-      console.log("logging in");
-      const loginUser = {
-        username: this.state.username,
-        password: this.state.passwordLogin
-      }
-      //hit the API file, getUser method and pass the login user information
-      API.getUser(loginUser)
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
-    }
-  }
-
   render() {
     return (
       <div>
-      <h3>Sign Up Below:</h3>
+        <h3>Sign Up Below:</h3>
+        <form>
+        <SignUp
+          label="Name"
+          id="name"
+          placeholder="John Smith"
+          name="name"
+          value={this.state.name}
+          onChange={this.handleInputChange}
+        >
+        </SignUp>
+        <SignUp
+          label="Email"
+          id="email"
+          placeholder="John@Smith.com"
+          name="email"
+          value={this.state.email}
+          onChange={this.handleInputChange}
+        >
+        </SignUp>
+        <SignUp
+          label="Password"
+          id="password"
+          placeholder="password"
+          name="password"
+          type="password"
+          value={this.state.password}
+          onChange={this.handleInputChange}
+        >
+        </SignUp>
+        <SubmitSignUp
+        onClick={(event) => this.props.handleFormSubmit(event, this.state.name, this.state.email, this.state.password)}
+        >
+        </SubmitSignUp>
+      </form>
+      <hr/>
+      <h3>Or Login:</h3>
       <form>
-      <SignUp
-        label="Name"
-        id="name"
-        placeholder="John Smith"
-        name="name"
-        value={this.state.name}
-        onChange={this.handleInputChange}
-      >
-      </SignUp>
-      <SignUp
-        label="Email"
-        id="email"
-        placeholder="John@Smith.com"
-        name="email"
-        value={this.state.email}
-        onChange={this.handleInputChange}
-      >
-      </SignUp>
-      <SignUp
-        label="Password"
-        id="password"
-        placeholder="password"
-        name="password"
-        type="password"
-        value={this.state.password}
-        onChange={this.handleInputChange}
-      >
-      </SignUp>
-      <SubmitSignUp
-      onClick={this.handleFormSubmit}
-      >
-      </SubmitSignUp>
-    </form>
-    <hr/>
-    <h3>Or Login:</h3>
-    <form>
-      <SignUp
-        label="Username/Email"
-        id="username"
-        placeholder="john@smith.com"
-        name="username"
-        value={this.state.username}
-        onChange={this.handleInputChange}
-      >
-      </SignUp>
-      <SignUp
-        label="Password"
-        id="passwordLogin"
-        placeholder="password"
-        name="passwordLogin"
-        value={this.state.passwordLogin}
-        onChange={this.handleInputChange}
-      >
-      </SignUp>
-      <SubmitSignUp
-      onClick={this.handleLogin}
-      >
-      </SubmitSignUp>
-    </form>
+        <SignUp
+          label="Username/Email"
+          id="username"
+          placeholder="john@smith.com"
+          name="username"
+          value={this.state.username}
+          onChange={this.handleInputChange}
+        >
+        </SignUp>
+        <SignUp
+          label="Password"
+          id="passwordLogin"
+          placeholder="password"
+          name="passwordLogin"
+          value={this.state.passwordLogin}
+          onChange={this.handleInputChange}
+        >
+        </SignUp>
+        <SubmitSignUp
+        onClick={(event) => this.props.handleLogin(event, this.state.username, this.state.passwordLogin)}
+        >
+        </SubmitSignUp>
+      </form>
     </div>
     )
   }
