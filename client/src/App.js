@@ -7,6 +7,7 @@ import {NavBar, NavItem} from "./components/nav";
 import Login from "./pages/Login";
 import AddPost from "./pages/AddPost";
 import API from "./utils/API";
+import "./app.css";
 
 
 class App extends Component {
@@ -94,5 +95,6 @@ class App extends Component {
   }
 
 };
+
 
 export default App;

@@ -17,22 +17,14 @@ module.exports = {
     db.Post
       .findById(req.params.id)
       .populate("comment")
+      .populate("author")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
-    const userID = req.params.id;
+    // const userID = req.params.id;
     db.Post
       .create(req.body)
-      .then(dbPost => db.User.findOneAndUpdate({
-        _id: userID,
-      }, {
-        $push: {
-          post: dbPost._id
-        }
-      }, {
-        new: true
-      }))
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
