@@ -51,6 +51,7 @@ i{
 
 .post-author-name{
     font-weight:bold;
-    font-size:14px;
+    /* font-size:14px; */
     color:rgba(239, 130 ,117, 1);
+
 }
