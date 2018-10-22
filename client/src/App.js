@@ -72,7 +72,6 @@ class App extends Component {
       <Router>
       <div>
       <NavBar>
-           <h1> Scroll </h1>
            <NavItem>home </NavItem>
            <NavItem>search </NavItem>
            <NavItem>user profile</NavItem>
