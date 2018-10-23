@@ -1,10 +1,14 @@
 .pop-up{
-    height:200px;
-    width:300px;
-    border:1px red solid;
+    height:300px;
+    width:400px;
+    border:4px rgba(136, 160, 150, 1) solid;
     display:flex;
     flex-direction:column;
     justify-content: space-around;
     align-items:center;
     /* display:none; */
+    position:fixed;
+    top : 100px;
+    margin:0 auto;
+    background-color:rgba(255,255,255,.95);
 }

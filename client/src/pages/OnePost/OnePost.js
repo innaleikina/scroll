@@ -10,10 +10,11 @@ class OnePost extends Component {
     state = {
         //grabs the post id from the url
         postId: this.props.match.params.id,
-        userId: "",
+        authorName: "",
         post:{},
         comments:[],
         commentPopUpShown:false,
+        chunks:[]
       
         //if false no render, if true, render 
 
@@ -21,7 +22,10 @@ class OnePost extends Component {
 
     componentDidMount() {
         this.loadPost();
+      
     }
+
+
 
     loadPost = () => {
         API.getPost(this.state.postId)
@@ -29,7 +33,7 @@ class OnePost extends Component {
                 this.setState({
                     post: res.data,
                     comments:res.data.comment,
-                    userId : res.data.author
+                    authorName : res.data.author.name
                 }, console.log(res.data))
             )
             .catch(err => console.log(err));
@@ -42,12 +46,18 @@ class OnePost extends Component {
        this.setState({
            commentPopUpShown: true
        })
-      } else {
-        this.setState({
-            commentPopUpShown: false
-        })
-      }
+      } 
     }
+
+    closePopUp = (e)  => {
+        e.preventDefault();
+        console.log('pop up close clicked');
+        if(this.state.commentPopUpShown === true){
+            this.setState({
+                commentPopUpShown: false
+            })
+        }
+}
    
 
     deletePost = event => {
@@ -56,29 +66,71 @@ class OnePost extends Component {
         console.log("post deleted");
     }
 
+      chunkSubstr = (str, size) => {
+        console.log("chunks subst start");
+        const numChunks = Math.ceil(str.length / size)
+        this.this.setState({
+            chunks: new Array(numChunks)
+        })
+        for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
+            this.setState({
+                chunks: this.state.chunks.concat(str.substr(o, size))
+            })
+            console.log(this.state.chunks);
+        }
+      
+        // this.setState({
+        //     chunks:chunks
+        // })
+        
+      }
+
+      
 
   render() {
-
+    console.log(this.state.post.content)
     return (
-        <div >
-          <h3> One Post</h3>
-          <h6>  Post Content</h6>
-          <p>{this.state.post.content}</p>
-          <h6> Comments </h6>
-         {/* MAP FUNCTION TO GET COMMENTS */}
-          {this.state.comments.map(comment => (
-          <div  key={comment._id}>
-             <p  data-comment={comment._id}>{comment.content}  </p>
-           </div>
-           ))}
-        {/* ======COMMENT MODULE (WILL MAKE OWN COMPONENT)======= */}
-         {this.state.commentPopUpShown ? <CommentPopup  loadPost={this.loadPost} postId={this.state.postId} /> : <div></div> }
-       
-        {/* ======BUTTONS======= */}
-          <h6> Buttons </h6>
-          <Button onClick ={this.deletePost}> delete post </Button>
-          <Button > delete comment </Button>
-          <Button onClick={this.openCommentPopup}> add comment </Button>
+        <div className="one-post-wrap">
+            <p id="one-post-author"> {this.state.authorName}</p>
+
+            <div className="one-post" >
+               <p>{this.state.post.content}</p>
+            </div>
+
+
+               <div className="buttons-text-wrap">
+                <div className="one-post-buttons">
+                        <Button  className="button-one-post" onClick={this.openCommentPopup}><i className="far fa-heart"></i> </Button>
+                        <Button className="button-one-post" onClick={this.openCommentPopup}><i className="far fa-comment"></i> </Button>
+                    </div>
+                    <div className="like-comments-text">
+                        <div>{this.state.post.likes} likes</div>
+                        <div>{this.state.comments.length} comments</div>
+                    </div>
+                </div>
+           
+           
+            {/* MAP FUNCTION TO GET COMMENTS */}
+            <div className="one-post-comments">
+                {this.state.comments.map(comment => (
+                <div  key={comment._id}>
+                    <div  className="one-comment" data-comment={comment._id}>
+                    <div className="comment-text"><span className="comment-author">{comment.author}</span> {comment.content}  </div>
+                     <Button className="trash-icon" > <i className="far fa-trash-alt"></i> </Button> </div>
+                </div>
+                
+                ))}
+            </div>
+           
+
+            {/* ======COMMENT MODULE (WILL MAKE OWN COMPONENT)======= */}
+                {this.state.commentPopUpShown ? <CommentPopup closePopUp={this.closePopUp}  loadPost={this.loadPost} postId={this.state.postId} /> : <div></div> }
+                
+            {/* ======BUTTONS======= */}
+            <h6> Buttons </h6>
+            <Button onClick ={this.deletePost}> delete post </Button>
+          
+            
         </div>
     );
   }
