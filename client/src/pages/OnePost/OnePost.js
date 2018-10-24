@@ -91,8 +91,12 @@ class OnePost extends Component {
     console.log(this.state.post.content)
     return (
         <div className="one-post-wrap">
-            <p id="one-post-author"> {this.state.authorName}</p>
-
+          <div className="author-all">
+              <p id="one-post-author"> {this.state.authorName}</p>
+            {/* this will have functionality to edit and delete posts  */}
+            
+              <div className="author-menu"><i className="fas fa-ellipsis-h"></i></div>
+            </div>
             <div className="one-post" >
                <p>{this.state.post.content}</p>
             </div>

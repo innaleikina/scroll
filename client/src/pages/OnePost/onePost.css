@@ -75,3 +75,8 @@
     font-weight:bold;
 }
 
+.author-all{
+    display:flex;
+    justify-content: space-between;
+
+}
