@@ -51,6 +51,7 @@ class Login extends Component {
         >
         </SignUp>
         <SubmitSignUp
+        text="submit"
         onClick={(event) => this.props.handleFormSubmit(event, this.state.name, this.state.email, this.state.password)}
         >
         </SubmitSignUp>
@@ -72,12 +73,26 @@ class Login extends Component {
           id="passwordLogin"
           placeholder="password"
           name="passwordLogin"
+          type="password"
           value={this.state.passwordLogin}
           onChange={this.handleInputChange}
         >
         </SignUp>
         <SubmitSignUp
+        text="login"
         onClick={(event) => this.props.handleLogin(event, this.state.username, this.state.passwordLogin)}
+        >
+        </SubmitSignUp>
+
+        <SubmitSignUp
+        text="login with FB"
+        onClick={(event) => this.props.handleFBLogin(event)}
+        >
+        </SubmitSignUp>
+
+        <SubmitSignUp
+        text="login with Google"
+        // onClick={(event) => this.props.handleLogin(event, this.state.username, this.state.passwordLogin)}
         >
         </SubmitSignUp>
       </form>
