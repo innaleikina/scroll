@@ -21,6 +21,18 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findBySearch: function(req,res){
+    db.Post
+    .find(
+       
+      )
+    .populate("post")
+    .sort({
+      date: -1
+    })
+    .then(dbModeil => res.json(dbMode))
+    .catch(err => res.status(422).json(err));
+  },
   create: function (req, res) {
     // const userID = req.params.id;
     db.Post

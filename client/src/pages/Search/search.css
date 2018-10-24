@@ -1,0 +1,27 @@
+.search-wrap{
+    width:400px;
+    margin:0 auto;
+}
+
+.search-input{
+    width:200px;
+}
+
+.select{
+    width:30%;
+    border-radius: 0px;
+}
+
+.select-all{
+    display:flex;
+    justify-content: space-between;
+    margin-top:20px;
+    margin-bottom:40px;
+    /* border:1px red solid; */
+}
+
+.search-btn-wrap{
+    display:flex;
+    justify-content: space-between;
+    /* border: 1px red solid; */
+}
