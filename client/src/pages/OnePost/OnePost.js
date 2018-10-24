@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import API from "../../utils/API";
 import  "./onePost.css";
 import {Button} from "../../components/form";
+
 import CommentPopup from "../../components/commentPopup";
 
 
@@ -10,10 +11,13 @@ class OnePost extends Component {
     state = {
         //grabs the post id from the url
         postId: this.props.match.params.id,
-        userId: "",
+        authorName: "",
         post:{},
         comments:[],
         commentPopUpShown:false,
+        chunks:[],
+        authorId: "",
+        activeChunk:0
       
         //if false no render, if true, render 
 
@@ -21,7 +25,10 @@ class OnePost extends Component {
 
     componentDidMount() {
         this.loadPost();
+      
     }
+
+
 
     loadPost = () => {
         API.getPost(this.state.postId)
@@ -29,8 +36,9 @@ class OnePost extends Component {
                 this.setState({
                     post: res.data,
                     comments:res.data.comment,
-                    userId : res.data.author
-                }, console.log(res.data))
+                    authorName : res.data.author.name,
+                    authorId:res.data.author._id
+                }, this.chunkSubstr(res.data.content, 1000))
             )
             .catch(err => console.log(err));
     };
@@ -42,12 +50,18 @@ class OnePost extends Component {
        this.setState({
            commentPopUpShown: true
        })
-      } else {
-        this.setState({
-            commentPopUpShown: false
-        })
-      }
+      } 
     }
+
+    closePopUp = (e)  => {
+        e.preventDefault();
+        console.log('pop up close clicked');
+        if(this.state.commentPopUpShown === true){
+            this.setState({
+                commentPopUpShown: false
+            })
+        }
+}
    
 
     deletePost = event => {
@@ -57,28 +71,81 @@ class OnePost extends Component {
     }
 
 
-  render() {
+      chunkSubstr = (str, size) => {
+        console.log("chunks subst start");
+        const numChunks = Math.ceil(str.length / size)
+        for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
+            this.setState({
+                chunks: this.state.chunks.concat(str.substr(o, size))
+            })
+        }
+      }
 
+      //renders different text to the post component depending on which page number is clicked
+      handlePageClick = (e) => {
+          e.preventDefault();
+          this.setState({
+              activeChunk: e.target.id
+          })
+          console.log(this.state.activeChunk);
+      }
+      
+
+  render() {
     return (
-        <div >
-          <h3> One Post</h3>
-          <h6>  Post Content</h6>
-          <p>{this.state.post.content}</p>
-          <h6> Comments </h6>
-         {/* MAP FUNCTION TO GET COMMENTS */}
-          {this.state.comments.map(comment => (
-          <div  key={comment._id}>
-             <p  data-comment={comment._id}>{comment.content}  </p>
-           </div>
-           ))}
-        {/* ======COMMENT MODULE (WILL MAKE OWN COMPONENT)======= */}
-         {this.state.commentPopUpShown ? <CommentPopup  loadPost={this.loadPost} postId={this.state.postId} /> : <div></div> }
-       
-        {/* ======BUTTONS======= */}
-          <h6> Buttons </h6>
-          <Button onClick ={this.deletePost}> delete post </Button>
-          <Button > delete comment </Button>
-          <Button onClick={this.openCommentPopup}> add comment </Button>
+        <div className="one-post-wrap">
+          <div className="author-all">
+           <a href={"/profile/" + this.state.authorId}>   <p id="one-post-author"> {this.state.authorName}</p></a>
+            {/* this will have functionality to edit and delete posts  */}
+            
+              <div className="author-menu"><i className="fas fa-ellipsis-h"></i></div>
+            </div>
+            {/* ===== TEXT OF THE POST ====== */}
+            <div className="one-post" >
+               <p>{this.state.chunks[this.state.activeChunk]}-</p>
+               
+            </div>
+             {/* ===== PAGINATION ====== */}
+             <div className="pagination">
+                {(this.state.chunks.length > 1) ?this.state.chunks.map((page,index) => (
+                <div key={index} id={index} onClick={this.handlePageClick}  className="page-num">{index+1}</div>
+                )) :<div></div>}
+             </div>
+
+             {/* ===== POST BUTTONS ====== */}
+               <div className="buttons-text-wrap">
+                <div className="one-post-buttons">
+                        <Button  className="button-one-post" onClick={this.openCommentPopup}><i className="far fa-heart"></i> </Button>
+                        <Button className="button-one-post" onClick={this.openCommentPopup}><i className="far fa-comment"></i> </Button>
+                    </div>
+                    <div className="like-comments-text">
+                        <div>{this.state.post.likes} likes</div>
+                        <div>{this.state.comments.length} comments</div>
+                    </div>
+                </div>
+           
+           
+            {/* MAP FUNCTION TO GET COMMENTS */}
+            <div className="one-post-comments">
+                {this.state.comments.map(comment => (
+                <div  key={comment._id}>
+                    <div  className="one-comment" data-comment={comment._id}>
+                    <div className="comment-text"><span className="comment-author">{comment.author}</span> {comment.content}  </div>
+                     <Button className="trash-icon" > <i className="far fa-trash-alt"></i> </Button> </div>
+                </div>
+                
+                ))}
+            </div>
+           
+
+            {/* ======COMMENT MODULE (WILL MAKE OWN COMPONENT)======= */}
+                {this.state.commentPopUpShown ? <CommentPopup closePopUp={this.closePopUp}  loadPost={this.loadPost} postId={this.state.postId} /> : <div></div> }
+                
+            {/* ======BUTTONS======= */}
+            <h6> Buttons </h6>
+            <Button onClick ={this.deletePost}> delete post </Button>
+          
+            
         </div>
     );
   }

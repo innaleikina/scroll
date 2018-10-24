@@ -72,7 +72,6 @@ class App extends Component {
       <Router>
       <div>
       <NavBar>
-           <h1> Scroll </h1>
            <NavItem>home </NavItem>
            <NavItem>search </NavItem>
            <NavItem>user profile</NavItem>
@@ -80,12 +79,11 @@ class App extends Component {
          </NavBar>
         <Switch>
         <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin}/>} />
-          <Route exact path="/post/:id" component={OnePost} />
-          {/* <Route exact path="/login" component={Login} /> */}
-          <Route exact path="/home" component={Timeline} />
-          <Route exact path="/search" component={Main} />
-          <Route exact path="/user" component={Main} />
-          <Route exact path="/new post" component={AddPost} />
+          <Route exact path="/post/:id"  render={(props) => <OnePost {...props} />}/>
+           <Route exact path="/home" render={(props) => <Timeline {...props} />}/>
+          <Route exact path="/search" render={(props) => <Main {...props}/>} />
+          <Route exact path="/user" render={(props) => <Main {...props}/>} />
+          <Route exact path="/new post" render={(props) => <AddPost {...props} userName={this.state.name}/>} />
     
           {/* <Route component={NoMatch} /> */}
         </Switch>

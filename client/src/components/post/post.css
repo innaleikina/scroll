@@ -20,8 +20,9 @@
     width:90%;
     border:7px rgba(136, 160, 150, 1) solid;
     border-right:3.5px rgba(136, 160, 150, 1) solid;
-    font-size:13px;
+    font-size:14px;
     padding:10px;
+    line-height:19px;
 }
 
 
@@ -44,10 +45,7 @@
     padding-top:10px;
 }
 
-i{
-    margin-right:5px;
-    color:rgba(136, 120, 128, 1)
-}
+
 
 .post-author-name{
     font-weight:bold;
