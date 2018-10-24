@@ -64,6 +64,15 @@ class App extends Component {
 
   consoling = () => {
     console.log(this.state.email, this.state.name)
+    window.location.href = "/home"
+  }
+
+  handleFBLogin = (event) => {
+    event.preventDefault();
+    console.log("loggin in with fb");
+    API.getFBUser()
+    .then(res => console.log("response from api call"))
+    .catch(err => console.log(err));
   }
 
   render() {
@@ -78,7 +87,7 @@ class App extends Component {
            <NavItem>new post</NavItem>
          </NavBar>
         <Switch>
-        <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin}/>} />
+        <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin}/>} />
           <Route exact path="/post/:id" component={OnePost} />
           {/* <Route exact path="/login" component={Login} /> */}
           <Route exact path="/home" component={Timeline} />

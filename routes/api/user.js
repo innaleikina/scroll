@@ -3,13 +3,12 @@ const userController = require("../../controllers/userController");
 const db = require("../../models");
 
 //auth definitions and variables start -----------------------------------------------------------------
-var passport = require('passport'),
+const passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy;
+  FacebookStrategy = require('passport-facebook').Strategy;
 
 passport.use(new LocalStrategy(
   function (username, password, done) {
-    console.log("in local strategy", username);
-    console.log("in local strategy", password);
     db.User.findOne({
       email: username
     }, function (err, user) {
@@ -41,6 +40,22 @@ passport.deserializeUser(function(userId, done) {
 
 //auth definitions and variables end -----------------------------------------------------------------
 
+//auth FB login start --------------------------------------------------------------------------------
+passport.use(new FacebookStrategy({
+  clientID: "1993823350674672",
+  clientSecret: "47b8126ed2719a0c09aed4354c99c52f",
+  callbackURL: "https://localhost:3000/user/facebook/callback"
+},
+function(accessToken, refreshToken, profile, done) {
+  console.log("inside callback function");
+  db.User.findOne({"email": "oserenchenko@gmail.com"}, function(err, user) {
+    if (err) { return done(err); }
+    done(null, user);
+  });
+}
+));
+//auth FB login end --------------------------------------------------------------------------------
+
 
 // Matches with "/user"
 router.route("/")
@@ -61,7 +76,21 @@ router
 router.route("/login")
   .post(passport.authenticate('local'), function(req, res) {
     res.json(req.user);
-});
+  });
+
+//fb login /user/facebook
+router.route("/facebook")
+  .get(
+    passport.authenticate('facebook')
+    // , {scope : ['public_profile', 'email']})
+    )
+
+//fb callback /user/facebook/callback
+router.route("/facebook/callback")
+  .get(passport.authenticate('facebook', { successRedirect: '/home',
+  failureRedirect: '/login' }));
+
+
   
 
 module.exports = router;
