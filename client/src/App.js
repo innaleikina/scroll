@@ -7,6 +7,7 @@ import {NavBar, NavItem} from "./components/nav";
 import Login from "./pages/Login";
 import AddPost from "./pages/AddPost";
 import API from "./utils/API";
+import "./app.css";
 
 
 class App extends Component {
@@ -80,7 +81,6 @@ class App extends Component {
       <Router>
       <div>
       <NavBar>
-           <h1> Scroll </h1>
            <NavItem>home </NavItem>
            <NavItem>search </NavItem>
            <NavItem>user profile</NavItem>
@@ -88,12 +88,11 @@ class App extends Component {
          </NavBar>
         <Switch>
         <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin}/>} />
-          <Route exact path="/post/:id" component={OnePost} />
-          {/* <Route exact path="/login" component={Login} /> */}
-          <Route exact path="/home" component={Timeline} />
-          <Route exact path="/search" component={Main} />
-          <Route exact path="/user" component={Main} />
-          <Route exact path="/new post" component={AddPost} />
+          <Route exact path="/post/:id"  render={(props) => <OnePost {...props} />}/>
+           <Route exact path="/home" render={(props) => <Timeline {...props} />}/>
+          <Route exact path="/search" render={(props) => <Main {...props}/>} />
+          <Route exact path="/user" render={(props) => <Main {...props}/>} />
+          <Route exact path="/new post" render={(props) => <AddPost {...props} userName={this.state.name}/>} />
     
           {/* <Route component={NoMatch} /> */}
         </Switch>
@@ -103,5 +102,6 @@ class App extends Component {
   }
 
 };
+
 
 export default App;

@@ -9,11 +9,11 @@ class AddPost extends Component {
 
    state ={
     //hard coded user id while we work on auth   
-    userId: "5bc94c9710e5551e7e8d6db5",
+    userId: this.props.userId,
     //will use the params.id when auth works
     // userId: this.props.match.params.id,
     textArea: "test in state post",
-    authorPost: "test author post",
+    authorPost: this.props.name,
    }
 
 
@@ -46,10 +46,12 @@ class AddPost extends Component {
   }
 
   render(){
+    console.log(this.props.userName)
     return( 
 
   <form className="pop-up" >
   <h3> ADD POST </h3>
+
     {/* {props.children} */}
     <Button> X </Button>
     <TextArea name="textArea" value={this.state.textArea} id="textArea" onChange={this.handleInputChange} />

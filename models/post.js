@@ -19,7 +19,8 @@ const postSchema = new Schema({
     required: true
   },
   likes: {
-    type: Number
+    type: Number,
+    default:0,
   },
   comment: [{
     type: Schema.Types.ObjectId,

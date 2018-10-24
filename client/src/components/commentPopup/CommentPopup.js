@@ -9,8 +9,8 @@ class CommentPopup extends Component {
 
    state ={
     userId: "5bc94c9710e5551e7e8d6db5",
-    textArea: "test in state",
-    authorComment: "test",
+    textArea: "Enter your comment here",
+    authorComment: "author name soon to be deleted ",
     comments:[]
   }
 
@@ -53,11 +53,13 @@ class CommentPopup extends Component {
     this.props.loadPost();
   }
 
+
+
   render(){
     return( 
   <form className="pop-up" >
     {/* {props.children} */}
-    <Button> X </Button>
+    <Button onClick={this.props.closePopUp} id="close-pop-up"> X </Button>
     <TextArea name="textArea" value={this.state.textArea} id="textArea" onChange={this.handleInputChange} />
     <Input name="authorComment" value={this.state.authorComment} id="authorComment" onChange={this.handleInputChange}/>
     {/* <Button > Save Comment </Button> */}

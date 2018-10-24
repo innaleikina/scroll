@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ellipsize from 'ellipsize';
+
 import {Posts, PostItem} from "../../components/post";
 import API from "../../utils/API";
 import "./timeline.css";
@@ -6,7 +8,8 @@ import "./timeline.css";
 class Timeline extends Component {
 
     state = {
-        posts: []
+        posts: [],
+        postPreview:""
     }
 
     componentDidMount() {
@@ -23,18 +26,27 @@ class Timeline extends Component {
             .catch(err => console.log(err));
     };
 
+   
+
 
   render() {
     return (
-        <div >
-        <h3> Timeline </h3>
+        <div id="timeline-wrap" >
+        {/* <h3 > Timeline </h3> */}
         <Posts>
         {this.state.posts.map(post => (
         <PostItem  key={post._id}>
           {/* p wrapped in a with href to make going to the OpenPost page possible */}
-           <a href={`/post/${post._id}`}>
-                 <p  data-post={post._id}>{post.content}  by {post.author.email}  </p>
-           </a>
+          <div className = "post-text">
+                <a href={`/post/${post._id}`}>
+                    <p  className="post-author-name" data-author={post.author.name}>{post.author.name}  </p>
+                    <p  data-post={post._id}> {ellipsize(post.content, 300)} </p>
+                </a>
+           </div>
+           <div className="post-data">
+              <p> <i className="far fa-heart"></i>{post.likes} </p>
+              <p><i className="far fa-comment"></i>{post.comment.length} </p>
+           </div>
            {/* <Button onClick={() => this.deleteArticle(article._id)}> delete </Button> */}
         </PostItem>
         ))}
