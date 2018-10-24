@@ -81,6 +81,7 @@ class OnePost extends Component {
         }
       }
 
+      //renders different text to the post component depending on which page number is clicked
       handlePageClick = (e) => {
           e.preventDefault();
           this.setState({
