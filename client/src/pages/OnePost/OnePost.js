@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import API from "../../utils/API";
 import  "./onePost.css";
 import {Button} from "../../components/form";
+
 import CommentPopup from "../../components/commentPopup";
 
 
@@ -14,7 +15,9 @@ class OnePost extends Component {
         post:{},
         comments:[],
         commentPopUpShown:false,
-        chunks:[]
+        chunks:[],
+        authorId: "",
+        activeChunk:0
       
         //if false no render, if true, render 
 
@@ -33,8 +36,9 @@ class OnePost extends Component {
                 this.setState({
                     post: res.data,
                     comments:res.data.comment,
-                    authorName : res.data.author.name
-                }, console.log(res.data))
+                    authorName : res.data.author.name,
+                    authorId:res.data.author._id
+                }, this.chunkSubstr(res.data.content, 1000))
             )
             .catch(err => console.log(err));
     };
@@ -66,42 +70,48 @@ class OnePost extends Component {
         console.log("post deleted");
     }
 
+
       chunkSubstr = (str, size) => {
         console.log("chunks subst start");
         const numChunks = Math.ceil(str.length / size)
-        this.this.setState({
-            chunks: new Array(numChunks)
-        })
         for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
             this.setState({
                 chunks: this.state.chunks.concat(str.substr(o, size))
             })
-            console.log(this.state.chunks);
         }
-      
-        // this.setState({
-        //     chunks:chunks
-        // })
-        
       }
 
+      handlePageClick = (e) => {
+          e.preventDefault();
+          this.setState({
+              activeChunk: e.target.id
+          })
+          console.log(this.state.activeChunk);
+      }
       
 
   render() {
-    console.log(this.state.post.content)
     return (
         <div className="one-post-wrap">
           <div className="author-all">
-              <p id="one-post-author"> {this.state.authorName}</p>
+           <a href={"/profile/" + this.state.authorId}>   <p id="one-post-author"> {this.state.authorName}</p></a>
             {/* this will have functionality to edit and delete posts  */}
             
               <div className="author-menu"><i className="fas fa-ellipsis-h"></i></div>
             </div>
+            {/* ===== TEXT OF THE POST ====== */}
             <div className="one-post" >
-               <p>{this.state.post.content}</p>
+               <p>{this.state.chunks[this.state.activeChunk]}-</p>
+               
             </div>
+             {/* ===== PAGINATION ====== */}
+             <div className="pagination">
+                {(this.state.chunks.length > 1) ?this.state.chunks.map((page,index) => (
+                <div key={index} id={index} onClick={this.handlePageClick}  className="page-num">{index+1}</div>
+                )) :<div></div>}
+             </div>
 
-
+             {/* ===== POST BUTTONS ====== */}
                <div className="buttons-text-wrap">
                 <div className="one-post-buttons">
                         <Button  className="button-one-post" onClick={this.openCommentPopup}><i className="far fa-heart"></i> </Button>
