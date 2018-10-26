@@ -51,5 +51,8 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  fetch: function (req, res) {
+    res.json(req.user);
   }
 }

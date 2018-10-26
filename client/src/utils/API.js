@@ -35,8 +35,13 @@ export default {
     return axios.post("/user/login", userLogin);
   },
 
-  getFBUser: function() {
-    console.log("api works");
-    return axios.get("/user/facebook")
+  fetchUser: function() {
+    return axios.get("/user/fetch");
   }
+
+  // getFBUser: function() {
+  //   console.log("api works");
+  //   return axios.get("/user/facebook")
+  // },
+
 };
