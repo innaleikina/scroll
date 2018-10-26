@@ -14,7 +14,7 @@
 
 .select-all{
     display:flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top:20px;
     margin-bottom:40px;
     /* border:1px red solid; */

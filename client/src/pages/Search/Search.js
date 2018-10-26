@@ -15,7 +15,7 @@ class Search extends Component {
         genre:"",
         category:"User",
         type:"",
-        sortBy:"",
+        // sortBy:"",
         postsFound:[],
         query:"",
         searchPerformed: false
@@ -60,7 +60,7 @@ class Search extends Component {
             }, console.log(res.data))
          )
          } else if (this.state.category ==="User"){
-            API.findUserBySearch(this.state.query)
+            API.findUserBySearch(this.state.query, this.state.genre, this.state.type)
             .then(res =>
             this.setState({
                 
@@ -120,12 +120,6 @@ class Search extends Component {
                         <Option> Science  </Option>
                         <Option> History  </Option>
                         <Option> Fantasy  </Option>
-                    </Select>
-
-
-                    <Select name="sortBy" value = {this.state.sortBy} onChange={this.handleSelectChange} id="category-search"  placeholder="sort by">
-                        <Option> Newest  </Option>
-                        <Option> Most Liked  </Option>
                     </Select>
                 </div>
                  } 

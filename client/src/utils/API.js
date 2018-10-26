@@ -42,7 +42,7 @@ export default {
 
   findPostBySearch: function(search) {
     console.log("post search");
-    return axios.get("/post/search/" + search)
+    return axios.get("/post/search/" + search )
   },
   
   findUserBySearch: function(search) {
