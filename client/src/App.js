@@ -7,6 +7,8 @@ import {NavBar, NavItem} from "./components/nav";
 import Login from "./pages/Login";
 import AddPost from "./pages/AddPost";
 import Search from "./pages/Search";
+import Profile from './pages/Profile';
+
 import API from "./utils/API";
 import "./app.css";
 
@@ -102,7 +104,8 @@ class App extends Component {
             <Route exact path="/post/:id"  render={(props) => <OnePost {...props} user={this.state.user}/>}/>
             <Route exact path="/home" render={(props) => <Timeline {...props} user={this.state.user}/>}/>
             <Route exact path="/search" render={(props) => <Main {...props}/>} />
-            <Route exact path="/user" render={(props) => <Main {...props}/>} />
+            <Route exact path="/user/otherUser/:id" render={(props) => <Profile {...props} user={this.state.user}/>} 
+             />
             <Route exact path="/new post" render={(props) => <AddPost {...props} user={this.state.user}/>} />
             {/* <Route component={NoMatch} /> */}
         </Switch>
