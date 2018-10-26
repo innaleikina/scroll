@@ -12,11 +12,7 @@ import "./app.css";
 
 class App extends Component {
   state = {
-    name: "",
-    email: "",
-    id: "",
-    followers: [],
-    following: []
+    user: {}
   }
 
   handleFormSubmit = (event, name, email, password) => {
@@ -54,54 +50,66 @@ class App extends Component {
   savingUserInfo = (res) => {
     console.log(res);
     const user = res.data;
+    // API.postLoggedInUser(user)
+    // .then(res => console.log(res))
+    // .catch(err => console.log(err));
     this.setState({
-      name: user.name,
-      email: user.email,
-      id: user._id,
-      followers: user.followers,
-      following: user.following
-    }, this.consoling);
+      user: user
+    }, this.redirect);
   };
 
-  consoling = () => {
-    console.log(this.state.email, this.state.name)
+  redirect = () => {
     window.location.href = "/home"
   }
 
-  handleFBLogin = (event) => {
-    event.preventDefault();
-    console.log("loggin in with fb");
-    API.getFBUser()
-    .then(res => console.log("response from api call"))
-    .catch(err => console.log(err));
+  fetchUser = () => {
+    API.fetchUser()
+      .then(res => {
+        console.log(res);
+        this.setState({
+          user: res.data
+        }, console.log(this.state.user))
+      });
   }
+
+  componentDidMount() {
+    this.fetchUser();
+  }
+
+  // handleFBLogin = (event) => {
+  //   event.preventDefault();
+  //   console.log("loggin in with fb");
+  //   API.getFBUser()
+  //   .then(res => console.log("response from api call"))
+  //   .catch(err => console.log(err));
+  // }
 
   render() {
     return (
       <Router>
       <div>
       <NavBar>
-           <NavItem>home </NavItem>
-           <NavItem>search </NavItem>
-           <NavItem>user profile</NavItem>
-           <NavItem>new post</NavItem>
+           <NavItem link="/home">home </NavItem>
+           <NavItem link="/search">search </NavItem>
+           <NavItem link="/user profile">user profile</NavItem>
+           <NavItem link="/new post">new post</NavItem>
          </NavBar>
+         {/* <p>{this.state.user.name}</p> */}
         <Switch>
-        <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin}/>} />
-          <Route exact path="/post/:id"  render={(props) => <OnePost {...props} />}/>
-           <Route exact path="/home" render={(props) => <Timeline {...props} />}/>
-          <Route exact path="/search" render={(props) => <Main {...props}/>} />
-          <Route exact path="/user" render={(props) => <Main {...props}/>} />
-          <Route exact path="/new post" render={(props) => <AddPost {...props} userName={this.state.name}/>} />
-    
-          {/* <Route component={NoMatch} /> */}
+            <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin}/>} />
+            <Route exact path="/post/:id"  render={(props) => <OnePost {...props} user={this.state.user}/>}/>
+            <Route exact path="/home" render={(props) => <Timeline {...props} user={this.state.user}/>}/>
+            <Route exact path="/search" render={(props) => <Main {...props}/>} />
+            <Route exact path="/user" render={(props) => <Main {...props}/>} />
+            <Route exact path="/new post" render={(props) => <AddPost {...props} user={this.state.user}/>} />
+          
+            {/* <Route component={NoMatch} /> */}
         </Switch>
       </div>
     </Router>
     )
-  }
-
-};
+  };
+}
 
 
 export default App;

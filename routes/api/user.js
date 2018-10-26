@@ -23,8 +23,6 @@ passport.use(new LocalStrategy(
       if (!user.validPassword(password)) {
         return done(null, false, console.log("incorrect password"));
       }
-      console.log("found user")
-      console.log(user);
       return done(null, user)
     });
   }
@@ -56,21 +54,22 @@ function(accessToken, refreshToken, profile, done) {
 ));
 //auth FB login end --------------------------------------------------------------------------------
 
+function isLoggedIn(req, res, next) {
+
+  // if user is authenticated in the session, carry on
+  if (req.isAuthenticated())
+      return next();
+  // if they aren't redirect them to the home page
+  res.redirect('/');
+}
 
 // Matches with "/user"
 router.route("/")
-  .post(userController.create)
+  .post(userController.create);
 
 ///user/all
 router.route("/all")
   .get(userController.findAll);
-
-// Matches with "/user/:id"
-router
-  .route("/:id")
-  .get(userController.findById)
-  .put(userController.update)
-  .delete(userController.remove);
 
 //auth /user/login
 router.route("/login")
@@ -78,19 +77,25 @@ router.route("/login")
     res.json(req.user);
   });
 
-//fb login /user/facebook
-router.route("/facebook")
-  .get(
-    passport.authenticate('facebook')
-    // , {scope : ['public_profile', 'email']})
-    )
+// //fb login /user/facebook
+// router.route("/facebook")
+//   .get(
+//     passport.authenticate('facebook')
+//     // , {scope : ['public_profile', 'email']})
+//     )
 
 //fb callback /user/facebook/callback
-router.route("/facebook/callback")
-  .get(passport.authenticate('facebook', { successRedirect: '/home',
-  failureRedirect: '/login' }));
+// router.route("/facebook/callback")
+//   .get(passport.authenticate('facebook', { successRedirect: '/home',
+//   failureRedirect: '/login' }));
 
+router.route('/fetch').get(userController.fetch);
 
-  
+// Matches with "/user/:id"
+router
+  .route("/:id")
+  .get(userController.findById)
+  .put(userController.update)
+  .delete(userController.remove);
 
 module.exports = router;

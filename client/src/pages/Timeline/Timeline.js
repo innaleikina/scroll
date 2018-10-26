@@ -9,7 +9,8 @@ class Timeline extends Component {
 
     state = {
         posts: [],
-        postPreview:""
+        postPreview:"",
+        user: {}
     }
 
     componentDidMount() {
@@ -26,12 +27,11 @@ class Timeline extends Component {
             .catch(err => console.log(err));
     };
 
-   
-
 
   render() {
     return (
         <div id="timeline-wrap" >
+        <p>Timeline {this.props.user.name}</p>
         {/* <h3 > Timeline </h3> */}
         <Posts>
         {this.state.posts.map(post => (

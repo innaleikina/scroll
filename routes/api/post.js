@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const postController = require("../../controllers/postController");
 
+
 router.route("/all")
   .get(postController.findAll);
-
 
 router.route("/:id")
 // This route uses the user id

@@ -13,7 +13,7 @@ class AddPost extends Component {
     //will use the params.id when auth works
     // userId: this.props.match.params.id,
     textArea: "test in state post",
-    authorPost: this.props.name,
+    authorPost: this.props.user.name,
    }
 
 
@@ -46,19 +46,19 @@ class AddPost extends Component {
   }
 
   render(){
-    console.log(this.props.userName)
     return( 
+      <div>
+        <form className="pop-up" >
+        <h3> ADD POST {this.props.user.name}</h3>
 
-  <form className="pop-up" >
-  <h3> ADD POST </h3>
-
-    {/* {props.children} */}
-    <Button> X </Button>
-    <TextArea name="textArea" value={this.state.textArea} id="textArea" onChange={this.handleInputChange} />
-    <Input name="authorPost" value={this.state.authorPost} id="authorPost" onChange={this.handleInputChange}/>
-    {/* <Button > Save Comment </Button> */}
-    <Input onClick={this.onSubmitClick}  type="submit" value="Submit"/>
-  </form>
+          {/* {props.children} */}
+          <Button> X </Button>
+          <TextArea name="textArea" value={this.state.textArea} id="textArea" onChange={this.handleInputChange} />
+          <Input name="authorPost" value={this.state.authorPost} id="authorPost" onChange={this.handleInputChange}/>
+          {/* <Button > Save Comment </Button> */}
+          <Input onClick={this.onSubmitClick}  type="submit" value="Submit"/>
+        </form>
+    </div>
     )
 
   }
