@@ -8,9 +8,9 @@ import API from "../../utils/API";
 class CommentPopup extends Component {
 
    state ={
-    userId: "5bc94c9710e5551e7e8d6db5",
+    userId: this.props.loggedInUserID,
     textArea: "Enter your comment here",
-    authorComment: "author name soon to be deleted ",
+    authorComment: this.props.loggedInUserName,
     comments:[]
   }
 

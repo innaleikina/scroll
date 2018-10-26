@@ -35,11 +35,6 @@ export default {
     return axios.post("/user/login", userLogin);
   },
 
-  getFBUser: function() {
-    console.log("api works");
-    return axios.get("/user/facebook")
-  },
-
   findPostBySearch: function(search) {
     console.log("post search");
     return axios.get("/post/search/" + search)
@@ -49,5 +44,23 @@ export default {
     console.log("post search");
     return axios.get("/user/search/" + search)
   }
+
+  fetchUser: function() {
+    return axios.get("/user/fetch");
+  },
+
+  getProfile: function(id) {
+    return axios.get("/user/otherUser/" + id);
+  },
+
+  followUser: function(loggedInId, otherUserId){
+    console.log(loggedInId)
+    return axios.put("/user/follow/" + loggedInId + "/" + otherUserId);
+  }
+
+  // getFBUser: function() {
+  //   console.log("api works");
+  //   return axios.get("/user/facebook")
+  // },
 
 };

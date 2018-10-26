@@ -17,7 +17,8 @@ class OnePost extends Component {
         commentPopUpShown:false,
         chunks:[],
         authorId: "",
-        activeChunk:0
+        activeChunk:0,
+        loggedInUser: ""
       
         //if false no render, if true, render 
 
@@ -25,7 +26,7 @@ class OnePost extends Component {
 
     componentDidMount() {
         this.loadPost();
-      
+        this.setState({loggedInUser: this.props.user._id})
     }
 
 
@@ -95,6 +96,7 @@ class OnePost extends Component {
     return (
         <div className="one-post-wrap">
           <div className="author-all">
+          <p>{this.props.user.name}</p>
            <a href={"/profile/" + this.state.authorId}>   <p id="one-post-author"> {this.state.authorName}</p></a>
             {/* this will have functionality to edit and delete posts  */}
             
@@ -139,7 +141,7 @@ class OnePost extends Component {
            
 
             {/* ======COMMENT MODULE (WILL MAKE OWN COMPONENT)======= */}
-                {this.state.commentPopUpShown ? <CommentPopup closePopUp={this.closePopUp}  loadPost={this.loadPost} postId={this.state.postId} /> : <div></div> }
+                {this.state.commentPopUpShown ? <CommentPopup closePopUp={this.closePopUp}  loadPost={this.loadPost} postId={this.state.postId} loggedInUserID={this.state.loggedInUser} loggedInUserName={this.props.user.name}/> : <div></div> }
                 
             {/* ======BUTTONS======= */}
             <h6> Buttons </h6>

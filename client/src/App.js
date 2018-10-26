@@ -7,15 +7,15 @@ import {NavBar, NavItem} from "./components/nav";
 import Login from "./pages/Login";
 import AddPost from "./pages/AddPost";
 import Search from "./pages/Search";
+import Profile from './pages/Profile';
+
 import API from "./utils/API";
 import "./app.css";
 
 
 class App extends Component {
   state = {
-   user: {
-
-   }
+    user: {}
   }
 
   handleFormSubmit = (event, name, email, password) => {
@@ -53,51 +53,68 @@ class App extends Component {
   savingUserInfo = (res) => {
     console.log(res);
     const user = res.data;
+    // API.postLoggedInUser(user)
+    // .then(res => console.log(res))
+    // .catch(err => console.log(err));
     this.setState({
-       user: user
-    }, this.consoling);
+      user: user
+    }, this.redirect);
   };
 
-  consoling = () => {
+  redirect = () => {
     console.log(this.state.user)
     window.location.href = "/home"
   }
 
-  handleFBLogin = (event) => {
-    event.preventDefault();
-    console.log("loggin in with fb");
-    API.getFBUser()
-    .then(res => console.log("response from api call"))
-    .catch(err => console.log(err));
+  fetchUser = () => {
+    API.fetchUser()
+      .then(res => {
+        console.log(res);
+        this.setState({
+          user: res.data
+        }, console.log(this.state.user))
+      });
   }
+
+  componentDidMount() {
+    this.fetchUser();
+  }
+
+  // handleFBLogin = (event) => {
+  //   event.preventDefault();
+  //   console.log("loggin in with fb");
+  //   API.getFBUser()
+  //   .then(res => console.log("response from api call"))
+  //   .catch(err => console.log(err));
+  // }
 
   render() {
     return (
       <Router>
       <div>
-      <NavBar>
-           <NavItem>home </NavItem>
-           <NavItem>search </NavItem>
-           <NavItem>user profile</NavItem>
-           <NavItem>new post</NavItem>
+          <NavBar>
+           <NavItem link="/home">home </NavItem>
+           <NavItem link="/search">search </NavItem>
+           <NavItem link="/user profile">user profile</NavItem>
+           <NavItem link="/new post">new post</NavItem>
          </NavBar>
+         {/* <p>{this.state.user.name}</p> */}
         <Switch>
-        <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin}/>} />
-          <Route exact path="/post/:id"  render={(props) => <OnePost {...props} />}/>
-           <Route exact path="/home" render={(props) => <Timeline {...props} />}/>
-          <Route exact path="/search" render={(props) => <Search {...props}/>} />
-          <Route exact path="/user" render={(props) => <Main {...props}/>} />
-          <Route exact path="/new post" render={(props) => <AddPost {...props} userName={this.state.user.name}/>} />
-    
-          {/* <Route component={NoMatch} /> */}
+            <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin}/>} />
+            <Route exact path="/post/:id"  render={(props) => <OnePost {...props} user={this.state.user}/>}/>
+            <Route exact path="/home" render={(props) => <Timeline {...props} user={this.state.user}/>}/>
+            <Route exact path="/search" render={(props) => <Main {...props}/>} />
+            <Route exact path="/user/otherUser/:id" render={(props) => <Profile {...props} user={this.state.user}/>} 
+             />
+            <Route exact path="/new post" render={(props) => <AddPost {...props} user={this.state.user}/>} />
+            {/* <Route component={NoMatch} /> */}
         </Switch>
 
       </div>
     </Router>
     )
-  }
-
-};
+  };
+}
 
 
 export default App;

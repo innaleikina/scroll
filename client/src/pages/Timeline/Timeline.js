@@ -9,7 +9,8 @@ class Timeline extends Component {
 
     state = {
         posts: [],
-        postPreview:""
+        postPreview:"",
+        user: {}
     }
 
     componentDidMount() {
@@ -26,12 +27,11 @@ class Timeline extends Component {
             .catch(err => console.log(err));
     };
 
-   
-
 
   render() {
     return (
         <div id="timeline-wrap" >
+        <p>Timeline {this.props.user.name}</p>
         {/* <h3 > Timeline </h3> */}
         <Posts>
         {this.state.posts.map(post => (
@@ -39,7 +39,7 @@ class Timeline extends Component {
           {/* p wrapped in a with href to make going to the OpenPost page possible */}
           <div className = "post-text">
                 <a href={`/post/${post._id}`}>
-                    <p  className="post-author-name" data-author={post.author.name}>{post.author.name}  </p>
+                    <a href={`/user/otherUser/${post.author._id}` }> <p  className="post-author-name" data-author-id={post.author._id} data-author={post.author.name}>{post.author.name}  </p></a>
                     <p  data-post={post._id}> {ellipsize(post.content, 300)} </p>
                 </a>
            </div>
