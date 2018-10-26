@@ -5,19 +5,33 @@
     text-align: center;
 }
 
-.title-genre-wrap {
+.name-genre-wrap {
     display:flex;
     justify-content: space-between;
+    /* border:1px red solid; */
+    /* padding-bottom:-5px; */
+    padding-bottom:5px;
+    
 }
 
-.name-type-wrap{
+.title-type-wrap{
     display:flex;
     justify-content: space-between;
     margin-bottom:15px;
+ 
 }
 
+.content-text{
+    white-space: pre-line;
+}
 
 
 .small-text{
     font-size:11px;
+}
+
+.post-title{
+    font-size:13px;
+    font-variant: small-caps;
+    font-weight:bold;
 }

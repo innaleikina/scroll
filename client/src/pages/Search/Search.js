@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import AllPosts from "../AllPosts";
 import {Input, Button} from "../../components/form"
 import {Option, Select} from "../../components/select"
+import {SearchResults} from "../../components/searchResults"
+
 import "./search.css"
 import API from '../../utils/API';
 
@@ -10,11 +12,11 @@ class Search extends Component {
 
     state = {
         genreSelected: [],
-        genre:"Genre",
-        type:"User",
-        category:"Chapter",
-        sortBy:"Newest",
-        postsFound:"",
+        genre:"",
+        category:"User",
+        type:"",
+        sortBy:"",
+        postsFound:[],
         query:"",
         searchPerformed: false
     }
@@ -48,7 +50,7 @@ class Search extends Component {
       }
 
       performSearch = () => {
-        if(this.state.type === "Post"){
+        if(this.state.category === "Post"){
         API.findPostBySearch(this.state.query)
         .then(res =>
             this.setState({
@@ -57,7 +59,7 @@ class Search extends Component {
                 searchPerformed: true
             }, console.log(res.data))
          )
-         } else if (this.state.type ==="User"){
+         } else if (this.state.category ==="User"){
             API.findUserBySearch(this.state.query)
             .then(res =>
             this.setState({
@@ -80,7 +82,7 @@ class Search extends Component {
                  <div className="search-btn-wrap">
                     <Input name="query" onChange={this.handleInputChange} className="search-input" placeholder="search term"></Input>
                     
-                    <Select name="type" value = {this.state.type} onChange={this.handleSelectChange}  id="type-search" placeholder="type">
+                    <Select name="category" value = {this.state.category} onChange={this.handleSelectChange}  id="category-search" placeholder="type">
                         <Option value="User"> User  </Option>
                         <Option value="Post"> Post </Option>
                     </Select>
@@ -88,16 +90,21 @@ class Search extends Component {
                     <Button onClick={this.onSearchClick}> Search </Button>
                  </div>
                  
+
+                  {this.state.category == "User" ? <div ></div> : 
                  
                  <div className="select-all">
 
                      <Select name="type" value = {this.state.type} onChange={this.handleSelectChange} id="category-search" placeholder="category">
+                       <Option> Select Type </Option>
                         <Option> Chapter  </Option>
                         <Option> Poetry  </Option>
                         <Option> Short Story  </Option>
                     </Select>
+                    
 
-                      <Select name="genre" value = {this.state.genre} onChange={this.handleSelectChange} id="genre-search" placeholder="genre">
+                      <Select  name="genre" value = {this.state.genre} onChange={this.handleSelectChange} id="genre-search" placeholder="genre">
+                        <Option> Select Genre </Option>
                         <Option> Science fiction </Option>
                         <Option> Satire </Option>
                         <Option> Drama </Option>
@@ -121,9 +128,12 @@ class Search extends Component {
                         <Option> Most Liked  </Option>
                     </Select>
                 </div>
+                 } 
                  
-
-                 {!this.state.searchPerformed ? <AllPosts user={this.props.user} ></AllPosts> : <div> Search Performed</div> }
+                {/* ======== RENDER ALL POSTS BEFORE SEARCH IS PERFORMED< AFTER SEARCH ONLY RENDER RESULTS */}
+                 {!this.state.searchPerformed ? <AllPosts user={this.props.user} ></AllPosts> : <SearchResults>
+                      Search Performed
+                </SearchResults> }
               
                
                 

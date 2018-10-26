@@ -39,18 +39,23 @@ class AllPosts extends Component {
           {/* p wrapped in a with href to make going to the OpenPost page possible */}
           <div className = "post-text">
                 <a href={`/post/${post._id}`}>
-                <div className="title-genre-wrap">
-                  <h6>{post.title}</h6>
+               
+                <div className="name-genre-wrap">
+                  <a href={`/user/otherUser/${post.author._id}` }> 
+                    <div  className="post-author-name"     
+                    data-author-id={post.author._id} data-author={post.author.name}>{post.author.name}  </div>
+                  </a>
                   <div className="small-text">{post.genre}</div>
                 </div>
 
-                <div className="name-type-wrap">
-                   <a href={`/user/otherUser/${post.author._id}` }> <p  className="post-author-name" data-author-id={post.author._id} data-author={post.author.name}>{post.author.name}  </p></a>
+                <div className="title-type-wrap">
+                    <h6 className="post-title">{post.title}</h6>
+             
                      <p className="small-text">{post.type}</p>
                    </div> 
                    
                    
-                    <p  data-post={post._id}> {ellipsize(post.content, 300)} </p>
+                    <p className="content-text"  data-post={post._id}> {ellipsize(post.content, 300)} </p>
                 </a>
            </div>
            <div className="post-data">
