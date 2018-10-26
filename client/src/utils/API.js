@@ -9,6 +9,11 @@ export default {
   getPost: function(id) {
     return axios.get("/post/" + id);
   },
+
+  getPostsFollowing: function(followingID) {
+    return axios.get("/post/following/" + followingID);
+  },
+
   //delete one post
   deletePost: function(id) {
     return axios.delete("/post/" + id);
@@ -43,7 +48,7 @@ export default {
   findUserBySearch: function(search) {
     console.log("post search");
     return axios.get("/user/search/" + search)
-  }
+  },
 
   fetchUser: function() {
     return axios.get("/user/fetch");
