@@ -3,7 +3,7 @@ import ellipsize from 'ellipsize';
 
 import {Posts, PostItem} from "../../components/post";
 import API from "../../utils/API";
-// import "./allposts.css";
+import "./allposts.css";
 
 class AllPosts extends Component {
 
@@ -31,7 +31,7 @@ class AllPosts extends Component {
   render() {
     return (
         <div id="timeline-wrap" >
-        <p>Timeline {this.props.user.name}</p>
+        <p> Explore {this.props.user.name}</p>
         {/* <h3 > Timeline </h3> */}
         <Posts>
         {this.state.posts.map(post => (
@@ -39,7 +39,17 @@ class AllPosts extends Component {
           {/* p wrapped in a with href to make going to the OpenPost page possible */}
           <div className = "post-text">
                 <a href={`/post/${post._id}`}>
-                    <a href={`/user/otherUser/${post.author._id}` }> <p  className="post-author-name" data-author-id={post.author._id} data-author={post.author.name}>{post.author.name}  </p></a>
+                <div className="title-genre-wrap">
+                  <h6>{post.title}</h6>
+                  <div className="small-text">{post.genre}</div>
+                </div>
+
+                <div className="name-type-wrap">
+                   <a href={`/user/otherUser/${post.author._id}` }> <p  className="post-author-name" data-author-id={post.author._id} data-author={post.author.name}>{post.author.name}  </p></a>
+                     <p className="small-text">{post.type}</p>
+                   </div> 
+                   
+                   
                     <p  data-post={post._id}> {ellipsize(post.content, 300)} </p>
                 </a>
            </div>
