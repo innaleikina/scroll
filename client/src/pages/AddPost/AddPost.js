@@ -45,12 +45,16 @@ class AddPost extends Component {
 
   }
 
+  displayProps = (props) => {
+    console.log(props);
+  }
+  
+
   render(){
     return( 
       <div>
         <form className="pop-up" >
         <h3> ADD POST {this.props.user.name}</h3>
-
           {/* {props.children} */}
           <Button> X </Button>
           <TextArea name="textArea" value={this.state.textArea} id="textArea" onChange={this.handleInputChange} />

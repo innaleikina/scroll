@@ -6,6 +6,7 @@ import OnePost from "./pages/OnePost";
 import {NavBar, NavItem} from "./components/nav";
 import Login from "./pages/Login";
 import AddPost from "./pages/AddPost";
+import Search from "./pages/Search";
 import API from "./utils/API";
 import "./app.css";
 
@@ -59,6 +60,7 @@ class App extends Component {
   };
 
   redirect = () => {
+    console.log(this.state.user)
     window.location.href = "/home"
   }
 
@@ -88,7 +90,7 @@ class App extends Component {
     return (
       <Router>
       <div>
-      <NavBar>
+          <NavBar>
            <NavItem link="/home">home </NavItem>
            <NavItem link="/search">search </NavItem>
            <NavItem link="/user profile">user profile</NavItem>
@@ -102,9 +104,9 @@ class App extends Component {
             <Route exact path="/search" render={(props) => <Main {...props}/>} />
             <Route exact path="/user" render={(props) => <Main {...props}/>} />
             <Route exact path="/new post" render={(props) => <AddPost {...props} user={this.state.user}/>} />
-          
             {/* <Route component={NoMatch} /> */}
         </Switch>
+
       </div>
     </Router>
     )

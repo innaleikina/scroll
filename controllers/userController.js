@@ -18,6 +18,17 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findBySearch: function(req,res){
+    db.User
+    .find({"name":
+    { $regex: new RegExp("^" + req.params.search.toLowerCase(), "i") } })
+    .populate("post")
+    .sort({
+      date: -1
+    })
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  },
   create: function (req, res) {
     db.User
       .create(req.body)

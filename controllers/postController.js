@@ -22,6 +22,18 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findBySearch: function(req,res){
+    db.Post
+    .find({"content":
+    { "$regex": req.params.search , "$options": "i" }
+    })
+    //      /.*son.*/i
+     .sort({
+      date: -1
+    })
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  },
   create: function (req, res) {
     // const userID = req.params.id;
     db.Post

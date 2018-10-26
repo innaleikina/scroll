@@ -14,4 +14,9 @@ router.route("/:id")
   .put(postController.update)
   .delete(postController.remove);
 
+
+  router
+  .route("/search/:search")
+  .get(postController.findBySearch)
+  
 module.exports = router;
