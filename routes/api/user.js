@@ -94,6 +94,11 @@ router.route('/fetch').get(userController.fetch);
 
 router.route("/otherUser/:id").get(userController.findById);
 
+
+router.route("/follow/:loggedinid/:otherid").put(userController.update);
+
+
+
   //Search by userName
 router
   .route("/search/:search")

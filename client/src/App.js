@@ -104,7 +104,8 @@ class App extends Component {
             <Route exact path="/post/:id"  render={(props) => <OnePost {...props} user={this.state.user}/>}/>
             <Route exact path="/home" render={(props) => <Timeline {...props} user={this.state.user}/>}/>
             <Route exact path="/search" render={(props) => <Main {...props}/>} />
-            <Route exact path="/user/otherUser/:id" render={(props) => <Profile {...props}/>} />
+            <Route exact path="/user/otherUser/:id" render={(props) => <Profile {...props} user={this.state.user}/>} 
+             />
             <Route exact path="/new post" render={(props) => <AddPost {...props} user={this.state.user}/>} />
             {/* <Route component={NoMatch} /> */}
         </Switch>

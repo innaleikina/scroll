@@ -41,6 +41,11 @@ export default {
 
   getProfile: function(id) {
     return axios.get("/user/otherUser/" + id);
+  },
+
+  followUser: function(loggedInId, otherUserId){
+    console.log(loggedInId)
+    return axios.put("/user/follow/" + loggedInId + "/" + otherUserId);
   }
 
   // getFBUser: function() {

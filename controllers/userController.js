@@ -38,8 +38,14 @@ module.exports = {
   update: function (req, res) {
     db.User
       .findOneAndUpdate({
-        _id: req.params.id
-      }, req.body)
+        _id: req.params.loggedinid},
+        {
+          $push: {
+            following: req.params.otherid
+          }
+        },{
+          new: true
+        })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

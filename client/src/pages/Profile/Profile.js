@@ -7,7 +7,8 @@ class Profile extends Component {
    
   state = {
     userId: this.props.match.params.id,
-     user:{}
+     otherUser:{},
+     followed: false
     
   }
 
@@ -19,20 +20,27 @@ class Profile extends Component {
     API.getProfile(this.state.userId)
         .then(res =>
             this.setState({
-                user: res.data,
+                otherUser: res.data,
+
             }, console.log(res.data))
         )
         .catch(err => console.log(err));
 };
+
+handleFollow = () => {
+  API.followUser(this.props.user._id, this.state.otherUser._id)
+  .then(res => console.log(res.data))
+}
 
 
   render() {
     return (
       <div>
      <h1> Profile Page </h1>
-     <h2> {this.state.user.name} </h2>
-     <h2> {this.state.user.email} </h2>
-     <Button> follow </Button>
+     <h3> logged in user  {this.props.user._id}</h3>
+     <h2> other user {this.state.otherUser.name} </h2>
+     <h2> {this.state.otherUser.email} </h2>
+     <Button onClick={this.handleFollow}> follow </Button>
     </div>
     )
   }
