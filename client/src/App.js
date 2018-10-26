@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "./pages/Main";
 import Timeline from "./pages/Timeline";
+import AllPosts from "./pages/AllPosts";
 import OnePost from "./pages/OnePost";
 import {NavBar, NavItem} from "./components/nav";
 import Login from "./pages/Login";
@@ -103,7 +104,7 @@ class App extends Component {
             <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin}/>} />
             <Route exact path="/post/:id"  render={(props) => <OnePost {...props} user={this.state.user}/>}/>
             <Route exact path="/home" render={(props) => <Timeline {...props} user={this.state.user}/>}/>
-            <Route exact path="/search" render={(props) => <Main {...props}/>} />
+            <Route exact path="/search" render={(props) => <AllPosts {...props} user={this.state.user}/>} />
             <Route exact path="/user/otherUser/:id" render={(props) => <Profile {...props} user={this.state.user}/>} 
              />
             <Route exact path="/new post" render={(props) => <AddPost {...props} user={this.state.user}/>} />
