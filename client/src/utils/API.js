@@ -35,6 +35,16 @@ export default {
     return axios.post("/user/login", userLogin);
   },
 
+  findPostBySearch: function(search) {
+    console.log("post search");
+    return axios.get("/post/search/" + search)
+  },
+  
+  findUserBySearch: function(search) {
+    console.log("post search");
+    return axios.get("/user/search/" + search)
+  }
+
   fetchUser: function() {
     return axios.get("/user/fetch");
   },
