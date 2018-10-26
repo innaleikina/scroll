@@ -34,6 +34,13 @@ module.exports = {
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
   },
+  getFollowing: function(req,res){
+    db.Post
+    .find({"author": req.params.followingID}
+    )
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  },
   create: function (req, res) {
     // const userID = req.params.id;
     db.Post

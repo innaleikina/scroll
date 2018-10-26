@@ -104,7 +104,7 @@ class App extends Component {
             <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin}/>} />
             <Route exact path="/post/:id"  render={(props) => <OnePost {...props} user={this.state.user}/>}/>
             <Route exact path="/home" render={(props) => <Timeline {...props} user={this.state.user}/>}/>
-            <Route exact path="/search" render={(props) => <AllPosts {...props} user={this.state.user}/>} />
+            <Route exact path="/search" render={(props) => <Search {...props} user={this.state.user}/>} />
             <Route exact path="/user/otherUser/:id" render={(props) => <Profile {...props} user={this.state.user}/>} 
              />
             <Route exact path="/new post" render={(props) => <AddPost {...props} user={this.state.user}/>} />

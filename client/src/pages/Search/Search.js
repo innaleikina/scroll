@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Timeline from "../Timeline";
+import AllPosts from "../AllPosts";
 import {Input, Button} from "../../components/form"
 import {Option, Select} from "../../components/select"
 import "./search.css"
@@ -123,7 +123,7 @@ class Search extends Component {
                 </div>
                  
 
-                 {!this.state.searchPerformed ? <Timeline></Timeline> : <div> Search Performed</div> }
+                 {!this.state.searchPerformed ? <AllPosts user={this.props.user} ></AllPosts> : <div> Search Performed</div> }
               
                
                 

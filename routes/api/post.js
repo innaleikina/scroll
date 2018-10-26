@@ -5,6 +5,9 @@ const postController = require("../../controllers/postController");
 router.route("/all")
   .get(postController.findAll);
 
+router.route("/following/:followingID")  
+  .get(postController.getFollowing)
+
 router.route("/:id")
 // This route uses the user id
   .post(postController.create)
