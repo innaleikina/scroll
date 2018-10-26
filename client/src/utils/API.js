@@ -38,5 +38,16 @@ export default {
   getFBUser: function() {
     console.log("api works");
     return axios.get("/user/facebook")
+  },
+
+  findPostBySearch: function(search) {
+    console.log("post search");
+    return axios.get("/post/search/" + search)
+  },
+  
+  findUserBySearch: function(search) {
+    console.log("post search");
+    return axios.get("/user/search/" + search)
   }
+
 };

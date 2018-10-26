@@ -1,9 +1,9 @@
 import React from "react";
 
-export const Select =({ children } , props) => (
+export const Select =( props) => (
 
     <select className="select" {...props}>
-      {children}
+      {props.children}
     </select>
 
 );
