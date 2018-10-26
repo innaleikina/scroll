@@ -23,8 +23,8 @@ export default {
     return axios.post("/comment/" + userid +"/"+ id , commentData);
   },
  //post a post
- postPost: function(userid){
-   return axios.post("/post/" + userid)
+ postPost: function(userid , postData){
+   return axios.post("/post/add/" + userid , postData)
  },
   
   // Saves a book to the database

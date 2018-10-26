@@ -1,0 +1,35 @@
+.add-post-wrap{
+    width:400px;
+    margin:0 auto;
+    margin-top:20px;
+}
+
+.pop-up-post{
+    height:800px;
+    width:400px;
+    border:4px rgba(136, 160, 150, 1) solid;
+    display:flex;
+    flex-direction:column;
+    justify-content: space-around;
+    align-items:center;
+     margin-bottom:80px;
+    background-color:rgba(255,255,255,.95);
+}
+
+#add-post-h3{
+    margin-top:20px;
+    color:rgba(136, 160, 150, 1);
+}
+
+#textArea-post{
+    height:500px;
+    width:360px;
+}
+
+#title-post{
+    width:360px;
+}
+
+#submit-post{
+    margin-bottom:40px;
+}

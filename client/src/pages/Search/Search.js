@@ -91,7 +91,7 @@ class Search extends Component {
                  
                  <div className="select-all">
 
-                     <Select name="category" value = {this.state.category} onChange={this.handleSelectChange} id="category-search" placeholder="category">
+                     <Select name="type" value = {this.state.type} onChange={this.handleSelectChange} id="category-search" placeholder="category">
                         <Option> Chapter  </Option>
                         <Option> Poetry  </Option>
                         <Option> Short Story  </Option>

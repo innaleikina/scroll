@@ -9,31 +9,32 @@ class Timeline extends Component {
 
     state = {
         posts: [],
-        postPreview:"",
-        user: {}
-    }
+        user:{}
+     }
 
-    // componentDidMount() {
-    //     this.loadPosts();
+    // componentWillMount() {
+    //    this.loadPosts()
     // }
+
+    setStateUser = () => {
+        this.setState={
+            user:this.props.user
+        }
+    }
 
     loadPosts = () => {
         {this.props.user.following.map(following => (
-            API.getPostFollowing(following)
+            API.getPostsFollowing(following)
                 .then(res => console.log(res))
                 .catch(err => console.log(err))
         ))}
-
-        API.getPosts()
-            .then(res => console.log(res.data)
-            )
-            .catch(err => console.log(err));
     };
 
 
   render() {
-    //   this.loadPosts();
+    // this.setState();
     console.log(this.props.user)
+  
     return (
         <div id="timeline-wrap" >
         <p>FOLLOWING THESE GUYS {this.props.user.following}</p>

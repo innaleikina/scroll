@@ -70,7 +70,7 @@ class App extends Component {
   fetchUser = () => {
     API.fetchUser()
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.setState({
           user: res.data
         }, console.log(this.state.user))
