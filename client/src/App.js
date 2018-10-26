@@ -6,17 +6,16 @@ import OnePost from "./pages/OnePost";
 import {NavBar, NavItem} from "./components/nav";
 import Login from "./pages/Login";
 import AddPost from "./pages/AddPost";
+import Search from "./pages/Search";
 import API from "./utils/API";
 import "./app.css";
 
 
 class App extends Component {
   state = {
-    name: "",
-    email: "",
-    id: "",
-    followers: [],
-    following: []
+   user: {
+
+   }
   }
 
   handleFormSubmit = (event, name, email, password) => {
@@ -55,16 +54,12 @@ class App extends Component {
     console.log(res);
     const user = res.data;
     this.setState({
-      name: user.name,
-      email: user.email,
-      id: user._id,
-      followers: user.followers,
-      following: user.following
+       user: user
     }, this.consoling);
   };
 
   consoling = () => {
-    console.log(this.state.email, this.state.name)
+    console.log(this.state.user)
     window.location.href = "/home"
   }
 
@@ -90,12 +85,13 @@ class App extends Component {
         <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin}/>} />
           <Route exact path="/post/:id"  render={(props) => <OnePost {...props} />}/>
            <Route exact path="/home" render={(props) => <Timeline {...props} />}/>
-          <Route exact path="/search" render={(props) => <Main {...props}/>} />
+          <Route exact path="/search" render={(props) => <Search {...props}/>} />
           <Route exact path="/user" render={(props) => <Main {...props}/>} />
-          <Route exact path="/new post" render={(props) => <AddPost {...props} userName={this.state.name}/>} />
+          <Route exact path="/new post" render={(props) => <AddPost {...props} userName={this.state.user.name}/>} />
     
           {/* <Route component={NoMatch} /> */}
         </Switch>
+
       </div>
     </Router>
     )

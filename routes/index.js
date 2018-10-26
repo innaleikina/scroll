@@ -9,7 +9,7 @@ const profileRoutes = require("./api/profile");
 router.use("/user", userRoutes);
 router.use("/comment", commentRoutes);
 router.use("/post", postRoutes);
-// router.use("/profile", profileRoutes);
+// // router.use("/profile", profileRoutes);
 // router.use("/auth", authRoutes);
 
 module.exports = router;

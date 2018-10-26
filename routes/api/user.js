@@ -72,6 +72,11 @@ router
   .put(userController.update)
   .delete(userController.remove);
 
+  //Search by userName
+router
+  .route("/search/:search")
+  .get(userController.findBySearch)
+
 //auth /user/login
 router.route("/login")
   .post(passport.authenticate('local'), function(req, res) {
