@@ -39,7 +39,7 @@ class Timeline extends Component {
           {/* p wrapped in a with href to make going to the OpenPost page possible */}
           <div className = "post-text">
                 <a href={`/post/${post._id}`}>
-                    <p  className="post-author-name" data-author={post.author.name}>{post.author.name}  </p>
+                    <a href={`/user/otherUser/${post.author._id}` }> <p  className="post-author-name" data-author-id={post.author._id} data-author={post.author.name}>{post.author.name}  </p></a>
                     <p  data-post={post._id}> {ellipsize(post.content, 300)} </p>
                 </a>
            </div>

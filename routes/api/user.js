@@ -91,6 +91,9 @@ router.route("/login")
 
 router.route('/fetch').get(userController.fetch);
 
+
+router.route("/otherUser/:id").get(userController.findById);
+
   //Search by userName
 router
   .route("/search/:search")

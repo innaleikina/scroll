@@ -37,6 +37,10 @@ export default {
 
   fetchUser: function() {
     return axios.get("/user/fetch");
+  },
+
+  getProfile: function(id) {
+    return axios.get("/user/otherUser/" + id);
   }
 
   // getFBUser: function() {
