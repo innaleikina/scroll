@@ -36,5 +36,5 @@ app.use(routes);
 ////SETTING UP PASSPORT END---------------------------------------------------
 
 app.listen(PORT, () => {
-  console.log('Running on port:', PORT);
+  console.log('Running on port:', PORT)
 })
