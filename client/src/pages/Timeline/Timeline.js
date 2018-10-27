@@ -37,8 +37,8 @@ class Timeline extends Component {
   
     return (
         <div id="timeline-wrap" >
-        <p>FOLLOWING THESE GUYS {this.props.user.following}</p>
-        {/* <h3 > Timeline </h3> */}
+        {/* <p>FOLLOWING THESE GUYS {this.props.user.following}</p> */}
+        <h3 > Timeline {this.props.user.name}</h3>
         <Posts>
         {this.state.posts.map(post => (
         <PostItem  key={post._id}>
