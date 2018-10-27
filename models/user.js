@@ -17,12 +17,17 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  following: {
-    type: Array
-  },
+  following: [{
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  }],
   followers: {
     type: Array
   },
+  posts: [{
+    type: Schema.Types.ObjectId,
+    ref: "Post"
+  }],
   postsLiked: [{
     type: Schema.Types.ObjectId,
     ref: "Post"

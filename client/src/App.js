@@ -57,9 +57,7 @@ class App extends Component {
   savingUserInfo = (res) => {
     console.log(res);
     const user = res.data;
-    // API.postLoggedInUser(user)
-    // .then(res => console.log(res))
-    // .catch(err => console.log(err));
+    console.log("saving user", user)
     this.setState({
       user: user,
       authed: true
@@ -67,14 +65,15 @@ class App extends Component {
   };
 
   redirect = () => {
-    console.log(this.state.user, this.state.authed)
-    window.location.href = "/home"
+    console.log("REDIRECT", this.state.user, this.state.authed);
+    this.logoutButton();
+    // window.location.href = "/home"
   };
 
   fetchUser = () => {
     API.fetchUser()
       .then(res => {
-        // console.log(res);
+        console.log(res.data);
         if (res.data) {
           this.setState({
             user: res.data,
@@ -96,6 +95,7 @@ class App extends Component {
   };
 
   logoutButton = () => {
+    console.log("logout button function called")
     let logoutbtn = document.getElementById("logoutBtn");
     if (this.state.authed === true) {
       logoutbtn.style.display = "block";
@@ -140,13 +140,13 @@ class App extends Component {
             {/* <Route exact path="/post/:id"  render={(props) => <OnePost {...props} user={this.state.user}/>}/> */}
             {/* <Route exact path="/home" render={(props) => <Timeline {...props} user={this.state.user}/>}/> */}
             {/* <Route exact path="/search" render={(props) => <Search {...props} user={this.state.user}/>} /> */}
-            {/* <Route exact path="/user/otherUser/:id" render={(props) => <Profile {...props} user={this.state.user}/>} /> */}
+            <Route exact path="/user/otherUser/:id" render={(props) => <Profile {...props} user={this.state.user}/>} />
             {/* <Route exact path="/new post" render={(props) => <AddPost {...props} user={this.state.user}/>} /> */}
 
             <PrivateRoute authed={this.state.authed} user={this.state.user} path='/home' component={Timeline} />
             <PrivateRoute authed={this.state.authed} user={this.state.user} path="/post/:id"  component={OnePost} />
             <PrivateRoute authed={this.state.authed} user={this.state.user} path="/search"   component={Search} />
-            <PrivateRoute authed={this.state.authed} user={this.state.user} path="/user/otherUser/:id"  component={Profile} />
+            {/* <PrivateRoute authed={this.state.authed} user={this.state.user} path="/user/otherUser/:id"  component={Profile} /> */}
             <PrivateRoute authed={this.state.authed} user={this.state.user} path="/new post" component={AddPost} />
             <PrivateRoute authed={this.state.authed} user={this.state.user} path="/user profile" component={Profile} />
 

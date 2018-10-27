@@ -41,8 +41,8 @@ handleFollow = () => {
      {/* <h1> Profile Page </h1> */}
      {/* <h3> logged in user  {this.props.user._id}</h3> */}
      <h2> {this.state.otherUser.name} </h2>
-     <div> followers  {this.state.otherUser.followers} </div>
-     <div> posts  {this.state.otherUser.posts} </div>
+     {/* <div> followers  {this.state.otherUser.followers} </div> */}
+     {/* <div> posts  {this.state.otherUser.posts} </div> */}
      <Button onClick={this.handleFollow}> follow </Button>
         {/* {this.state.otherUser.posts.map(post=> (
             <Posts key={post._id}>
