@@ -55,12 +55,10 @@ export default {
   },
 
   getProfile: function(id) {
-    console.log(id);
     return axios.get("/user/otherUser/" + id);
   },
 
   followUser: function(loggedInId, otherUserId){
-    console.log(loggedInId)
     return axios.put("/user/follow/" + loggedInId + "/" + otherUserId);
   },
 
