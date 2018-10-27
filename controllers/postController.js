@@ -25,10 +25,21 @@ module.exports = {
   findBySearch: function (req, res) {
     db.Post
       .find({
-        "content": {
-          "$regex": req.params.search,
-          "$options": "i"
-        }
+        $and: [{
+            $or: [{
+              "content": {
+                "$regex": req.params.search,
+                "$options": "i"
+              }
+            }, {
+              "title": {
+                "$regex": req.params.search,
+                "$options": "i"
+              }
+            }]
+          },
+
+        ]
       })
       //      /.*son.*/i
       .sort({
