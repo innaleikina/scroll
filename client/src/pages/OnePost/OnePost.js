@@ -117,8 +117,8 @@ class OnePost extends Component {
              {/* ===== POST BUTTONS ====== */}
                <div className="buttons-text-wrap">
                 <div className="one-post-buttons">
-                        <Button  className="button-one-post" onClick={this.openCommentPopup}><i className="far fa-heart"></i> </Button>
-                        <Button className="button-one-post" onClick={this.openCommentPopup}><i className="far fa-comment"></i> </Button>
+                        <Button  className="button-one-post" onClick={this.openCommentPopup}><i className="far fa-heart icon-btn"></i> </Button>
+                        <Button className="button-one-post" onClick={this.openCommentPopup}><i className="far fa-comment icon-btn"></i> </Button>
                     </div>
                     <div className="like-comments-text">
                         <div>{this.state.post.likes} likes</div>
@@ -133,7 +133,7 @@ class OnePost extends Component {
                 <div  key={comment._id}>
                     <div  className="one-comment" data-comment={comment._id}>
                     <div className="comment-text"><span className="comment-author">{comment.author}</span> {comment.content}  </div>
-                     <Button className="trash-icon" > <i className="far fa-trash-alt"></i> </Button> </div>
+                     <Button className="trash-icon" > <i className="far fa-trash-alt icon-btn"></i> </Button> </div>
                 </div>
                 
                 ))}

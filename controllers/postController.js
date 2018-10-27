@@ -22,24 +22,28 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findBySearch: function(req,res){
+  findBySearch: function (req, res) {
     db.Post
-    .find({"content":
-    { "$regex": req.params.search , "$options": "i" }
-    })
-    //      /.*son.*/i
-     .sort({
-      date: -1
-    })
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
+      .find({
+        "content": {
+          "$regex": req.params.search,
+          "$options": "i"
+        }
+      })
+      //      /.*son.*/i
+      .sort({
+        date: -1
+      })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   },
-  getFollowing: function(req,res){
+  getFollowing: function (req, res) {
     db.Post
-    .find({"author": req.params.followingID}
-    )
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
+      .find({
+        "author": req.params.followingID
+      })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
     // const userID = req.params.id;

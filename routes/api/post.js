@@ -9,7 +9,7 @@ router.route("/following/:followingID")
   .get(postController.getFollowing)
 
 router.route("/:id")
-// This route uses the user id
+// This route uses the post id
   .post(postController.create)
   // This route uses the user id
   .get(postController.findById)
@@ -17,6 +17,9 @@ router.route("/:id")
   .put(postController.update)
   .delete(postController.remove);
 
+  router.route("/add/:id")
+// This route uses the user id
+  .post(postController.create)
 
   router
   .route("/search/:search")
