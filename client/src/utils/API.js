@@ -55,6 +55,7 @@ export default {
   },
 
   getProfile: function(id) {
+    console.log(id);
     return axios.get("/user/otherUser/" + id);
   },
 

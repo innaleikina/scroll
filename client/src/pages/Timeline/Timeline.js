@@ -12,22 +12,27 @@ class Timeline extends Component {
         user:{}
      }
 
-    // componentWillMount() {
-    //    this.loadPosts()
-    // }
+    componentWillMount() {
+       this.loadPosts()
+    }
 
-    setStateUser = () => {
-        this.setState={
-            user:this.props.user
-        }
+    mapFollowing = (res) => {
+      res.data.following.map(following => 
+        API.getProfile(following)
+          .then(res => console.log(res.data))
+          .catch(err => console.log(err))
+      )
     }
 
     loadPosts = () => {
-        {this.props.user.following.map(following => (
-            API.getPostsFollowing(following)
-                .then(res => console.log(res))
-                .catch(err => console.log(err))
-        ))}
+        // {this.props.user.following.map(following => (
+        //     API.getPostsFollowing(following)
+        //         .then(res => console.log(res))
+        //         .catch(err => console.log(err))
+        // ))}
+      API.fetchUser() 
+        .then(res => this.mapFollowing(res))
+        .catch(err => console.log(err))
     };
 
 

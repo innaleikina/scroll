@@ -16,6 +16,7 @@ module.exports = {
     db.User
       .findById(req.params.id)
       .populate("posts")
+      .populate("following")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

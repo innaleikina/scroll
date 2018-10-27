@@ -57,9 +57,7 @@ class App extends Component {
   savingUserInfo = (res) => {
     console.log(res);
     const user = res.data;
-    // API.postLoggedInUser(user)
-    // .then(res => console.log(res))
-    // .catch(err => console.log(err));
+    console.log("saving user", user)
     this.setState({
       user: user,
       authed: true
@@ -67,14 +65,15 @@ class App extends Component {
   };
 
   redirect = () => {
-    console.log("REDIRECT", this.state.user, this.state.authed)
+    console.log("REDIRECT", this.state.user, this.state.authed);
+    this.logoutButton();
     // window.location.href = "/home"
   };
 
   fetchUser = () => {
     API.fetchUser()
       .then(res => {
-        // console.log(res);
+        console.log(res.data);
         if (res.data) {
           this.setState({
             user: res.data,
@@ -96,6 +95,7 @@ class App extends Component {
   };
 
   logoutButton = () => {
+    console.log("logout button function called")
     let logoutbtn = document.getElementById("logoutBtn");
     if (this.state.authed === true) {
       logoutbtn.style.display = "block";
