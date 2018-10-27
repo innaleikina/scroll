@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Main from "./pages/Main";
 import Timeline from "./pages/Timeline";
 import AllPosts from "./pages/AllPosts";
@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import AddPost from "./pages/AddPost";
 import Search from "./pages/Search";
 import Profile from './pages/Profile';
+import PrivateRoute from './components/PrivateRoute';
 
 import API from "./utils/API";
 import "./app.css";
@@ -16,7 +17,8 @@ import "./app.css";
 
 class App extends Component {
   state = {
-    user: {}
+    user: {},
+    authed: false
   }
 
   handleFormSubmit = (event, name, email, password) => {
@@ -58,28 +60,39 @@ class App extends Component {
     // .then(res => console.log(res))
     // .catch(err => console.log(err));
     this.setState({
-      user: user
+      user: user,
+      authed: true
     }, this.redirect);
   };
 
   redirect = () => {
-    console.log(this.state.user)
+    console.log(this.state.user, this.state.authed)
     window.location.href = "/home"
-  }
+  };
 
   fetchUser = () => {
     API.fetchUser()
       .then(res => {
         // console.log(res);
-        this.setState({
-          user: res.data
-        }, console.log(this.state.user))
+        if (res.data) {
+          this.setState({
+            user: res.data,
+            authed: true
+          }, console.log(this.state.user, this.state.authed))
+        }
       });
-  }
+  };
 
   componentDidMount() {
     this.fetchUser();
-  }
+  };
+
+  alert = () => {
+    console.log("hello");
+    if (this.state.authed === false) {
+      {alert("Please log in first.")} 
+    }
+  };
 
   // handleFBLogin = (event) => {
   //   event.preventDefault();
@@ -94,20 +107,28 @@ class App extends Component {
       <Router>
       <div>
           <NavBar>
-           <NavItem link="/home">home </NavItem>
-           <NavItem link="/search">search </NavItem>
-           <NavItem link="/user profile">user profile</NavItem>
-           <NavItem link="/new post">new post</NavItem>
+           <NavItem onClick={this.alert} link="/home">home </NavItem>
+           <NavItem onClick={this.alert} link="/search">search </NavItem>
+           <NavItem onClick={this.alert} link="/user profile">user profile</NavItem>
+           <NavItem onClick={this.alert} link="/new post">new post</NavItem>
          </NavBar>
          {/* <p>{this.state.user.name}</p> */}
         <Switch>
             <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin}/>} />
-            <Route exact path="/post/:id"  render={(props) => <OnePost {...props} user={this.state.user}/>}/>
-            <Route exact path="/home" render={(props) => <Timeline {...props} user={this.state.user}/>}/>
-            <Route exact path="/search" render={(props) => <Search {...props} user={this.state.user}/>} />
-            <Route exact path="/user/otherUser/:id" render={(props) => <Profile {...props} user={this.state.user}/>} 
-             />
-            <Route exact path="/new post" render={(props) => <AddPost {...props} user={this.state.user}/>} />
+
+            {/* <Route exact path="/post/:id"  render={(props) => <OnePost {...props} user={this.state.user}/>}/> */}
+            {/* <Route exact path="/home" render={(props) => <Timeline {...props} user={this.state.user}/>}/> */}
+            {/* <Route exact path="/search" render={(props) => <Search {...props} user={this.state.user}/>} /> */}
+            {/* <Route exact path="/user/otherUser/:id" render={(props) => <Profile {...props} user={this.state.user}/>} /> */}
+            {/* <Route exact path="/new post" render={(props) => <AddPost {...props} user={this.state.user}/>} /> */}
+
+            <PrivateRoute authed={this.state.authed} user={this.state.user} path='/home' component={Timeline} />
+            <PrivateRoute authed={this.state.authed} user={this.state.user} path="/post/:id"  component={OnePost} />
+            <PrivateRoute authed={this.state.authed} user={this.state.user} path="/search"   component={Search} />
+            <PrivateRoute authed={this.state.authed} user={this.state.user} path="/user/otherUser/:id"  component={Profile} />
+            <PrivateRoute authed={this.state.authed} user={this.state.user} path="/new post" component={AddPost} />
+            <PrivateRoute authed={this.state.authed} user={this.state.user} path="/user profile" component={Profile} />
+
             {/* <Route component={NoMatch} /> */}
         </Switch>
 
