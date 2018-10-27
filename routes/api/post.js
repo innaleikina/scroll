@@ -22,7 +22,16 @@ router.route("/:id")
   .post(postController.create)
 
   router
-  .route("/search/:search")
-  .get(postController.findBySearch)
+  .route("/search/:search/")
+  .get(postController.findBySearchWord)
+
+  router
+  .route("/genre/:genre/")
+  .get(postController.findByGenre)
+
+  router
+  .route("/type/:type/")
+  .get(postController.findByType)
+  
   
 module.exports = router;

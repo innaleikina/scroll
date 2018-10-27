@@ -1,5 +1,17 @@
 const db = require("../models");
 
+//             {
+//               "genre": {
+//                 "$regex": req.params.genre,
+//                 "$options": "i"
+//               }
+//             },
+//             {
+//               "type": {
+//                 "$regex": req.params.type,
+//                 "$options": "i"
+//               }
+//             }
 
 // Defining methods for the booksController
 module.exports = {
@@ -22,13 +34,66 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findBySearch: function (req, res) {
+  findBySearchWord: function (req, res) {
     db.Post
       .find({
-        "content": {
-          "$regex": req.params.search,
-          "$options": "i"
-        }
+        $and: [{
+            //search for content and titles of posts
+            $or: [{
+              "content": {
+                "$regex": req.params.search,
+                "$options": "i"
+              }
+            }, {
+              "title": {
+                "$regex": req.params.search,
+                "$options": "i"
+              }
+            }]
+          }
+
+        ]
+      })
+      .populate("author")
+      //      /.*son.*/i
+      .sort({
+        date: -1
+      })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findByGenre: function (req, res) {
+    db.Post
+      .find({
+        $and: [{
+            //search for genre of posts
+              "genre": {
+              "$regex": req.params.genre,
+              "$options": "i"
+            }
+          }
+
+        ]
+      })
+      //      /.*son.*/i
+      .sort({
+        date: -1
+      })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findByType: function (req, res) {
+    db.Post
+      .find({
+        $and: [{
+            //search for genre of posts
+              "type": {
+              "$regex": req.params.type,
+              "$options": "i"
+            }
+          }
+
+        ]
       })
       //      /.*son.*/i
       .sort({

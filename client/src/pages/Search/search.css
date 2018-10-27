@@ -26,3 +26,8 @@
     /* border: 1px red solid; */
 }
 
+.no-result{
+    text-align:center;
+    font-size:25px;
+    color:rgba(239, 130 ,117, 1);
+}

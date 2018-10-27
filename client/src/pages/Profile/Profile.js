@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import API from "../../utils/API";
 import {Button} from "../../components/form";
+import {Posts, PostItem} from "../../components/post"
+import "./profile.css";
 
 
 class Profile extends Component {
@@ -35,12 +37,21 @@ handleFollow = () => {
 
   render() {
     return (
-      <div>
-     <h1> Profile Page </h1>
-     <h3> logged in user  {this.props.user._id}</h3>
-     <h2> other user {this.state.otherUser.name} </h2>
-     <h2> {this.state.otherUser.email} </h2>
+      <div className="profile-wrap">
+     {/* <h1> Profile Page </h1> */}
+     {/* <h3> logged in user  {this.props.user._id}</h3> */}
+     <h2> {this.state.otherUser.name} </h2>
+     <div> followers  {this.state.otherUser.followers} </div>
+     <div> posts  {this.state.otherUser.posts} </div>
      <Button onClick={this.handleFollow}> follow </Button>
+        {/* {this.state.otherUser.posts.map(post=> (
+            <Posts key={post._id}>
+               <PostItem> 
+               {post.title} 
+               
+                </PostItem>
+             </Posts> 
+        ))} */}
     </div>
     )
   }

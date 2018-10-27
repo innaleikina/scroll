@@ -40,14 +40,14 @@ export default {
     return axios.post("/user/login", userLogin);
   },
 
-  findPostBySearch: function(search) {
+  findPostBySearchWord: function(search) {
     console.log("post search");
     return axios.get("/post/search/" + search )
   },
   
   findUserBySearch: function(search) {
     console.log("post search");
-    return axios.get("/user/search/" + search)
+    return axios.get("/user/search/" + search )
   },
 
   fetchUser: function() {
