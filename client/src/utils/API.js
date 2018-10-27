@@ -61,6 +61,10 @@ export default {
   followUser: function(loggedInId, otherUserId){
     console.log(loggedInId)
     return axios.put("/user/follow/" + loggedInId + "/" + otherUserId);
+  },
+
+  logout: function() {
+    return axios.get("/user/logout/");
   }
 
   // getFBUser: function() {
