@@ -5,7 +5,7 @@ import Timeline from "./pages/Timeline";
 import AllPosts from "./pages/AllPosts";
 import OnePost from "./pages/OnePost";
 import {NavBar, NavItem} from "./components/nav";
-import Login from "./pages/Login";
+import Test from "./pages/Test";
 import AddPost from "./pages/AddPost";
 import Search from "./pages/Search";
 import Profile from './pages/Profile';
@@ -135,7 +135,7 @@ class App extends Component {
          {/* <p>{this.state.user.name}</p> */}
          <LogOut handleLogout={this.handleLogout}></LogOut>
         <Switch>
-            <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin}/>} />
+            <Route exact path="/"  render={(props) => <Test {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin}/>} />
 
             {/* <Route exact path="/post/:id"  render={(props) => <OnePost {...props} user={this.state.user}/>}/> */}
             {/* <Route exact path="/home" render={(props) => <Timeline {...props} user={this.state.user}/>}/> */}
