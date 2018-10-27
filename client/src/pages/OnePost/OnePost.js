@@ -54,8 +54,8 @@ class OnePost extends Component {
       } 
     }
 
-    closePopUp = (e)  => {
-        e.preventDefault();
+    closePopUp = ()  => {
+
         console.log('pop up close clicked');
         if(this.state.commentPopUpShown === true){
             this.setState({
@@ -77,6 +77,7 @@ class OnePost extends Component {
         const numChunks = Math.ceil(str.length / size)
         for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
             this.setState({
+                chunks:[],
                 chunks: this.state.chunks.concat(str.substr(o, size))
             })
         }

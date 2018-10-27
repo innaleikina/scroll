@@ -51,6 +51,7 @@ class CommentPopup extends Component {
     e.preventDefault();
     this.saveComment();
     this.props.loadPost();
+    this.props.closePopUp();
   }
 
 
