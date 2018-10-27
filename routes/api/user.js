@@ -5,7 +5,7 @@ const db = require("../../models");
 //auth definitions and variables start -----------------------------------------------------------------
 const passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy;
-  FacebookStrategy = require('passport-facebook').Strategy;
+FacebookStrategy = require('passport-facebook').Strategy;
 
 passport.use(new LocalStrategy(
   function (username, password, done) {
@@ -28,11 +28,11 @@ passport.use(new LocalStrategy(
   }
 ));
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user._id);
 });
 
-passport.deserializeUser(function(userId, done) {
+passport.deserializeUser(function (userId, done) {
   db.User.findById(userId, (err, user) => done(err, user));
 });
 
@@ -40,17 +40,21 @@ passport.deserializeUser(function(userId, done) {
 
 //auth FB login start --------------------------------------------------------------------------------
 passport.use(new FacebookStrategy({
-  clientID: "1993823350674672",
-  clientSecret: "47b8126ed2719a0c09aed4354c99c52f",
-  callbackURL: "https://localhost:3000/user/facebook/callback"
-},
-function(accessToken, refreshToken, profile, done) {
-  console.log("inside callback function");
-  db.User.findOne({"email": "oserenchenko@gmail.com"}, function(err, user) {
-    if (err) { return done(err); }
-    done(null, user);
-  });
-}
+    clientID: "1993823350674672",
+    clientSecret: "47b8126ed2719a0c09aed4354c99c52f",
+    callbackURL: "https://localhost:3000/user/facebook/callback"
+  },
+  function (accessToken, refreshToken, profile, done) {
+    console.log("inside callback function");
+    db.User.findOne({
+      "email": "oserenchenko@gmail.com"
+    }, function (err, user) {
+      if (err) {
+        return done(err);
+      }
+      done(null, user);
+    });
+  }
 ));
 //auth FB login end --------------------------------------------------------------------------------
 
@@ -58,7 +62,7 @@ function isLoggedIn(req, res, next) {
 
   // if user is authenticated in the session, carry on
   if (req.isAuthenticated())
-      return next();
+    return next();
   // if they aren't redirect them to the home page
   res.redirect('/');
 }
@@ -73,9 +77,20 @@ router.route("/all")
 
 //auth /user/login
 router.route("/login")
-  .post(passport.authenticate('local'), function(req, res) {
+  .post(passport.authenticate('local', {
+    // successRedirect: '/home',
+    failureRedirect: '/'
+  }), function (req, res) {
     res.json(req.user);
   });
+
+//logout
+router.route("/logout")
+  .get(function(req, res){
+    req.logout();
+    res.redirect('/');
+  })
+
 
 // //fb login /user/facebook
 // router.route("/facebook")
@@ -99,7 +114,7 @@ router.route("/follow/:loggedinid/:otherid").put(userController.update);
 
 
 
-  //Search by userName
+//Search by userName
 router
   .route("/search/:search")
   .get(userController.findBySearch)

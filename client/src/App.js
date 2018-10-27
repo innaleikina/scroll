@@ -10,6 +10,7 @@ import AddPost from "./pages/AddPost";
 import Search from "./pages/Search";
 import Profile from './pages/Profile';
 import PrivateRoute from './components/PrivateRoute';
+import LogOut from './components/LogOut';
 
 import API from "./utils/API";
 import "./app.css";
@@ -78,7 +79,7 @@ class App extends Component {
           this.setState({
             user: res.data,
             authed: true
-          }, console.log(this.state.user, this.state.authed))
+          }, this.logoutButton)
         }
       });
   };
@@ -92,6 +93,25 @@ class App extends Component {
     if (this.state.authed === false) {
       {alert("Please log in first.")} 
     }
+  };
+
+  logoutButton = () => {
+    let logoutbtn = document.getElementById("logoutBtn");
+    if (this.state.authed === true) {
+      logoutbtn.style.display = "block";
+    } else {
+      logoutbtn.style.display = "none";
+    }
+  };
+
+  handleLogout = () => {
+    console.log("logging out");
+    API.logout() 
+      .then(res => this.setState({
+        user: {},
+        authed: false
+      }, this.logoutButton))
+      .catch(err => console.log(err));
   };
 
   // handleFBLogin = (event) => {
@@ -113,6 +133,7 @@ class App extends Component {
            <NavItem onClick={this.alert} link="/new post">new post</NavItem>
          </NavBar>
          {/* <p>{this.state.user.name}</p> */}
+         <LogOut handleLogout={this.handleLogout}></LogOut>
         <Switch>
             <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin}/>} />
 
