@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import Main from "./pages/Main";
 import Timeline from "./pages/Timeline";
-import AllPosts from "./pages/AllPosts";
 import OnePost from "./pages/OnePost";
 import {NavBar, NavItem} from "./components/nav";
 import Login from "./pages/Login";
@@ -73,7 +71,7 @@ class App extends Component {
   fetchUser = () => {
     API.fetchUser()
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data) {
           this.setState({
             user: res.data,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./addPost.css"
-import {Button, TextArea, Input} from "../../components/form";
+import { TextArea, Input} from "../../components/form";
 import {Option, Select} from "../../components/select";
 
 import API from "../../utils/API";

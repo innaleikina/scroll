@@ -58,8 +58,8 @@ class Search extends Component {
                 searchPerformed: true
             }, console.log(res.data))
           ) //if category is post and type is not empty
-         } else if (this.state.category ==="User"){
-             if(this.state.query == ""){
+         } else if (this.state.category === "User"){
+             if(this.state.query === ""){
                  alert("You must enter a search term")
              }
               API.findUserBySearch(this.state.query)
@@ -93,7 +93,7 @@ class Search extends Component {
                  </div>
                  
 
-                  {this.state.category == "User" ? <div ></div> : 
+                  {this.state.category === "User" ? <div ></div> : 
                  
                  <div className="select-all">
 
@@ -131,8 +131,8 @@ class Search extends Component {
                    <SearchResults>
 
                        {/* A nested if statement. If results is empty render that it's empty, if category is user, render user data, if category is post, render post data */}
-                       {this.state.results == "" ? <div className="no-result"> No Results Found</div> :         
-                          this.state.category == "User" ? this.state.results.map(result => (
+                       {this.state.results === "" ? <div className="no-result"> No Results Found</div> :         
+                          this.state.category === "User" ? this.state.results.map(result => (
                              <div  key={result._id}>
                               <a href={`/user/otherUser/${result._id}`}>{result.name}</a>
                             </div>
