@@ -10,6 +10,7 @@ class Profile extends Component {
   state = {
     userId: this.props.match.params.id,
      otherUser:{},
+     posts:[],
      followed: false
     
   }
@@ -23,7 +24,7 @@ class Profile extends Component {
         .then(res =>
             this.setState({
                 otherUser: res.data,
-
+                posts: res.data.posts
             }, console.log(res.data))
         )
         .catch(err => console.log(err));
@@ -36,22 +37,24 @@ handleFollow = () => {
 
 
   render() {
+    console.log( this.state.posts)
     return (
       <div className="profile-wrap">
      {/* <h1> Profile Page </h1> */}
      {/* <h3> logged in user  {this.props.user._id}</h3> */}
      <h2> {this.state.otherUser.name} </h2>
-     {/* <div> followers  {this.state.otherUser.followers} </div> */}
+     {/* <div> followers  {this.state.otherUser.followers.length} </div> */}
      {/* <div> posts  {this.state.otherUser.posts} </div> */}
      <Button onClick={this.handleFollow}> follow </Button>
-        {/* {this.state.otherUser.posts.map(post=> (
+     {/* <p> {this.state.posts[0]}</p> */}
+        {this.state.posts.map(post=> (
             <Posts key={post._id}>
                <PostItem> 
                {post.title} 
-               
+               {post.content}
                 </PostItem>
              </Posts> 
-        ))} */}
+        ))}
     </div>
     )
   }
