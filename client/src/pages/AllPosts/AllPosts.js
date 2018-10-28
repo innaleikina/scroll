@@ -31,7 +31,7 @@ class AllPosts extends Component {
   render() {
     return (
         <div id="timeline-wrap" >
-        <p> Explore {this.props.user.name}</p>
+        <p> Explore</p>
         {/* <h3 > Timeline </h3> */}
         <Posts>
         {this.state.posts.map(post => (
