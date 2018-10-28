@@ -43,7 +43,7 @@ export default {
   findUserBySearch: function(search) {
     console.log("post search");
     return axios.get("/user/search/" + search)
-  }
+  },
 
   fetchUser: function() {
     return axios.get("/user/fetch");
