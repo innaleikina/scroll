@@ -144,7 +144,7 @@ class Search extends Component {
                        {/* A nested if statement. If results is empty render that it's empty, if category is user, render user data, if category is post, render post data */}
                        {this.state.results.length === 0 ? <div className="no-result"> No Results Found</div> :         
                           this.state.category === "User" ? this.state.resultsUser.map(result => (
-                             <div  key={result._id}>
+                             <div className="found-user"  key={result._id}>
                               <a href={`/user/otherUser/${result._id}`}>{result.name}</a>
                             </div>
                             )) :  
