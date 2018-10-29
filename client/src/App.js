@@ -127,7 +127,7 @@ class App extends Component {
           <NavBar>
            <NavItem onClick={this.alert} link="/home">home </NavItem>
            <NavItem onClick={this.alert} link="/search">search </NavItem>
-           <NavItem onClick={this.alert} link="/user profile">user profile</NavItem>
+           <NavItem onClick={this.alert} link={`/user/otherUser/${this.state.user._id}`}>user profile</NavItem>
            <NavItem onClick={this.alert} link="/new post">new post</NavItem>
          </NavBar>
          {/* <p>{this.state.user.name}</p> */}
@@ -146,7 +146,7 @@ class App extends Component {
             <PrivateRoute authed={this.state.authed} user={this.state.user} path="/search"   component={Search} />
             {/* <PrivateRoute authed={this.state.authed} user={this.state.user} path="/user/otherUser/:id"  component={Profile} /> */}
             <PrivateRoute authed={this.state.authed} user={this.state.user} path="/new post" component={AddPost} />
-            <PrivateRoute authed={this.state.authed} user={this.state.user} path="/user profile" component={Profile} />
+            <PrivateRoute authed={this.state.authed} user={this.state.user} path={`/user/otherUser/${this.state.user._id}`} component={Profile} />
 
             {/* <Route component={NoMatch} /> */}
         </Switch>
