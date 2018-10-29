@@ -21,6 +21,8 @@ class Search extends Component {
         type:"",
         // sortBy:"",
         results:[],
+        resultsUser:[],
+        resultsPost:[],
         query:"",
         searchPerformed: false,
      
@@ -43,18 +45,23 @@ class Search extends Component {
             value
         } = event.target;
         this.setState({
-            [name]: value
+            [name]: value,
+            // resultsPost:[],
+            // resultsUser: []
         });
       };
 
       performSearch = () => {
+        //   this.setState= ({
+        //       searchPerformed: false
+        //   })
           //if category is post and query string is not empty
         if(this.state.category === "Post" && this.state.query !== ""){
         API.findPostBySearchWord(this.state.query)
         .then(res =>
             this.setState({
                 
-                results:res.data,
+                resultsPost:res.data,
                 searchPerformed: true
             }, console.log(res.data))
           ) //if category is post and type is not empty
@@ -66,7 +73,7 @@ class Search extends Component {
              .then(res =>
              this.setState({
                 
-                results:res.data,
+                resultsUser:res.data,
                 searchPerformed: true
             }, console.log(res.data))
           )
@@ -79,6 +86,10 @@ class Search extends Component {
       }
 
     render() {
+        if(this.state.resultsPost.length > 0){
+            console.log(this.state.resultsPost.length);
+        }
+     
         return (
             <div className="search-wrap">
                  <div className="search-btn-wrap">
@@ -93,7 +104,7 @@ class Search extends Component {
                  </div>
                  
 
-                  {this.state.category === "User" ? <div ></div> : 
+                {this.state.category === "User" ? <div ></div> : 
                  
                  <div className="select-all">
 
@@ -131,14 +142,15 @@ class Search extends Component {
                    <SearchResults>
 
                        {/* A nested if statement. If results is empty render that it's empty, if category is user, render user data, if category is post, render post data */}
-                       {this.state.results === "" ? <div className="no-result"> No Results Found</div> :         
-                          this.state.category === "User" ? this.state.results.map(result => (
+                       {this.state.resultsUser.length === 0 ? <div className="no-result"> No Results Found</div> :         
+                          this.state.category === "User" ? this.state.resultsUser.map(result => (
                              <div  key={result._id}>
                               <a href={`/user/otherUser/${result._id}`}>{result.name}</a>
                             </div>
                             )) :  
+                                this.state.resultsPost.length > 0 ?
                             <Posts>
-                            {this.state.results.map(result => (
+                            {this.state.resultsPost.map(result => (
                               <PostItem key={result._id}>
                                   <div className = "post-text">
                                         <a href={`/post/${result._id}`}>
@@ -167,7 +179,7 @@ class Search extends Component {
                                 </div>
                               </PostItem> 
                             )) }
-                            </Posts> }
+                            </Posts > : <div className="no-result"> no result </div> }
 
                  
                  
