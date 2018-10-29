@@ -82,6 +82,15 @@ class Profile extends Component {
     renderFollowButton = () => {
       // once the state isn't empty
       if(!this.isEmpty(this.state.loggedInUser)){
+        if(this.state.loggedInUser._id === this.state.otherUser._id){
+          return(
+            <p>you are on your own page</p> 
+          )
+        }
+
+
+
+
         console.log("logged in user is not empty");
         //check if user has more than 0 followers
         if(this.state.loggedInUser.following.length > 0){
