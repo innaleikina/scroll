@@ -60,7 +60,7 @@ class Search extends Component {
         API.findPostBySearchWord(this.state.query)
         .then(res =>
             this.setState({
-                
+                results: res.data,
                 resultsPost:res.data,
                 searchPerformed: true
             }, console.log(res.data))
@@ -72,7 +72,7 @@ class Search extends Component {
               API.findUserBySearch(this.state.query)
              .then(res =>
              this.setState({
-                
+                results:res.data,
                 resultsUser:res.data,
                 searchPerformed: true
             }, console.log(res.data))
@@ -142,7 +142,7 @@ class Search extends Component {
                    <SearchResults>
 
                        {/* A nested if statement. If results is empty render that it's empty, if category is user, render user data, if category is post, render post data */}
-                       {this.state.resultsUser.length === 0 ? <div className="no-result"> No Results Found</div> :         
+                       {this.state.results.length === 0 ? <div className="no-result"> No Results Found</div> :         
                           this.state.category === "User" ? this.state.resultsUser.map(result => (
                              <div  key={result._id}>
                               <a href={`/user/otherUser/${result._id}`}>{result.name}</a>
