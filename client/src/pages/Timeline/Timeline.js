@@ -39,25 +39,46 @@ class Timeline extends Component {
     return (
         <div id="timeline-wrap" >
         {/* <p>FOLLOWING THESE GUYS {this.props.user.following}</p> */}
-        <h3 > Timeline {this.props.user.name}</h3>
-        {/* <Posts> */}
-          {this.state.following.map(result => 
-            <div>
-              <p>{result.name}</p>
+          {this.state.following.length === 0? <div> You don't follow anyone yet </div> :
+          this.state.following.map(result => 
+            <div >
+              <p className="owner-name">{result.name}'s posts</p>
               {result.posts.map(post => 
-              <p>{post.content}</p>
-            )}
+              <div>
+                 <PostItem  key={post._id}>
+          {/* p wrapped in a with href to make going to the OpenPost page possible */}
+          <div className = "post-text">
+                <a href={`/post/${post._id}`}>
+               
+                <div className="name-genre-wrap">
+                
+                  <div className="small-text">{post.genre}</div>
+                </div>
+
+                <div className="title-type-wrap">
+                    <h6 className="post-title">{post.title}</h6>
+             
+                     <p className="small-text">{post.type}</p>
+                   </div> 
+                   
+                   
+                    <p className="content-text"  data-post={post._id}> {ellipsize(post.content, 300)} </p>
+                </a>
+           </div>
+           <div className="post-data">
+              <p> <i className="far fa-heart"></i>{post.likes} </p>
+              <p><i className="far fa-comment"></i>{post.comment.length} </p>
+           </div>
+           {/* <Button onClick={() => this.deleteArticle(article._id)}> delete </Button> */}
+        </PostItem>
+ 
+              </div>
+              )}
             </div>
           
 
-            
-            // <p>{result.name}</p>
-
-            // <PostItem key={result._id}>
-            //   <p>{result.name}</p>
-            // </PostItem>
+          
             )}
-        {/* </Posts> */}
     </div>
     );
   }
