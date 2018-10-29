@@ -67,7 +67,7 @@ class Profile extends Component {
                }
             }
 
-
+           //checks if an object is empty
             isEmpty = (obj) => {
               for(var key in obj) {
                   if(obj.hasOwnProperty(key))
@@ -78,16 +78,20 @@ class Profile extends Component {
 
 
 
-
+    
     renderFollowButton = () => {
-      // console.log(this.state.loggedInUser)
+      // once the state isn't empty
       if(!this.isEmpty(this.state.loggedInUser)){
         console.log("logged in user is not empty");
+        //check if user has more than 0 followers
         if(this.state.loggedInUser.following.length > 0){
+          //if they have more than 0 followers check if the followers include the id of the person whose profile we are viewing
           if(this.state.loggedInUser.following.includes(this.state.otherUser._id)){
+            //if yes don't render button
              return (
                <div> following </div>
               );
+              //if no render button, but after the button is clicked render "following"
             } else {
                return (
               !this.state.followed ?  <div className="following-wrap"><Button className="follow-btn" onClick={this.handleFollow}> follow </Button></div> :  
@@ -95,6 +99,7 @@ class Profile extends Component {
             
             );
           }
+          //if user has 0 people they follow always render the button
        }  else {
           return (
             !this.state.followed ?  <div className="following-wrap"><Button className="follow-btn" onClick={this.handleFollow}> follow </Button></div> :  
@@ -113,6 +118,7 @@ class Profile extends Component {
       
       <div className="name-follow-wrap">
          <h2 className="profile-name"> {this.state.otherUser.name} </h2>
+         {/* call render button function */}
          {this.renderFollowButton()}
         
        </div>
