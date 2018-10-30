@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import AllPosts from "../AllPosts";
 import {Input, Button} from "../../components/form"
 import {Option, Select} from "../../components/select"
@@ -145,7 +146,7 @@ class Search extends Component {
                        {this.state.results.length === 0 ? <div className="no-result"> No Results Found</div> :         
                           this.state.category === "User" ? this.state.resultsUser.map(result => (
                              <div className="found-user"  key={result._id}>
-                              <a href={`/user/otherUser/${result._id}`}>{result.name}</a>
+                              <Link to={`/user/otherUser/${result._id}`}>{result.name}</Link>
                             </div>
                             )) :  
                                 this.state.resultsPost.length > 0 ?
@@ -153,13 +154,13 @@ class Search extends Component {
                             {this.state.resultsPost.map(result => (
                               <PostItem key={result._id}>
                                   <div className = "post-text">
-                                        <a href={`/post/${result._id}`}>
+                                        <Link to={`/post/${result._id}`}>
                                     
                                         <div className="name-genre-wrap">
-                                        <a href={`/user/otherUser/${result.author._id}` }> 
+                                        <Link to={`/user/otherUser/${result.author._id}` }> 
                                             <div  className="post-author-name"     
                                             data-author-id={result.author._id} data-author={result.author.name}>{result.author.name}  </div>
-                                        </a>
+                                        </Link>
                                         <div className="small-text">{result.genre}</div>
                                         </div>
 
@@ -171,7 +172,7 @@ class Search extends Component {
                                         
                                         
                                             <p className="content-text"  data-post={result._id}> {ellipsize(result.content, 300)} </p>
-                                        </a>
+                                        </Link>
                                 </div>
                                 <div className="post-data">
                                     <p> <i className="far fa-heart"></i>{result.likes} </p>

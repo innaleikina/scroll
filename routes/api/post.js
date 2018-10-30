@@ -33,5 +33,8 @@ router.route("/:id")
   .route("/type/:type/")
   .get(postController.findByType)
   
+
+  router.route("/like/:postid/:userid")
+    .get(postController.updateLikes)
   
 module.exports = router;

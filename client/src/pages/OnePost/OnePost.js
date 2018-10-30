@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import API from "../../utils/API";
 import  "./onePost.css";
 import {Button} from "../../components/form";
@@ -91,14 +92,25 @@ class OnePost extends Component {
           })
           console.log(this.state.activeChunk);
       }
-      
+
+      handleLikes = (event) => {
+        event.preventDefault();
+        console.log("liking post");
+          API.fetchUser()
+            .then(res => API.likePost(this.state.post._id, res.data._id)
+                .then(res => console.log("liked post"))
+                .catch(err => console.log(err))
+            )
+            .catch(err => console.log(err));
+      }
+
 
   render() {
     return (
         <div className="one-post-wrap">
           <div className="author-all">
           <p>{this.props.user.name}</p>
-           <a href={"/profile/" + this.state.authorId}>   <p id="one-post-author"> {this.state.authorName}</p></a>
+           <Link to={"/profile/" + this.state.authorId}>   <p id="one-post-author"> {this.state.authorName}</p></Link>
             {/* this will have functionality to edit and delete posts  */}
             
               <div className="author-menu"><i className="fas fa-ellipsis-h"></i></div>
@@ -118,7 +130,7 @@ class OnePost extends Component {
              {/* ===== POST BUTTONS ====== */}
                <div className="buttons-text-wrap">
                 <div className="one-post-buttons">
-                        <Button  className="button-one-post" onClick={this.openCommentPopup}><i className="far fa-heart icon-btn"></i> </Button>
+                        <Button  className="button-one-post" onClick={this.handleLikes}><i className="far fa-heart icon-btn"></i> </Button>
                         <Button className="button-one-post" onClick={this.openCommentPopup}><i className="far fa-comment icon-btn"></i> </Button>
                     </div>
                     <div className="like-comments-text">

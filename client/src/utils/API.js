@@ -66,6 +66,11 @@ export default {
     return axios.get("/user/logout/");
   },
 
+  likePost: function(postId, userId) {
+    console.log(postId, userId);
+    // return axios.put("post/like/" + postId + "/" + userId);
+  }
+
   // getFBUser: function() {
   //   console.log("api works");
   //   return axios.get("/user/facebook")

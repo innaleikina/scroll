@@ -9,7 +9,6 @@ import Search from "./pages/Search";
 import Profile from './pages/Profile';
 import PrivateRoute from './components/PrivateRoute';
 import LogOut from './components/LogOut';
-
 import API from "./utils/API";
 import "./app.css";
 
@@ -69,6 +68,7 @@ class App extends Component {
         }
       });
   };
+
 
   componentDidMount() {
     this.fetchUser();
@@ -133,13 +133,13 @@ class App extends Component {
             {/* <Route exact path="/post/:id"  render={(props) => <OnePost {...props} user={this.state.user}/>}/> */}
             {/* <Route exact path="/home" render={(props) => <Timeline {...props} user={this.state.user}/>}/> */}
             {/* <Route exact path="/search" render={(props) => <Search {...props} user={this.state.user}/>} /> */}
-            <Route exact path="/user/otherUser/:id" render={(props) => <Profile {...props} user={this.state.user}/>} />
+            {/* <Route exact path="/user/otherUser/:id" render={(props) => <Profile {...props} user={this.state.user}/>} /> */}
             {/* <Route exact path="/new post" render={(props) => <AddPost {...props} user={this.state.user}/>} /> */}
 
             <PrivateRoute authed={this.state.authed} user={this.state.user} path='/home' component={Timeline} />
             <PrivateRoute authed={this.state.authed} user={this.state.user} path="/post/:id"  component={OnePost} />
             <PrivateRoute authed={this.state.authed} user={this.state.user} path="/search"   component={Search} />
-            {/* <PrivateRoute authed={this.state.authed} user={this.state.user} path="/user/otherUser/:id"  component={Profile} /> */}
+            <PrivateRoute authed={this.state.authed} user={this.state.user} path="/user/otherUser/:id"  component={Profile} />
             <PrivateRoute authed={this.state.authed} user={this.state.user} path="/new post" component={AddPost} />
             <PrivateRoute authed={this.state.authed} user={this.state.user} path={`/user/otherUser/${this.state.user._id}`} component={Profile} />
 

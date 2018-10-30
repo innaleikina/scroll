@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import API from "../../utils/API";
 import {Button} from "../../components/form";
 import {Posts, PostItem} from "../../components/post"
@@ -137,7 +138,7 @@ class Profile extends Component {
              <PostItem  key={post._id}>
           {/* p wrapped in a with href to make going to the OpenPost page possible */}
           <div className = "post-text">
-                <a href={`/post/${post._id}`}>
+                <Link to={`/post/${post._id}`}>
                
                 <div className="name-genre-wrap">
                   <p className="small-text">{post.type}</p>
@@ -152,7 +153,7 @@ class Profile extends Component {
                    
                    
                     <p className="content-text"  data-post={post._id}> {ellipsize(post.content, 300)} </p>
-                </a>
+                </Link>
            </div>
            <div className="post-data">
               <p> <i className="far fa-heart"></i>{post.likes} </p>

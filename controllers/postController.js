@@ -144,5 +144,19 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+
+  updateLikes: function(req, res) {
+    db.Post
+      .findOneAndUpdate({
+        _id: req.params.postid
+      }, {
+        $push: {
+        likes : req.params.userid
+      }
+    })
+    .then(dbPost => res.json(dbPost))
+    .catch(err => res.status(422).json(err));
   }
+
 };
