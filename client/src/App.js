@@ -117,7 +117,8 @@ class App extends Component {
   render() {
     return (
       <Router>
-      <div>
+      <div className="main-page">
+      <LogOut handleLogout={this.handleLogout}></LogOut>
           <NavBar>
            <NavItem onClick={this.alert} link="/home">home </NavItem>
            <NavItem onClick={this.alert} link="/search">search </NavItem>
@@ -125,7 +126,7 @@ class App extends Component {
            <NavItem onClick={this.alert} link="/new post">new post</NavItem>
          </NavBar>
          {/* <p>{this.state.user.name}</p> */}
-         <LogOut handleLogout={this.handleLogout}></LogOut>
+         
         <Switch>
             <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin} handleGoogleLogin={this.handleGoogleLogin}/>}/>
 
