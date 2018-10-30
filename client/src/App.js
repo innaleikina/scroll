@@ -23,14 +23,13 @@ class App extends Component {
   handleFormSubmit = (event, name, email, password) => {
     event.preventDefault();
     if (name && email && password) {
-      console.log("inputs working");
       const newUser = {
         name: name,
         email: email,
         password: password
       }
       API.createUser(newUser)
-        .then(res => console.log("created user"))
+        .then(res => document.getElementById("message").style.display = "block")
         .catch(err => console.log(err));
     }
   };
@@ -40,7 +39,6 @@ class App extends Component {
     event.preventDefault();
     //if username and password inputs have been filled...
     if (username && password) {
-      console.log("logging in");
       const loginUser = {
         username: username,
         password: password
@@ -53,25 +51,16 @@ class App extends Component {
   };
 
   savingUserInfo = (res) => {
-    console.log(res);
     const user = res.data;
-    console.log("saving user", user)
     this.setState({
       user: user,
       authed: true
-    }, this.redirect);
-  };
-
-  redirect = () => {
-    console.log("REDIRECT", this.state.user, this.state.authed);
-    this.logoutButton();
-    // window.location.href = "/home"
+    }, this.logoutButton);
   };
 
   fetchUser = () => {
     API.fetchUser()
       .then(res => {
-        // console.log(res.data);
         if (res.data) {
           this.setState({
             user: res.data,
@@ -86,14 +75,12 @@ class App extends Component {
   };
 
   alert = () => {
-    console.log("hello");
     if (this.state.authed === false) {
       {alert("Please log in first.")} 
     }
   };
 
   logoutButton = () => {
-    console.log("logout button function called")
     let logoutbtn = document.getElementById("logoutBtn");
     if (this.state.authed === true) {
       logoutbtn.style.display = "block";
@@ -103,7 +90,6 @@ class App extends Component {
   };
 
   handleLogout = () => {
-    console.log("logging out");
     API.logout() 
       .then(res => this.setState({
         user: {},
@@ -118,7 +104,15 @@ class App extends Component {
   //   API.getFBUser()
   //   .then(res => console.log("response from api call"))
   //   .catch(err => console.log(err));
-  // }
+  // };
+
+  // handleGoogleLogin = (event) => {
+  //   event.preventDefault();
+  //   console.log("loggin in with google")
+  //   API.getGoogleUser()
+  //     .then(res => console.log("hit google api, came back"))
+  //     .catch(err => console.log(err));
+  // };
 
   render() {
     return (
@@ -133,7 +127,7 @@ class App extends Component {
          {/* <p>{this.state.user.name}</p> */}
          <LogOut handleLogout={this.handleLogout}></LogOut>
         <Switch>
-            <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin}/>} />
+            <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin} handleGoogleLogin={this.handleGoogleLogin}/>}/>
 
             {/* <Route exact path="/post/:id"  render={(props) => <OnePost {...props} user={this.state.user}/>}/> */}
             {/* <Route exact path="/home" render={(props) => <Timeline {...props} user={this.state.user}/>}/> */}

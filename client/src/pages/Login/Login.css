@@ -1,0 +1,28 @@
+#message {
+  display: none;
+}
+
+.login-page{
+  width:380px;
+  margin: 0 auto;
+  /* text-align: center; */
+}
+
+.intro {
+  text-align: center;
+}
+
+.nav-item {
+  font-family:"Oswald";
+  color: rgba(239, 130, 117,1);
+  font-size: 18px;
+}
+
+.login-btns {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#regLogin {
+  background-color: grey;
+}

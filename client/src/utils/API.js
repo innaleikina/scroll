@@ -64,11 +64,15 @@ export default {
 
   logout: function() {
     return axios.get("/user/logout/");
-  }
+  },
 
   // getFBUser: function() {
   //   console.log("api works");
   //   return axios.get("/user/facebook")
   // },
+
+  // getGoogleUser: function() {
+  //   return axios.get("user/google")
+  // }
 
 };

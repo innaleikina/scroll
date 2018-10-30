@@ -5,7 +5,9 @@ const db = require("../../models");
 //auth definitions and variables start -----------------------------------------------------------------
 const passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy;
-FacebookStrategy = require('passport-facebook').Strategy;
+// FacebookStrategy = require('passport-facebook').Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
+
 
 passport.use(new LocalStrategy(
   function (username, password, done) {
@@ -38,24 +40,39 @@ passport.deserializeUser(function (userId, done) {
 
 //auth definitions and variables end -----------------------------------------------------------------
 
+//auth Google login start --------------------------------------------------------------------------------
+// passport.use(new GoogleStrategy({
+//   consumerKey: "342518891026-b2c3kdjolo43a6tjsn2s3gckedbvckqn.apps.googleusercontent.com",
+//   consumerSecret: "0EZ8fkwCaCZzT3Fdd3nD30Pi",
+//   callbackURL: "localhost3000/home"
+// },
+// function(token, tokenSecret, profile, done) {
+//   console.log("hitting google api");
+//     // User.findOrCreate({ googleId: profile.id }, function (err, user) {
+//     //   return done(err, user);
+//     // });
+// }
+// ));
+//auth Google login end --------------------------------------------------------------------------------
+
 //auth FB login start --------------------------------------------------------------------------------
-passport.use(new FacebookStrategy({
-    clientID: "1993823350674672",
-    clientSecret: "47b8126ed2719a0c09aed4354c99c52f",
-    callbackURL: "https://localhost:3000/user/facebook/callback"
-  },
-  function (accessToken, refreshToken, profile, done) {
-    console.log("inside callback function");
-    db.User.findOne({
-      "email": "oserenchenko@gmail.com"
-    }, function (err, user) {
-      if (err) {
-        return done(err);
-      }
-      done(null, user);
-    });
-  }
-));
+// passport.use(new FacebookStrategy({
+//     clientID: "1993823350674672",
+//     clientSecret: "47b8126ed2719a0c09aed4354c99c52f",
+//     callbackURL: "https://localhost:3000/user/facebook/callback"
+//   },
+//   function (accessToken, refreshToken, profile, done) {
+//     console.log("inside callback function");
+//     db.User.findOne({
+//       "email": "oserenchenko@gmail.com"
+//     }, function (err, user) {
+//       if (err) {
+//         return done(err);
+//       }
+//       done(null, user);
+//     });
+//   }
+// ));
 //auth FB login end --------------------------------------------------------------------------------
 
 function isLoggedIn(req, res, next) {
@@ -91,15 +108,24 @@ router.route("/logout")
     res.redirect('/');
   })
 
+//google login
+// router.route("/google")
+//   .get(passport.authenticate('google', { scope: 'https://www.google.com/m8/feeds' }))
 
-// //fb login /user/facebook
+// router.route("/google/login/callback")
+//   .get(passport.authenticate('google', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     res.redirect('/');
+//   })
+
+//fb login /user/facebook
 // router.route("/facebook")
 //   .get(
 //     passport.authenticate('facebook')
 //     // , {scope : ['public_profile', 'email']})
 //     )
 
-//fb callback /user/facebook/callback
+// fb callback /user/facebook/callback
 // router.route("/facebook/callback")
 //   .get(passport.authenticate('facebook', { successRedirect: '/home',
 //   failureRedirect: '/login' }));
