@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {SignUp, SubmitSignUp} from "../../components/SignUp";
-import { BrowserRouter as  Redirect } from "react-router-dom";
+// import { BrowserRouter as  Redirect } from "react-router-dom";
+import API from "../../utils/API";
+import { withRouter } from 'react-router-dom'
 
 import "./Login.css";
 
@@ -19,6 +21,47 @@ class Login extends Component {
       [name]: value
     });
   };
+
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+    if (this.state.name && this.state.email && this.state.password) {
+      const newUser = {
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password
+      }
+      API.createUser(newUser)
+        .then(res => console.log("created new user"))
+        .catch(err => console.log(err));
+    }
+  };
+
+  //handling user login
+  handleLogin = (event) => {
+    event.preventDefault();
+    console.log("handeling login")
+    //if username and password inputs have been filled...
+    if (this.state.username && this.state.passwordLogin) {
+      const loginUser = {
+        username: this.state.username,
+        password: this.state.passwordLogin
+      }
+      //hit the API file, getUser method and pass the login user information
+      API.getUser(loginUser)
+        .then(res => this.redirect())
+        .catch(err => console.log(err));
+    }
+  };
+
+  redirect = () => {
+    this.props.fetchUser();
+    API.fetchUser()
+      .then(res => {
+        if (res.data) {
+          this.props.history.push("/home");
+        }
+      })
+  }
 
 
   render() {
@@ -61,7 +104,7 @@ class Login extends Component {
             <SubmitSignUp
             text="login"
             id="regLogin"
-            onClick={(event) => this.props.handleLogin(event, this.state.username, this.state.passwordLogin)}
+            onClick={(event) => this.handleLogin(event)}
             >
             </SubmitSignUp>
 
@@ -105,7 +148,7 @@ class Login extends Component {
             </SignUp>
             <SubmitSignUp
             text="submit"
-            onClick={(event) => this.props.handleFormSubmit(event, this.state.name, this.state.email, this.state.password)}
+            onClick={(event) => this.handleFormSubmit(event)}
             >
             </SubmitSignUp>
           </form>
