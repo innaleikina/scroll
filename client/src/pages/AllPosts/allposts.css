@@ -35,3 +35,10 @@
     font-variant: small-caps;
     font-weight:bold;
 }
+
+.explore-title{
+    font-size:24px;
+    font-weight:bold;
+    color:rgba(239, 130, 117,1);
+    margin:30px 0;
+}

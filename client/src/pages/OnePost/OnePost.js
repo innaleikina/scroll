@@ -34,6 +34,9 @@ class OnePost extends Component {
 
 
     loadPost = () => {
+        this.setState({
+            chunks:[]
+        });
         API.getPost(this.state.postId)
             .then(res =>
                 this.setState({
@@ -41,7 +44,7 @@ class OnePost extends Component {
                     likes: res.data.likes,
                     comments: res.data.comment,
                     authorName : res.data.author.name,
-                    authorId:res.data.author._id
+                    authorId:res.data.author._id,
                 }, this.chunkSubstr(res.data.content, 1000))
             )
             .catch(err => console.log(err));
@@ -133,7 +136,8 @@ class OnePost extends Component {
             </div>
             {/* ===== TEXT OF THE POST ====== */}
             <div className="one-post" >
-               <p>{this.state.chunks[this.state.activeChunk]}-</p>
+               <p>{this.state.chunks[this.state.activeChunk]}
+                {this.state.chunks.length > 1? <span>- </span>: <span></span>}</p>
                
             </div>
              {/* ===== PAGINATION ====== */}

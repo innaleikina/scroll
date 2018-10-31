@@ -16,6 +16,7 @@ import {
 import "./app.css";
 
 
+
 class App extends Component {
   state = {
     user: {},
@@ -62,6 +63,7 @@ class App extends Component {
   // };
 
   fetchUser = () => {
+    
     API.fetchUser()
       .then(res => {
         if (res.data) {
@@ -70,8 +72,14 @@ class App extends Component {
             authed: true
           }, this.logoutButton)
         }
-      });
+      })
   };
+
+  // redirect = () =>{
+  //   if (this.state.authed()) {
+  //     return <Redirect to="/home" />;
+  //   }
+  // }
 
 
   componentDidMount() {

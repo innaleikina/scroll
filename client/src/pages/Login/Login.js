@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {SignUp, SubmitSignUp} from "../../components/SignUp";
+import { BrowserRouter as  Redirect } from "react-router-dom";
+
 import "./Login.css";
 
 class Login extends Component {
@@ -17,6 +19,7 @@ class Login extends Component {
       [name]: value
     });
   };
+
 
   render() {
     return (
