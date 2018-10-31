@@ -20,7 +20,8 @@ class OnePost extends Component {
         chunks:[],
         authorId: "",
         activeChunk:0,
-        loggedInUser: ""
+        postAuthor: this.props.match.params.userid,
+        loggedInUser:""
       
         //if false no render, if true, render 
 
@@ -37,6 +38,16 @@ class OnePost extends Component {
         this.setState({
             chunks:[]
         });
+
+
+            API.fetchUser()
+            .then(res => this.setState({
+            loggedInUser: res.data
+            }), console.log("success"))
+            .catch(err => console.log(err))
+        
+        
+
         API.getPost(this.state.postId)
             .then(res =>
                 this.setState({
@@ -71,10 +82,16 @@ class OnePost extends Component {
 }
    
 
-    deletePost = event => {
+    // deletePost = event => {
+    //     event.preventDefault();
+    //     API.deletePost(id);
+    //     console.log("post deleted");
+    // }
+
+    deleteComment= event => {
         event.preventDefault();
-        API.deletePost(this.state.postId);
-        console.log("post deleted");
+        API.deleteComment();
+        console.log("comment deleted");
     }
 
 
@@ -122,17 +139,40 @@ class OnePost extends Component {
           }
         }
         
+            
+           
+            renderDeleteButton = (id) => {
+                console.log(this.state.loggedInUser);
+                console.log(this.state.authorId);
+                if(this.state.authorId !== ""){
+                        if(this.state.loggedInUser._id === this.state.authorId){
+                        return(
+                            <Button onClick={this.deletePost(id)} className="trash-icon" > <i className="far fa-trash-alt icon-btn"></i> </Button>
+                        )
+                      }
+                }
+            //     this.getLoggedInUser();
+            //     if(this.state.loggedInUser._id === this.state.postAuthor){
+            //     return(
+            //         <Button className="trash-icon" > <i className="far fa-trash-alt icon-btn"></i> </Button>
+            //     )
+            //   }
+        }
 
 
   render() {
+    //   this.getLoggedInUser();
     return (
         <div className="one-post-wrap">
+        
           <div className="author-all">
+
           <p>{this.props.user.name}</p>
+
            <Link to={"/user/otherUser/" + this.state.authorId}>   <p id="one-post-author"> {this.state.authorName}</p></Link>
             {/* this will have functionality to edit and delete posts  */}
             
-              <div className="author-menu"><i className="fas fa-ellipsis-h"></i></div>
+              {/* <div className="author-menu"><i className="fas fa-ellipsis-h"></i></div> */}
             </div>
             {/* ===== TEXT OF THE POST ====== */}
             <div className="one-post" >
@@ -150,8 +190,8 @@ class OnePost extends Component {
              {/* ===== POST BUTTONS ====== */}
                <div className="buttons-text-wrap">
                 <div className="one-post-buttons">
-                        <Button  className="button-one-post" onClick={this.handleLikes}><i className="far fa-heart icon-btn"></i> </Button>
-                        <Button className="button-one-post" onClick={this.openCommentPopup}><i className="far fa-comment icon-btn"></i> </Button>
+                        <Button  className="button-one-post" onClick={this.handleLikes}><i className="one-post-i far fa-heart icon-btn"></i> </Button>
+                        <Button className="button-one-post" onClick={this.openCommentPopup}><i className="one-post-i far fa-comment icon-btn"></i> </Button>
                     </div>
                     <div className="like-comments-text">
                         <div>{this.state.likes.length} likes</div>
@@ -166,7 +206,7 @@ class OnePost extends Component {
                 <div  key={comment._id}>
                     <div  className="one-comment" data-comment={comment._id}>
                     <div className="comment-text"><span className="comment-author">{comment.author}</span> {comment.content}  </div>
-                     <Button className="trash-icon" > <i className="far fa-trash-alt icon-btn"></i> </Button> </div>
+                     </div>
                 </div>
                 
                 ))}
@@ -175,11 +215,7 @@ class OnePost extends Component {
 
             {/* ======COMMENT MODULE (WILL MAKE OWN COMPONENT)======= */}
                 {this.state.commentPopUpShown ? <CommentPopup closePopUp={this.closePopUp}  loadPost={this.loadPost} postId={this.state.postId} loggedInUserID={this.state.loggedInUser} loggedInUserName={this.props.user.name}/> : <div></div> }
-                
-            {/* ======BUTTONS======= */}
-            <h6> Buttons </h6>
-            <Button onClick ={this.deletePost}> delete post </Button>
-          
+
             
         </div>
     );

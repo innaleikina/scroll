@@ -27,7 +27,7 @@ class Profile extends Component {
      API.fetchUser()
      .then(res => this.setState({
         loggedInUser: res.data
-     }))
+     }), console.log("success"))
      .catch(err => console.log(err));
       
      API.getProfile(this.state.userId)

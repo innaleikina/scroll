@@ -13,9 +13,9 @@ class AddPost extends Component {
     userId: this.props.user._id,
     //will use the params.id when auth works
     // userId: this.props.match.params.id,
-    textArea: "enter text",
+    textArea: "",
     authorPost: this.props.user.name,
-    title:"enter title",
+    title:"",
     genre:"Science",
     type:"Chapter"
    }
@@ -105,9 +105,9 @@ class AddPost extends Component {
                     </Select>
                 </div>
 
-          <Input name="title" value={this.state.title} id="title-post" onChange={this.handleInputChange}/>
+          <Input name="title" placeholder="enter title" value={this.state.title} id="title-post" onChange={this.handleInputChange}/>
 
-          <TextArea name="textArea" value={this.state.textArea} id="textArea-post" onChange={this.handleInputChange} />
+          <TextArea name="textArea" placeholder="enter text" value={this.state.textArea} id="textArea-post" onChange={this.handleInputChange} />
        
           {/* <Button > Save Comment </Button> */}
           <Input id="submit-post" onClick={this.onSubmitClick}  type="submit" value="Submit"/>
