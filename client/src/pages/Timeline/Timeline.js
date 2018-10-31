@@ -67,7 +67,7 @@ class Timeline extends Component {
                 </Link>
            </div>
            <div className="post-data">
-              <p> <i className="far fa-heart"></i>{post.likes} </p>
+              <p> <i className="far fa-heart"></i>{post.likes.length} </p>
               <p><i className="far fa-comment"></i>{post.comment.length} </p>
            </div>
            {/* <Button onClick={() => this.deleteArticle(article._id)}> delete </Button> */}

@@ -35,6 +35,6 @@ router.route("/:id")
   
 
   router.route("/like/:postid/:userid")
-    .get(postController.updateLikes)
+    .put(postController.updateLikes)
   
 module.exports = router;

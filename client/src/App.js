@@ -44,18 +44,19 @@ class App extends Component {
       }
       //hit the API file, getUser method and pass the login user information
       API.getUser(loginUser)
-        .then(res => this.savingUserInfo(res))
+        .then(res => this.fetchUser())
         .catch(err => console.log(err));
     }
   };
 
-  savingUserInfo = (res) => {
-    const user = res.data;
-    this.setState({
-      user: user,
-      authed: true
-    }, this.logoutButton);
-  };
+  // savingUserInfo = (res) => {
+  //   console.log(res);
+  //   const user = res.data;
+  //   this.setState({
+  //     user: user,
+  //     authed: true
+  //   }, this.logoutButton);
+  // };
 
   fetchUser = () => {
     API.fetchUser()

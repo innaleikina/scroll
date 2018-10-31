@@ -175,7 +175,7 @@ class Search extends Component {
                                         </Link>
                                 </div>
                                 <div className="post-data">
-                                    <p> <i className="far fa-heart"></i>{result.likes} </p>
+                                    <p> <i className="far fa-heart"></i>{result.likes.length} </p>
                                     <p><i className="far fa-comment"></i>{result.comment.length} </p>
                                 </div>
                               </PostItem> 

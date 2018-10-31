@@ -68,7 +68,7 @@ export default {
 
   likePost: function(postId, userId) {
     console.log(postId, userId);
-    // return axios.put("post/like/" + postId + "/" + userId);
+    return axios.put("/post/like/" + postId + "/" + userId);
   }
 
   // getFBUser: function() {

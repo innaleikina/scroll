@@ -14,6 +14,7 @@ class OnePost extends Component {
         postId: this.props.match.params.id,
         authorName: "",
         post:{},
+        likes: [],
         comments:[],
         commentPopUpShown:false,
         chunks:[],
@@ -37,7 +38,8 @@ class OnePost extends Component {
             .then(res =>
                 this.setState({
                     post: res.data,
-                    comments:res.data.comment,
+                    likes: res.data.likes,
+                    comments: res.data.comment,
                     authorName : res.data.author.name,
                     authorId:res.data.author._id
                 }, this.chunkSubstr(res.data.content, 1000))
@@ -93,16 +95,30 @@ class OnePost extends Component {
           console.log(this.state.activeChunk);
       }
 
+      //handle liking posts
       handleLikes = (event) => {
         event.preventDefault();
         console.log("liking post");
           API.fetchUser()
-            .then(res => API.likePost(this.state.post._id, res.data._id)
-                .then(res => console.log("liked post"))
-                .catch(err => console.log(err))
-            )
+            .then(res => this.apiLikeHit(res))
             .catch(err => console.log(err));
       }
+
+      apiLikeHit = (res) => {
+          if (this.state.likes.includes(res.data._id)) {
+            console.log("you've already liked this post");
+          } else {
+            API.likePost(this.state.post._id, res.data._id)
+            .then(res => console.log("liked post"))
+            .then(API.getPost (this.state.post._id)
+              .then(res => this.setState({
+                likes: res.data.likes
+              }, console.log(this.state.likes)))
+            )
+            .catch(err => console.log(err))
+          }
+        }
+        
 
 
   render() {
@@ -134,7 +150,7 @@ class OnePost extends Component {
                         <Button className="button-one-post" onClick={this.openCommentPopup}><i className="far fa-comment icon-btn"></i> </Button>
                     </div>
                     <div className="like-comments-text">
-                        <div>{this.state.post.likes} likes</div>
+                        <div>{this.state.likes.length} likes</div>
                         <div>{this.state.comments.length} comments</div>
                     </div>
                 </div>
