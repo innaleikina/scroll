@@ -13,54 +13,13 @@ import API from "./utils/API";
 import "./app.css";
 
 
-
 class App extends Component {
   state = {
     user: {},
     authed: false
   }
 
-  handleFormSubmit = (event, name, email, password) => {
-    event.preventDefault();
-    if (name && email && password) {
-      const newUser = {
-        name: name,
-        email: email,
-        password: password
-      }
-      API.createUser(newUser)
-        .then(res => document.getElementById("message").style.display = "block")
-        .catch(err => console.log(err));
-    }
-  };
-
-  //handling user login
-  handleLogin = (event, username, password) => {
-    event.preventDefault();
-    //if username and password inputs have been filled...
-    if (username && password) {
-      const loginUser = {
-        username: username,
-        password: password
-      }
-      //hit the API file, getUser method and pass the login user information
-      API.getUser(loginUser)
-        .then(res => this.fetchUser())
-        .catch(err => console.log(err));
-    }
-  };
-
-  // savingUserInfo = (res) => {
-  //   console.log(res);
-  //   const user = res.data;
-  //   this.setState({
-  //     user: user,
-  //     authed: true
-  //   }, this.logoutButton);
-  // };
-
   fetchUser = () => {
-    
     API.fetchUser()
       .then(res => {
         if (res.data) {
@@ -72,13 +31,6 @@ class App extends Component {
       })
   };
 
-  // redirect = () =>{
-  //   if (this.state.authed()) {
-  //     return <Redirect to="/home" />;
-  //   }
-  // }
-
-
   componentDidMount() {
     this.fetchUser();
   };
@@ -89,7 +41,7 @@ class App extends Component {
     }
   };
 
-  logoutButton = () => {
+  logoutButton = (history) => {
     let logoutbtn = document.getElementById("logoutBtn");
     if (this.state.authed === true) {
       logoutbtn.style.display = "block";
@@ -137,7 +89,7 @@ class App extends Component {
          {/* <p>{this.state.user.name}</p> */}
          
         <Switch>
-            <Route exact path="/"  render={(props) => <Login {...props} handleFormSubmit={this.handleFormSubmit} handleLogin={this.handleLogin} handleFBLogin={this.handleFBLogin} handleGoogleLogin={this.handleGoogleLogin}/>}/>
+            <Route exact path="/"  render={(props) => <Login {...props} fetchUser={this.fetchUser}/>}/>
 
             {/* <Route exact path="/post/:id"  render={(props) => <OnePost {...props} user={this.state.user}/>}/> */}
             {/* <Route exact path="/home" render={(props) => <Timeline {...props} user={this.state.user}/>}/> */}
