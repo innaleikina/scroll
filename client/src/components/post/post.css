@@ -18,6 +18,7 @@
 }
 .post-text{
     width:90%;
+    background-color:white;
     border:7px rgba(136, 160, 150, 1) solid;
     border-right:3.5px rgba(136, 160, 150, 1) solid;
     font-size:14px;
@@ -38,6 +39,7 @@
 
 .post-data{
     border:7px rgba(136, 160, 150, 1) solid;
+    background-color:white;
     border-left:3.5px rgba(136, 160, 150, 1) solid;
     width:60px;
     font-size:13px;

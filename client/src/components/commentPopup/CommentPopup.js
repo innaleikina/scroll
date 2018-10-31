@@ -9,7 +9,7 @@ class CommentPopup extends Component {
 
    state ={
     userId: this.props.loggedInUserID,
-    textArea: "Enter your comment here",
+    textArea: "",
     authorComment: this.props.loggedInUserName,
     comments:[]
   }
@@ -61,10 +61,9 @@ class CommentPopup extends Component {
   <form className="pop-up" >
     {/* {props.children} */}
     <Button onClick={this.props.closePopUp} id="close-pop-up"> X </Button>
-    <TextArea name="textArea" value={this.state.textArea} id="textArea" onChange={this.handleInputChange} />
-    <Input name="authorComment" value={this.state.authorComment} id="authorComment" onChange={this.handleInputChange}/>
+    <TextArea name="textArea" placeholder="enter your comment" value={this.state.textArea} id="text-area" onChange={this.handleInputChange} />
     {/* <Button > Save Comment </Button> */}
-    <Input onClick={this.onSubmitClick}  type="submit" value="Submit"/>
+    <Input className="submit" onClick={this.onSubmitClick}  type="submit" value="Submit"/>
   </form>
     )
 
