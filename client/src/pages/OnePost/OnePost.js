@@ -126,7 +126,7 @@ class OnePost extends Component {
         <div className="one-post-wrap">
           <div className="author-all">
           <p>{this.props.user.name}</p>
-           <Link to={"/profile/" + this.state.authorId}>   <p id="one-post-author"> {this.state.authorName}</p></Link>
+           <Link to={"/user/otherUser/" + this.state.authorId}>   <p id="one-post-author"> {this.state.authorName}</p></Link>
             {/* this will have functionality to edit and delete posts  */}
             
               <div className="author-menu"><i className="fas fa-ellipsis-h"></i></div>

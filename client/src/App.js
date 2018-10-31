@@ -10,6 +10,9 @@ import Profile from './pages/Profile';
 import PrivateRoute from './components/PrivateRoute';
 import LogOut from './components/LogOut';
 import API from "./utils/API";
+import {
+  withRouter
+} from 'react-router-dom';
 import "./app.css";
 
 
@@ -81,7 +84,7 @@ class App extends Component {
     }
   };
 
-  logoutButton = () => {
+  logoutButton = (history) => {
     let logoutbtn = document.getElementById("logoutBtn");
     if (this.state.authed === true) {
       logoutbtn.style.display = "block";
