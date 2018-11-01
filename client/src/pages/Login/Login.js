@@ -31,8 +31,10 @@ class Login extends Component {
         password: this.state.password
       }
       API.createUser(newUser)
-        .then(res => console.log("created new user"))
+        .then(res => {alert("New user created.")} )
         .catch(err => console.log(err));
+    } else {
+      {alert("Please fill in your name, email, and password.")} 
     }
   };
 
@@ -48,8 +50,15 @@ class Login extends Component {
       }
       //hit the API file, getUser method and pass the login user information
       API.getUser(loginUser)
-        .then(res => this.redirect())
+        .then(res => {
+          if(typeof(res.data) === "string") {
+            {alert("Incorrect email or password.")} 
+          } else {
+            this.redirect()
+          }})
         .catch(err => console.log(err));
+    } else {
+      {alert("Please input both your email and password.")} 
     }
   };
 
