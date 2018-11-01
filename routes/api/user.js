@@ -137,6 +137,7 @@ router.route("/otherUser/:id").get(userController.findById);
 
 
 router.route("/follow/:loggedinid/:otherid").put(userController.update);
+// router.route("/follow/:loggedinid/:otherid").put(userController.updateFollowers);
 
 
 

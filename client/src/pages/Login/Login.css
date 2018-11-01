@@ -3,13 +3,19 @@
 }
 
 .login-page{
-  width:380px;
+  width:400px;
   margin: 0 auto;
+  border:5px rgba(136, 160, 150, 1) solid;
+  margin-top:20px;
+  margin-bottom:40px;
+  padding:25px;
   /* text-align: center; */
 }
 
 .intro {
   text-align: center;
+  margin-bottom:20px;
+  
 }
 
 .nav-item {
@@ -25,4 +31,30 @@
 
 #regLogin {
   background-color: grey;
+}
+
+.nav-tabs{
+ width:350px;
+}
+
+#welcome-msg{
+  color:rgba(239, 130, 117,1);
+  font-size:22px;
+
+}
+
+#tagline{
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing: 1px;
+  color:rgba(136, 160, 150, 1);
+  margin-top:-8px;
+}
+
+#about-scroll{
+  margin-top:10px;
+  margin-bottom:60px;
+  text-align: center;
+  letter-spacing:.5px;
+  color:gray;
 }
