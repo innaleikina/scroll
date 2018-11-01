@@ -20,16 +20,19 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findBySearch: function(req,res){
+  findBySearch: function (req, res) {
     db.User
-    .find({"name":
-    { $regex: new RegExp("^" + req.params.search.toLowerCase(), "i") } })
-    .populate("post")
-    .sort({
-      date: -1
-    })
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
+      .find({
+        "name": {
+          $regex: new RegExp("^" + req.params.search.toLowerCase(), "i")
+        }
+      })
+      .populate("post")
+      .sort({
+        date: -1
+      })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
     db.User
@@ -40,14 +43,24 @@ module.exports = {
   update: function (req, res) {
     db.User
       .findOneAndUpdate({
-        _id: req.params.loggedinid},
-        {
-          $push: {
-            following: req.params.otherid
-          }
-        },{
-          new: true
-        })
+        _id: req.params.loggedinid
+      }, {
+        $push: {
+          following: req.params.otherid
+        }
+      }, {
+        new: true
+      })
+      .then(
+        dbUser => db.User.findOneAndUpdate({
+        _id: req.params.otherid
+      }, {
+        $push: {
+          followers: req.params.loggedinid
+        }
+      }, {
+        new: true
+      }))
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

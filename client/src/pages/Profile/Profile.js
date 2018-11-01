@@ -6,78 +6,88 @@ import {Posts, PostItem} from "../../components/post"
 import ellipsize from 'ellipsize';
 
 import "./profile.css";
-
-
 class Profile extends Component {
-   
+
   state = {
     userId: this.props.match.params.id,
-     otherUser:{},
-     posts:[],
-     followed: false,
-     loggedInUser:{}
-    
+    otherUser: {},
+    posts: [],
+    followed: false,
+    loggedInUser: {},
+    followers: []
+
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.loadProfile();
   }
 
   loadProfile = () => {
-     API.fetchUser()
-     .then(res => this.setState({
+    API.fetchUser()
+      .then(res => this.setState({
         loggedInUser: res.data
-     }), console.log("success"))
-     .catch(err => console.log(err));
-      
-     API.getProfile(this.state.userId)
-        .then(res =>
-            this.setState({
-                otherUser: res.data,
-                posts: res.data.posts,
-            })
-        )
-        .catch(err => console.log(err));
-     };
+      }), console.log("success"))
+      .catch(err => console.log(err));
 
-    
+    API.getProfile(this.state.userId)
+      .then(res =>
+        this.setState({
+          otherUser: res.data,
+          posts: res.data.posts,
+          followers: res.data.followers
+        })
+      )
+      .catch(err => console.log(err));
+  };
 
 
-     handleFollow = () => { 
-              if(this.state.loggedInUser.following.length > 0){
-                console.log("length is greater than 0")
-          
-                if(this.state.loggedInUser.following.includes(this.state.otherUser._id)){
-                  console.log("you already follow this user");
-                  this.setState({
-                    followed:true
-                  })
-                 } else {
-                  API.followUser(this.props.user._id, this.state.otherUser._id)
-                  .then(this.setState({
-                   followed : true
-                    }))
-                   .then(res => console.log(res.data))
-                 }
-               } else {
-                  API.followUser(this.props.user._id, this.state.otherUser._id)
-                  .then(this.setState({
-                   followed : true
-                 }))
-                 .then(res => console.log(res.data))
-               }
-            }
 
-           
-           
-            //checks if an object is empty
-            isEmpty = (obj) => {
-              for(var key in obj) {
-                  if(obj.hasOwnProperty(key))
-                      return false;
-              }
-              return true;
-          }
+
+  handleFollow = () => {
+    if (this.state.loggedInUser.following.length > 0) {
+      console.log("length is greater than 0")
+
+      if (this.state.loggedInUser.following.includes(this.state.otherUser._id)) {
+        console.log("you already follow this user");
+        this.setState({
+          followed: true
+        })
+      } else {
+        API.followUser(this.props.user._id, this.state.otherUser._id)
+          .then(this.setState({
+            followed: true
+          }))
+          .then(API.getUserById(this.state.otherUser._id)
+            .then(res => this.setState({
+              followers: res.data.followers
+            }, console.log(this.state.followers)))
+          )
+          .then(res => console.log(res.data))
+      }
+    } else {
+      API.followUser(this.props.user._id, this.state.otherUser._id)
+        .then(this.setState({
+          followed: true
+        }))
+        .then(API.getUserById(this.state.otherUser._id)
+        .then(res => this.setState({
+          followers: res.data.followers
+        }, console.log(this.state.followers)))
+      )
+        .then(res => console.log(res.data))
+    }
+  }
+
+
+
+  //checks if an object is empty
+  isEmpty = (obj) => {
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key))
+        return false;
+    }
+    return true;
+  }
 
 
 
@@ -87,7 +97,7 @@ class Profile extends Component {
       if(!this.isEmpty(this.state.loggedInUser)){
         if(this.state.loggedInUser._id === this.state.otherUser._id){
           return(
-            <p>you are on your own page</p> 
+            <p></p> 
           )
         }
 
@@ -98,21 +108,21 @@ class Profile extends Component {
           if(this.state.loggedInUser.following.includes(this.state.otherUser._id)){
             //if yes don't render button
              return (
-               <div> following </div>
+               <div> followed </div>
               );
               //if no, render button, but after the button is clicked render "following"
             } else {
                return (
-              !this.state.followed ?  <div className="following-wrap"><Button className="follow-btn" onClick={this.handleFollow}> follow </Button></div> :  
-              <div className="following-wrap"> following </div> 
+              !this.state.followed ?  <div className="following-btn-wrap"><Button className="follow-btn" onClick={this.handleFollow}> follow </Button></div> :  
+              <div className="following-btn-wrap"> followed </div> 
             
             );
           }
           //if user has 0 people they follow always render the button
        }  else {
           return (
-            !this.state.followed ?  <div className="following-wrap"><Button className="follow-btn" onClick={this.handleFollow}> follow </Button></div> :  
-            <div className="following-wrap"> following </div> 
+            !this.state.followed ?  <div className="following-btn-wrap"><Button className="follow-btn" onClick={this.handleFollow}> follow </Button></div> :  
+            <div className="following-btn-wrap"> followed </div> 
           )
        }
       }
@@ -121,12 +131,15 @@ class Profile extends Component {
             
 
   render() {
-    // console.log( this.state.loggedInUser)
+   console.log(this.state.followers)
     return (
       <div className="profile-wrap">
       
       <div className="name-follow-wrap">
          <h2 className="profile-name"> {this.state.otherUser.name} </h2>
+         <p> {this.state.posts.length} posts </p>
+         <p> {this.state.followers.length} followers </p>
+         
          {/* call render button function */}
          {this.renderFollowButton()}
         

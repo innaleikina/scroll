@@ -126,3 +126,14 @@
 .icon-btn:focus{
     outline:0;
 }
+
+#btn-liked{
+    color:red;
+    background-color:white;
+    box-shadow:none;
+    border:1px rgba(136, 160, 150, 1) solid;
+}
+
+#icon-liked{
+    color:red;
+}

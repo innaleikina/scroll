@@ -68,8 +68,12 @@ class Login extends Component {
     return (
     <div className="login-page">
       <div className="intro">
-        <h5>Welcome to Scroll!</h5>
-        <p>A social platform for lovers of reading and writing.</p>
+        <h5 id="welcome-msg">Welcome to Scroll!</h5>
+        <p id="tagline">A social platform for lovers of reading and writing. </p>
+      </div>
+
+      <div id="about-scroll">
+      <p> Writer? Publish your writing on scroll, recieve feedback, and gain a following of dedicated readers who look forward to your new work. Reader? Join scroll and  </p>
       </div>
 
       <nav>
