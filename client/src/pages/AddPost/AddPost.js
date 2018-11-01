@@ -51,15 +51,21 @@ class AddPost extends Component {
       title: this.state.title,
       genre: this.state.genre,
       type: this.state.type
-    });
-    console.log("post posted");
+    })
+      .then(res => 
+        this.props.history.push("/post/" + res.data.posts[res.data.posts.length - 1])
+        )
+      .catch(err => console.log(err))
+  };
+    // console.log("post posted");
+    // this.props.history.push("/post/");
     // window.reirect("/post/")
     // console.log(this.state.userId)
     // console.log(this.state.textArea)
     // console.log(this.state.title)
     // console.log(this.state.genre)
     // console.log(this.state.type)
-  }
+ 
 
 
   onSubmitClick = (e) => {

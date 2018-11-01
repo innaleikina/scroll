@@ -5,6 +5,15 @@ const postRoutes = require("./api/post");
 const profileRoutes = require("./api/profile");
 
 
+router.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../client/public/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+
+
 // Book routes
 router.use("/user", userRoutes);
 router.use("/comment", commentRoutes);
