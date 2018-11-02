@@ -82,7 +82,7 @@ class Login extends Component {
       </div>
 
       <div id="about-scroll">
-      <p> Writer? Publish your writing on scroll, recieve feedback, and gain a following of dedicated readers who look forward to your new work. Reader? Join scroll and  </p>
+      <p> Writer? Publish your writing on scroll, recieve feedback, and gain a following of dedicated readers who look forward to your new work. Reader? Join scroll and never be without reading material again.  </p>
       </div>
 
       <nav>
