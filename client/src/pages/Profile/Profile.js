@@ -44,8 +44,7 @@ class Profile extends Component {
 
 
   handleFollow = () => {
-    if (this.state.loggedInUser.following.length > 0) {
-      console.log("length is greater than 0")
+  
 
       if (this.state.loggedInUser.following.includes(this.state.otherUser._id)) {
         console.log("you already follow this user");
@@ -64,18 +63,6 @@ class Profile extends Component {
           )
           .then(res => console.log(res.data))
       }
-    } else {
-      API.followUser(this.props.user._id, this.state.otherUser._id)
-        .then(this.setState({
-          followed: true
-        }))
-        .then(API.getUserById(this.state.otherUser._id)
-        .then(res => this.setState({
-          followers: res.data.followers
-        }, console.log(this.state.followers)))
-      )
-        .then(res => console.log(res.data))
-    }
   }
 
 
@@ -108,13 +95,13 @@ class Profile extends Component {
           if(this.state.loggedInUser.following.includes(this.state.otherUser._id)){
             //if yes don't render button
              return (
-               <div> followed </div>
+               <div className="followed"> followed </div>
               );
               //if no, render button, but after the button is clicked render "following"
             } else {
                return (
               !this.state.followed ?  <div className="following-btn-wrap"><Button className="follow-btn" onClick={this.handleFollow}> follow </Button></div> :  
-              <div className="following-btn-wrap"> followed </div> 
+              <div className="following-btn-wrap followed"> followed </div> 
             
             );
           }
@@ -122,7 +109,7 @@ class Profile extends Component {
        }  else {
           return (
             !this.state.followed ?  <div className="following-btn-wrap"><Button className="follow-btn" onClick={this.handleFollow}> follow </Button></div> :  
-            <div className="following-btn-wrap"> followed </div> 
+            <div className="following-btn-wrap followed"> followed </div> 
           )
        }
       }
@@ -137,12 +124,15 @@ class Profile extends Component {
       
       <div className="name-follow-wrap">
          <h2 className="profile-name"> {this.state.otherUser.name} </h2>
-         <p> {this.state.posts.length} posts </p>
-         <p> {this.state.followers.length} followers </p>
+    
          
          {/* call render button function */}
          {this.renderFollowButton()}
-        
+         
+       </div>
+       <div className="profile-stats">
+         <p className="stat"> {this.state.posts.length} posts </p>
+         <p className="stat"> {this.state.followers.length} followers </p>
        </div>
      {/* <p> {this.state.posts[0]}</p> */}
      <Posts>
