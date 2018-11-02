@@ -23,13 +23,10 @@ class OnePost extends Component {
         postAuthor: this.props.match.params.userid,
         loggedInUser:""
       
-        //if false no render, if true, render 
-
     }
 
     componentDidMount() {
         this.loadPost();
-        this.setState({loggedInUser: this.props.user._id})
     }
 
 
@@ -152,12 +149,7 @@ class OnePost extends Component {
                         )
                       }
                 }
-            //     this.getLoggedInUser();
-            //     if(this.state.loggedInUser._id === this.state.postAuthor){
-            //     return(
-            //         <Button className="trash-icon" > <i className="far fa-trash-alt icon-btn"></i> </Button>
-            //     )
-            //   }
+
         }
 
 
@@ -173,6 +165,7 @@ class OnePost extends Component {
             
             </div>
             {/* ===== TEXT OF THE POST ====== */}
+
             <div className="one-post" >
                <p>{this.state.chunks[this.state.activeChunk]}
                 {this.state.chunks.length > 1? <span>- </span>: <span></span>}</p>
@@ -210,6 +203,8 @@ class OnePost extends Component {
                     <div  className="one-comment" data-comment={comment._id}>
                     <div className="comment-text"><span className="comment-author">{comment.author}</span> {comment.content}  </div>
                      </div>
+
+                     {/* {this.state.loggedInUser._id === this.state.postAuthor?<div>logged in user is the author</div>: <div> logged in user is not the author</div>} */}
                 </div>
                 
                 ))}
