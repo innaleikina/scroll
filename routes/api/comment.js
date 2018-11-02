@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const commentController = require("../../controllers/commentController");
 
+
 router.route("/all")
   .get(commentController.findAll);
 
