@@ -44,8 +44,7 @@ class Profile extends Component {
 
 
   handleFollow = () => {
-    if (this.state.loggedInUser.following.length > 0) {
-      console.log("length is greater than 0")
+  
 
       if (this.state.loggedInUser.following.includes(this.state.otherUser._id)) {
         console.log("you already follow this user");
@@ -64,18 +63,6 @@ class Profile extends Component {
           )
           .then(res => console.log(res.data))
       }
-    } else {
-      API.followUser(this.props.user._id, this.state.otherUser._id)
-        .then(this.setState({
-          followed: true
-        }))
-        .then(API.getUserById(this.state.otherUser._id)
-        .then(res => this.setState({
-          followers: res.data.followers
-        }, console.log(this.state.followers)))
-      )
-        .then(res => console.log(res.data))
-    }
   }
 
 
