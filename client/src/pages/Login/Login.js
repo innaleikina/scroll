@@ -31,8 +31,8 @@ class Login extends Component {
         password: this.state.password
       }
       API.createUser(newUser)
-        .then(res => {alert("New user created.")} )
-        .catch(err => console.log(err));
+        .then(res => {alert("New user created.")})
+        .catch(err => {alert("Please put in a valid email.")});
     } else {
       {alert("Please fill in your name, email, and password.")} 
     }
@@ -70,7 +70,7 @@ class Login extends Component {
           this.props.history.push("/home");
         }
       })
-  }
+  };
 
 
   render() {
@@ -99,6 +99,7 @@ class Login extends Component {
               label="Email"
               id="username"
               placeholder="john@smith.com"
+              type="email"
               name="username"
               value={this.state.username}
               onChange={this.handleInputChange}
@@ -120,13 +121,6 @@ class Login extends Component {
             onClick={(event) => this.handleLogin(event)}
             >
             </SubmitSignUp>
-
-            {/* <SubmitSignUp
-            text="login with google"
-            id="googleLogin"
-            onClick={(event) => this.props.handleGoogleLogin(event)}
-            >
-            </SubmitSignUp> */}
          </form>
         </div>
         <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -145,6 +139,7 @@ class Login extends Component {
               id="email"
               placeholder="John@Smith.com"
               name="email"
+              type="email"
               value={this.state.email}
               onChange={this.handleInputChange}
             >

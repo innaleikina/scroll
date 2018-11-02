@@ -79,13 +79,4 @@ export default {
     return axios.put("/post/like/" + postId + "/" + userId);
   }
 
-  // getFBUser: function() {
-  //   console.log("api works");
-  //   return axios.get("/user/facebook")
-  // },
-
-  // getGoogleUser: function() {
-  //   return axios.get("user/google")
-  // }
-
 };
