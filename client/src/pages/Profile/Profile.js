@@ -95,13 +95,13 @@ class Profile extends Component {
           if(this.state.loggedInUser.following.includes(this.state.otherUser._id)){
             //if yes don't render button
              return (
-               <div> followed </div>
+               <div className="followed"> followed </div>
               );
               //if no, render button, but after the button is clicked render "following"
             } else {
                return (
               !this.state.followed ?  <div className="following-btn-wrap"><Button className="follow-btn" onClick={this.handleFollow}> follow </Button></div> :  
-              <div className="following-btn-wrap"> followed </div> 
+              <div className="following-btn-wrap followed"> followed </div> 
             
             );
           }
@@ -109,7 +109,7 @@ class Profile extends Component {
        }  else {
           return (
             !this.state.followed ?  <div className="following-btn-wrap"><Button className="follow-btn" onClick={this.handleFollow}> follow </Button></div> :  
-            <div className="following-btn-wrap"> followed </div> 
+            <div className="following-btn-wrap followed"> followed </div> 
           )
        }
       }
@@ -124,12 +124,15 @@ class Profile extends Component {
       
       <div className="name-follow-wrap">
          <h2 className="profile-name"> {this.state.otherUser.name} </h2>
-         <p> {this.state.posts.length} posts </p>
-         <p> {this.state.followers.length} followers </p>
+    
          
          {/* call render button function */}
          {this.renderFollowButton()}
-        
+         
+       </div>
+       <div className="profile-stats">
+         <p className="stat"> {this.state.posts.length} posts </p>
+         <p className="stat"> {this.state.followers.length} followers </p>
        </div>
      {/* <p> {this.state.posts[0]}</p> */}
      <Posts>

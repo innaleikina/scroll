@@ -10,8 +10,10 @@
 
 .name-follow-wrap{
     display:flex;
-    justify-content: space-around;
-    margin-bottom:20px;
+    justify-content:space-between;
+    width:370px;
+    margin:0 auto;
+
 }
 
 .profile-name{
@@ -44,4 +46,22 @@
 .follow-btn:active{
     top:2px;
     box-shadow:0px 0px 0px rgba(0,0,0,0.5);
+}
+
+.profile-stats{
+    display:flex;
+    color:rgba(136, 160, 150, 1);
+    margin:0 auto;
+    margin-bottom:20px;
+    justify-content: flex-start;
+    width:370px;
+}
+
+.stat{
+    margin-right:5px;
+    margin-left:5px;
+}
+
+.followed{
+    color:rgba(239, 130 ,117, .8);
 }
