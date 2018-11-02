@@ -40,6 +40,10 @@ export default {
     return axios.post("/user", userData);
   },
 
+  getUserById: function(id){
+    return axios.get("/user/" + id);
+  },
+
   getUser: function(userLogin) {
     return axios.post("/user/login", userLogin);
   },

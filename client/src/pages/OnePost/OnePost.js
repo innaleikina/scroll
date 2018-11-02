@@ -23,13 +23,10 @@ class OnePost extends Component {
         postAuthor: this.props.match.params.userid,
         loggedInUser:""
       
-        //if false no render, if true, render 
-
     }
 
     componentDidMount() {
         this.loadPost();
-        this.setState({loggedInUser: this.props.user._id})
     }
 
 
@@ -127,6 +124,7 @@ class OnePost extends Component {
       apiLikeHit = (res) => {
           if (this.state.likes.includes(res.data._id)) {
             console.log("you've already liked this post");
+
           } else {
             API.likePost(this.state.post._id, res.data._id)
             .then(res => console.log("liked post"))
@@ -151,30 +149,23 @@ class OnePost extends Component {
                         )
                       }
                 }
-            //     this.getLoggedInUser();
-            //     if(this.state.loggedInUser._id === this.state.postAuthor){
-            //     return(
-            //         <Button className="trash-icon" > <i className="far fa-trash-alt icon-btn"></i> </Button>
-            //     )
-            //   }
+
         }
 
 
   render() {
-    //   this.getLoggedInUser();
+   //console.log(this.state.loggedInUser);
     return (
         <div className="one-post-wrap">
         
           <div className="author-all">
 
-          <p>{this.props.user.name}</p>
-
            <Link to={"/user/otherUser/" + this.state.authorId}>   <p id="one-post-author"> {this.state.authorName}</p></Link>
             {/* this will have functionality to edit and delete posts  */}
             
-              {/* <div className="author-menu"><i className="fas fa-ellipsis-h"></i></div> */}
             </div>
             {/* ===== TEXT OF THE POST ====== */}
+
             <div className="one-post" >
                <p>{this.state.chunks[this.state.activeChunk]}
                 {this.state.chunks.length > 1? <span>- </span>: <span></span>}</p>
@@ -190,7 +181,12 @@ class OnePost extends Component {
              {/* ===== POST BUTTONS ====== */}
                <div className="buttons-text-wrap">
                 <div className="one-post-buttons">
-                        <Button  className="button-one-post" onClick={this.handleLikes}><i className="one-post-i far fa-heart icon-btn"></i> </Button>
+                        
+
+                        {this.state.likes.includes(this.state.loggedInUser._id) ?   <Button  className="button-one-post" id="btn-liked" onClick={this.handleLikes}><i id="icon-liked" className="one-post-i far fa-heart icon-btn"></i> </Button> :
+                        <Button  className="button-one-post" onClick={this.handleLikes}><i className="one-post-i far fa-heart icon-btn"></i> </Button>}
+
+                        
                         <Button className="button-one-post" onClick={this.openCommentPopup}><i className="one-post-i far fa-comment icon-btn"></i> </Button>
                     </div>
                     <div className="like-comments-text">
@@ -207,6 +203,8 @@ class OnePost extends Component {
                     <div  className="one-comment" data-comment={comment._id}>
                     <div className="comment-text"><span className="comment-author">{comment.author}</span> {comment.content}  </div>
                      </div>
+
+                     {/* {this.state.loggedInUser._id === this.state.postAuthor?<div>logged in user is the author</div>: <div> logged in user is not the author</div>} */}
                 </div>
                 
                 ))}
