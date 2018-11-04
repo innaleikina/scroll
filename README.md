@@ -15,7 +15,9 @@ email: test@test.com
 password: test
 ```
 
-<!-- ![homepage](chewzy_video.gif) -->
+![scroll](scroll1.gif)
+
+![scroll](scroll2.gif)
 
 ______________
 ______________
