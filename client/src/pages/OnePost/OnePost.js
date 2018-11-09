@@ -167,7 +167,7 @@ class OnePost extends Component {
         
           <div className="author-all">
 
-          <p>{this.props.user.name}</p>
+          {/* <p>{this.props.user.name}</p> */}
 
            <Link to={"/user/otherUser/" + this.state.authorId}>   <p id="one-post-author"> {this.state.authorName}</p></Link>
             {/* this will have functionality to edit and delete posts  */}
