@@ -31,6 +31,7 @@ class CommentPopup extends Component {
      //post id is coming fromt he url param, being passed from theOne Post parent component to this component through props.
     API.postComment(this.props.postId, this.state.userId, {
       author: this.state.authorComment,
+      authorId: this.state.userId,
       content: this.state.textArea
     });
     console.log("comment posted");
