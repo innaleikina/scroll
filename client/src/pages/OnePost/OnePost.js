@@ -143,7 +143,7 @@ class OnePost extends Component {
             
         showDropDown = () =>{
           if(!this.state.dropDownShown){
-              document.getElementById("myDropdown").style.display = "block";
+              document.getElementById("myDropdown").style.display = "flex";
               this.setState({
                   dropDownShown:true
               })
@@ -159,7 +159,6 @@ class OnePost extends Component {
 
 
   render() {
-     console.log(this.state.comments);
     return (
         <div className="one-post-wrap">
         
@@ -174,7 +173,13 @@ class OnePost extends Component {
                <div className="author-menu">
                   <i onClick={this.showDropDown}  className="fas fa-ellipsis-h"></i>
                   <div id="myDropdown" className="dropdown-content">
-                    <button onClick={this.deletePost} className="delete-post-btn">Delete Post</button>
+                    <ul className="post-menu-ul">
+                        <li onClick={this.deletePost} className="delete-post-btn post-menu-li">Delete Post</li>
+                        <li className="post-menu-li">
+                            Edit post
+                        </li>
+                    </ul>
+                   
                   </div>
                </div>
                :<div></div> 
