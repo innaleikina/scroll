@@ -85,7 +85,8 @@ class OnePost extends Component {
 
     deletePost = event => {
         event.preventDefault();
-        API.deletePost(this.state.post._id);
+        API.deletePost(this.state.post._id)
+          .then(res => this.props.history.push("/user/otherUser/" + res.data.author))
         console.log("post deleted");
     }
 
