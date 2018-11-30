@@ -86,8 +86,6 @@ class OnePost extends Component {
     }
 
     closePopUp = ()  => {
-
-        console.log('pop up close clicked');
         if(this.state.commentPopUpShown === true){
             this.setState({
                 commentPopUpShown: false
@@ -102,8 +100,7 @@ class OnePost extends Component {
           .then(res =>
             this.props.history.push("/user/otherUser/" + res.data.author)
             )
-        console.log("post deleted");
-    }
+            }
 
     deleteComment = id => {
 
@@ -143,13 +140,13 @@ class OnePost extends Component {
 
       apiLikeHit = (res) => {
           if (this.state.likes.includes(res.data._id)) {
-            console.log("you've already liked this post");
+            // console.log("you've already liked this post");
             this.setState({
                 postLiked: true
             })
           } else {
             API.likePost(this.state.post._id, res.data._id)
-            .then(res => console.log("liked post"))
+            // .then(res => console.log("liked post"))
             .then(API.getPost (this.state.post._id)
               .then(res => this.setState({
                 likes: res.data.likes,
@@ -178,9 +175,7 @@ class OnePost extends Component {
         
 
   render() {
-   
-    console.log(this.state.likes);
-          return (
+             return (
         <div className="one-post-wrap">
         
           <div className="author-all">

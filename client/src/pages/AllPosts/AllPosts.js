@@ -43,7 +43,7 @@ class AllPosts extends Component {
                
                 <div className="name-genre-wrap">
                   <Link to={`/user/otherUser/${post.author._id}` }> 
-                    <div  cl assName="post-author-name"     
+                    <div  className="post-author-name"     
                     data-author-id={post.author._id} data-author={post.author.name}>{post.author.name}  </div>
                   </Link>
                   <div className="small-text">{post.genre}</div>
