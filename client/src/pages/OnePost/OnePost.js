@@ -22,7 +22,8 @@ class OnePost extends Component {
         activeChunk:0,
         postAuthor: this.props.match.params.userid,
         loggedInUser:"",
-        dropDownShown:false
+        dropDownShown:false,
+        postLiked :false
       
         //if false no render, if true, render 
 
@@ -37,7 +38,7 @@ class OnePost extends Component {
 
     loadPost = () => {
         this.setState({
-            chunks:[]
+            chunks:[],
         });
 
 
@@ -58,13 +59,25 @@ class OnePost extends Component {
                     authorName : res.data.author.name,
                     authorId:res.data.author._id,
                 }, this.chunkSubstr(res.data.content, 1000))
-            )
+            ).then(res => this.checkIfLiked())
             .catch(err => console.log(err));
+   
+
     };
+
+    checkIfLiked = () => {
+        console.log(this.state.likes);
+        console.log("testing if post was liked before");
+        if (this.state.likes.includes(this.state.loggedInUser._id)) {
+            console.log("user id was included");
+            this.setState({
+                postLiked: true
+            }) 
+           }
+    }
 
     //Toggle to show an hide comment input
      openCommentPopup = () => {
-         console.log(this.state.commentPopUpShown);
          if(this.state.commentPopUpShown === false){
        this.setState({
            commentPopUpShown: true
@@ -119,7 +132,7 @@ class OnePost extends Component {
       //handle liking posts
       handleLikes = (event) => {
         event.preventDefault();
-        // console.log("liking post");
+       
           API.fetchUser()
             .then(res => this.apiLikeHit(res))
             .catch(err => console.log(err));
@@ -128,12 +141,16 @@ class OnePost extends Component {
       apiLikeHit = (res) => {
           if (this.state.likes.includes(res.data._id)) {
             console.log("you've already liked this post");
+            this.setState({
+                postLiked: true
+            })
           } else {
             API.likePost(this.state.post._id, res.data._id)
             .then(res => console.log("liked post"))
             .then(API.getPost (this.state.post._id)
               .then(res => this.setState({
-                likes: res.data.likes
+                likes: res.data.likes,
+                postLiked:true
               }, console.log(this.state.likes)))
             )
             .catch(err => console.log(err))
@@ -157,9 +174,10 @@ class OnePost extends Component {
 
         
 
-
   render() {
-    return (
+   
+    console.log(this.state.likes);
+          return (
         <div className="one-post-wrap">
         
           <div className="author-all">
@@ -204,7 +222,8 @@ class OnePost extends Component {
              {/* ===== POST BUTTONS ====== */}
                <div className="buttons-text-wrap">
                 <div className="one-post-buttons">
-                        <Button  className="button-one-post" onClick={this.handleLikes}><i className="one-post-i far fa-heart icon-btn"></i> </Button>
+                        {this.state.postLiked ?<Button className="liked"><i id="liked" className="one-post-i far fa-heart icon-btn"></i></Button> : <Button  className="button-one-post" onClick={this.handleLikes}><i className="one-post-i far fa-heart icon-btn"></i> </Button>}
+
                         <Button className="button-one-post" onClick={this.openCommentPopup}><i className="one-post-i far fa-comment icon-btn"></i> </Button>
                     </div>
                     <div className="like-comments-text">

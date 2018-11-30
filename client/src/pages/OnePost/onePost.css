@@ -184,3 +184,27 @@
     color:rgba(239, 130 ,117, 1);
     text-decoration: none;
 }
+
+#liked{
+    color:rgba(239, 130 ,117, 1);
+    background-color:white;
+    cursor:auto;
+}
+
+.liked{
+    border:1px rgba(136, 160, 150, 1) solid;
+    background-color:white;
+    box-shadow:2px 2px 2px rgba(0,0,0,0.5);
+    border-radius:10px;
+    margin-right:20px;
+    padding:10px;
+    display:flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    transition:.2s all linear;
+}
+
+.liked:hover{
+    cursor:auto;
+}
