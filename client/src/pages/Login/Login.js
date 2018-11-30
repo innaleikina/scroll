@@ -155,6 +155,7 @@ class Login extends Component {
             <SubmitSignUp
             text="submit"
             onClick={(event) => this.handleFormSubmit(event)}
+            id="regSignUp"
             >
             </SubmitSignUp>
           </form>
