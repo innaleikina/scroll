@@ -101,7 +101,7 @@ class Search extends Component {
                         <Option value="Post"> Post </Option>
                     </Select>
 
-                    <Button onClick={this.onSearchClick}> Search </Button>
+                    <Button className="search-btn" onClick={this.onSearchClick}> Search </Button>
                  </div>
                  
 

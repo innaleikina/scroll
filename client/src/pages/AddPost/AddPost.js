@@ -116,7 +116,7 @@ class AddPost extends Component {
           <TextArea name="textArea" placeholder="enter text" value={this.state.textArea} id="textArea-post" onChange={this.handleInputChange} />
        
           {/* <Button > Save Comment </Button> */}
-          <Input id="submit-post" onClick={this.onSubmitClick}  type="submit" value="Submit"/>
+          <Input  id="submit-post" onClick={this.onSubmitClick}  type="submit" value="Submit"/>
         </form>
     </div>
     )

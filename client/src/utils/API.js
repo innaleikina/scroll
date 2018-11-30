@@ -26,11 +26,7 @@ export default {
  postPost: function(userid , postData){
    return axios.post("/post/add/" + userid , postData)
  },
-  
-  // // Saves a book to the database
-  // getComment: function(commentId) {
-  //   return axios.get("/comment/", commentId);
-  // },
+
 
   deleteComment: function(commentId){
     return axios.delete("/comment/" + commentId)

@@ -21,7 +21,9 @@ class OnePost extends Component {
         authorId: "",
         activeChunk:0,
         postAuthor: this.props.match.params.userid,
-        loggedInUser:""
+        loggedInUser:"",
+        dropDownShown:false,
+        postLiked :false
       
         //if false no render, if true, render 
 
@@ -36,7 +38,7 @@ class OnePost extends Component {
 
     loadPost = () => {
         this.setState({
-            chunks:[]
+            chunks:[],
         });
 
 
@@ -57,13 +59,25 @@ class OnePost extends Component {
                     authorName : res.data.author.name,
                     authorId:res.data.author._id,
                 }, this.chunkSubstr(res.data.content, 1000))
-            )
+            ).then(res => this.checkIfLiked())
             .catch(err => console.log(err));
+   
+
     };
+
+    checkIfLiked = () => {
+        console.log(this.state.likes);
+        console.log("testing if post was liked before");
+        if (this.state.likes.includes(this.state.loggedInUser._id)) {
+            console.log("user id was included");
+            this.setState({
+                postLiked: true
+            }) 
+           }
+    }
 
     //Toggle to show an hide comment input
      openCommentPopup = () => {
-         console.log(this.state.commentPopUpShown);
          if(this.state.commentPopUpShown === false){
        this.setState({
            commentPopUpShown: true
@@ -82,21 +96,24 @@ class OnePost extends Component {
 }
    
 
-    // deletePost = event => {
-    //     event.preventDefault();
-    //     API.deletePost(id);
-    //     console.log("post deleted");
-    // }
-
-    deleteComment= event => {
+    deletePost = event => {
         event.preventDefault();
-        API.deleteComment();
-        console.log("comment deleted");
+        API.deletePost(this.state.post._id)
+          .then(res =>
+            this.props.history.push("/user/otherUser/" + res.data.author)
+            )
+        console.log("post deleted");
+    }
+
+    deleteComment = id => {
+
+        API.deleteComment(id);
+        this.loadPost();
     }
 
 
       chunkSubstr = (str, size) => {
-        console.log("chunks subst start");
+       
         const numChunks = Math.ceil(str.length / size)
         for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
             this.setState({
@@ -112,13 +129,13 @@ class OnePost extends Component {
           this.setState({
               activeChunk: e.target.id
           })
-          console.log(this.state.activeChunk);
+        //   console.log(this.state.activeChunk);
       }
 
       //handle liking posts
       handleLikes = (event) => {
         event.preventDefault();
-        console.log("liking post");
+       
           API.fetchUser()
             .then(res => this.apiLikeHit(res))
             .catch(err => console.log(err));
@@ -127,12 +144,16 @@ class OnePost extends Component {
       apiLikeHit = (res) => {
           if (this.state.likes.includes(res.data._id)) {
             console.log("you've already liked this post");
+            this.setState({
+                postLiked: true
+            })
           } else {
             API.likePost(this.state.post._id, res.data._id)
             .then(res => console.log("liked post"))
             .then(API.getPost (this.state.post._id)
               .then(res => this.setState({
-                likes: res.data.likes
+                likes: res.data.likes,
+                postLiked:true
               }, console.log(this.state.likes)))
             )
             .catch(err => console.log(err))
@@ -140,39 +161,53 @@ class OnePost extends Component {
         }
         
             
-           
-            renderDeleteButton = (id) => {
-                console.log(this.state.loggedInUser);
-                console.log(this.state.authorId);
-                if(this.state.authorId !== ""){
-                        if(this.state.loggedInUser._id === this.state.authorId){
-                        return(
-                            <Button onClick={this.deletePost(id)} className="trash-icon" > <i className="far fa-trash-alt icon-btn"></i> </Button>
-                        )
-                      }
-                }
-            //     this.getLoggedInUser();
-            //     if(this.state.loggedInUser._id === this.state.postAuthor){
-            //     return(
-            //         <Button className="trash-icon" > <i className="far fa-trash-alt icon-btn"></i> </Button>
-            //     )
-            //   }
+        showDropDown = () =>{
+          if(!this.state.dropDownShown){
+              document.getElementById("myDropdown").style.display = "flex";
+              this.setState({
+                  dropDownShown:true
+              })
+          } else {
+            document.getElementById("myDropdown").style.display = "none";
+            this.setState({
+                dropDownShown:false
+            })
+          }
         }
 
+        
 
   render() {
-    //   this.getLoggedInUser();
-    return (
+   
+    console.log(this.state.likes);
+          return (
         <div className="one-post-wrap">
         
           <div className="author-all">
 
-          <p>{this.props.user.name}</p>
 
            <Link to={"/user/otherUser/" + this.state.authorId}>   <p id="one-post-author"> {this.state.authorName}</p></Link>
+           
             {/* this will have functionality to edit and delete posts  */}
-            
-              {/* <div className="author-menu"><i className="fas fa-ellipsis-h"></i></div> */}
+              
+              {(this.state.loggedInUser._id === this.state.authorId) ?
+               <div className="author-menu">
+                  <i onClick={this.showDropDown}  className="fas fa-ellipsis-h"></i>
+                  <div id="myDropdown" className="dropdown-content">
+                    <ul className="post-menu-ul">
+                        <li onClick={this.deletePost} className="delete-post-btn post-menu-li">Delete Post</li>
+                        <li className="post-menu-li">
+                            Edit post
+                        </li>
+                    </ul>
+                   
+                  </div>
+               </div>
+               :<div></div> 
+              }
+              
+               
+              {/* */}
             </div>
             {/* ===== TEXT OF THE POST ====== */}
             <div className="one-post" >
@@ -190,7 +225,8 @@ class OnePost extends Component {
              {/* ===== POST BUTTONS ====== */}
                <div className="buttons-text-wrap">
                 <div className="one-post-buttons">
-                        <Button  className="button-one-post" onClick={this.handleLikes}><i className="one-post-i far fa-heart icon-btn"></i> </Button>
+                        {this.state.postLiked ?<Button className="liked"><i id="liked" className="one-post-i far fa-heart icon-btn"></i></Button> : <Button  className="button-one-post" onClick={this.handleLikes}><i className="one-post-i far fa-heart icon-btn"></i> </Button>}
+
                         <Button className="button-one-post" onClick={this.openCommentPopup}><i className="one-post-i far fa-comment icon-btn"></i> </Button>
                     </div>
                     <div className="like-comments-text">
@@ -203,10 +239,15 @@ class OnePost extends Component {
             {/* MAP FUNCTION TO GET COMMENTS */}
             <div className="one-post-comments">
                 {this.state.comments.map(comment => (
+                
                 <div  key={comment._id}>
-                    <div  className="one-comment" data-comment={comment._id}>
-                    <div className="comment-text"><span className="comment-author">{comment.author}</span> {comment.content}  </div>
+                    <div  className="one-comment">
+                       <div className="comment-text">
+                          <span className="comment-author">{comment.author}</span> {comment.content} 
+                        </div>
+                        {this.state.loggedInUser._id === comment.authorId ? <div><Button data-id={comment._id} onClick={() => this.deleteComment(comment._id)} className="trash-icon"> <i className="far fa-trash-alt icon-btn"></i> </Button></div> : <div></div>}
                      </div>
+                     
                 </div>
                 
                 ))}
