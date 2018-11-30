@@ -26,7 +26,7 @@ class Profile extends Component {
     API.fetchUser()
       .then(res => this.setState({
         loggedInUser: res.data
-      }), console.log("success"))
+      }))
       .catch(err => console.log(err));
 
     API.getProfile(this.state.userId)
@@ -59,9 +59,9 @@ class Profile extends Component {
           .then(API.getUserById(this.state.otherUser._id)
             .then(res => this.setState({
               followers: res.data.followers
-            }, console.log(this.state.followers)))
+            }))
           )
-          .then(res => console.log(res.data))
+          // .then(res => console.log(res.data))
       }
   }
 
@@ -87,8 +87,6 @@ class Profile extends Component {
             <p></p> 
           )
         }
-
-       console.log("logged in user is not empty");
         //check if user has more than 0 followers
         if(this.state.loggedInUser.following.length > 0){
           //if they have more than 0 followers check if the followers include the id of the person whose profile we are viewing
@@ -118,7 +116,7 @@ class Profile extends Component {
             
 
   render() {
-   console.log(this.state.followers)
+
     return (
       <div className="profile-wrap">
       

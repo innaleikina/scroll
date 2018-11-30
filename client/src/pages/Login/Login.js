@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {SignUp, SubmitSignUp} from "../../components/SignUp";
-// import { BrowserRouter as  Redirect } from "react-router-dom";
 import API from "../../utils/API";
-import { withRouter } from 'react-router-dom'
 
 import "./Login.css";
 
@@ -34,7 +32,7 @@ class Login extends Component {
         .then(res => {alert("New user created.")})
         .catch(err => {alert("Please put in a valid email.")});
     } else {
-      {alert("Please fill in your name, email, and password.")} 
+      alert("Please fill in your name, email, and password.")
     }
   };
 
@@ -52,13 +50,13 @@ class Login extends Component {
       API.getUser(loginUser)
         .then(res => {
           if(typeof(res.data) === "string") {
-            {alert("Incorrect email or password.")} 
+            alert("Incorrect email or password.") 
           } else {
             this.redirect()
           }})
         .catch(err => console.log(err));
     } else {
-      {alert("Please input both your email and password.")} 
+      alert("Please input both your email and password.")
     }
   };
 
@@ -157,6 +155,7 @@ class Login extends Component {
             <SubmitSignUp
             text="submit"
             onClick={(event) => this.handleFormSubmit(event)}
+            id="regSignUp"
             >
             </SubmitSignUp>
           </form>

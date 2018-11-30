@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Timeline from "./pages/Timeline";
 import OnePost from "./pages/OnePost";
 import {NavBar, NavItem} from "./components/nav";
@@ -37,7 +37,7 @@ class App extends Component {
 
   alert = () => {
     if (this.state.authed === false) {
-      {alert("Please log in first.")} 
+      alert("Please log in first.")
     }
   };
 
