@@ -62,7 +62,7 @@ class CommentPopup extends Component {
   <form className="pop-up" >
     {/* {props.children} */}
     <Button onClick={this.props.closePopUp} id="close-pop-up"> X </Button>
-    <TextArea name="textArea" placeholder="enter your comment" value={this.state.textArea} id="text-area" onChange={this.handleInputChange} />
+    <TextArea id="text-area" name="textArea" placeholder="enter your comment" value={this.state.textArea} id="text-area" onChange={this.handleInputChange} />
     {/* <Button > Save Comment </Button> */}
     <Input className="submit" onClick={this.onSubmitClick}  type="submit" value="Submit"/>
   </form>

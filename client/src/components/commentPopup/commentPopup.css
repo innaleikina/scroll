@@ -17,3 +17,32 @@
     height:100px;
     width:300px
 }
+
+#close-pop-up{
+    border:2px rgba(136, 160, 150, 1) solid;
+    color:rgba(239, 130 ,117, 1);
+    font-weight:bold;
+    background-color:white;
+    box-shadow:2px 2px 2px rgba(0,0,0,0.5);
+    border-radius:10px;
+    width:40px;
+    height:40px;
+    padding:5px;
+    display:flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    transition:.2s all linear;
+}
+
+#close-pop-up:hover{
+    cursor:pointer;
+    box-shadow:1px 1px 1px rgba(0,0,0,0.5);
+}
+
+#close-pop-up:active{
+
+    box-shadow:1px 1px 1px rgba(0,0,0,0);
+    top:2px;
+    border-color:rgba(239, 130 ,117, 1);
+}
