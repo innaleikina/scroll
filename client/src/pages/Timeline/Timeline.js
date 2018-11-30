@@ -36,13 +36,13 @@ class Timeline extends Component {
 
 
   render() {
-    console.log(this.state.following)
+
     return (
         <div id="timeline-wrap" >
         {/* <p>FOLLOWING THESE GUYS {this.props.user.following}</p> */}
           {this.state.following.length === 0? <div> You don't follow anyone yet </div> :
           this.state.following.map(result => 
-            <div className="following-wrap">
+            <div className="following-wrap" key={result._id}>
               <p className="owner-name"> <Link className="link-author" to={`/user/otherUser/${result._id}`}>{result.name} </Link>'s posts</p>
               {result.posts.map(post => 
               <div>

@@ -5,7 +5,7 @@ Scroll is a social media app for readers and writers. Writers can post poetry, s
 
 
 
-## Visit the deployed version of Chewzy
+## Visit the deployed version of Scroll
 [Scroll](https://pacific-everglades-31097.herokuapp.com/)
 Checkout the full version of the app with these credentials:
 ```

@@ -30,7 +30,41 @@
 }
 
 #regLogin {
-  background-color: grey;
+  background-color:rgba(136, 160, 150, 1);
+  border: 1.5px rgba(136, 160, 150, 1) solid;
+  transition: .2s all linear;
+  box-shadow:2px 2px 2px rgba(0,0,0,0.3);
+}
+
+#regLogin:hover{
+  border:1.5px rgba(239, 130 ,117, 1) solid;
+  /* box-shadow:1px 1px 1px rgba(0,0,0,0.2); */
+}
+
+#regLogin:active{
+  background-color:rgba(136, 160, 150, .8);
+  box-shadow:1px 1px 1px rgba(0,0,0,0);
+  top:1px;
+
+}
+
+#regSignUp{
+  background-color:rgba(136, 160, 150, 1);
+  border: 1.5px rgba(136, 160, 150, 1) solid;
+  transition: .2s all linear;
+  box-shadow:2px 2px 2px rgba(0,0,0,0.3);
+}
+
+#regSignUp:hover{
+  border:1.5px rgba(239, 130 ,117, 1) solid;
+  /* box-shadow:1px 1px 1px rgba(0,0,0,0.2); */
+}
+
+#regSignUp:active{
+  background-color:rgba(136, 160, 150, .8);
+  box-shadow:1px 1px 1px rgba(0,0,0,0);
+  top:1px;
+
 }
 
 .nav-tabs{

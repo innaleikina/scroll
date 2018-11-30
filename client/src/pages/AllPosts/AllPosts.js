@@ -23,7 +23,7 @@ class AllPosts extends Component {
             .then(res =>
                 this.setState({
                     posts: res.data,
-                }, console.log(res.data))
+                })
             )
             .catch(err => console.log(err));
     };
@@ -43,7 +43,7 @@ class AllPosts extends Component {
                
                 <div className="name-genre-wrap">
                   <Link to={`/user/otherUser/${post.author._id}` }> 
-                    <div  className="post-author-name"     
+                    <div  cl assName="post-author-name"     
                     data-author-id={post.author._id} data-author={post.author.name}>{post.author.name}  </div>
                   </Link>
                   <div className="small-text">{post.genre}</div>

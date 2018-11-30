@@ -34,3 +34,25 @@
     margin-bottom:40px;
 }
 
+
+#submit-post{
+    background-color: white;
+    float: right;
+    /* margin-top: 10px; */
+    color:rgba(136, 160, 150, 1);
+    border: 1px rgba(136, 160, 150, 1) solid;
+    border-radius:5px;
+    box-shadow:2px 2px 2px rgba(0,0,0,0.5);
+    padding:10px;
+    font-size:13px;
+    font-weight:bold;
+  }
+  
+#submit-post:hover{
+    box-shadow:1px 1px 1px rgba(0,0,0,0.5);
+  }
+  
+#submit-post:active{
+   box-shadow:none;
+   top:2px;
+  }

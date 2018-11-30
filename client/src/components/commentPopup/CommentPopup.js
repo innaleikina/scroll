@@ -31,6 +31,7 @@ class CommentPopup extends Component {
      //post id is coming fromt he url param, being passed from theOne Post parent component to this component through props.
     API.postComment(this.props.postId, this.state.userId, {
       author: this.state.authorComment,
+      authorId: this.state.userId,
       content: this.state.textArea
     });
     console.log("comment posted");
@@ -61,7 +62,7 @@ class CommentPopup extends Component {
   <form className="pop-up" >
     {/* {props.children} */}
     <Button onClick={this.props.closePopUp} id="close-pop-up"> X </Button>
-    <TextArea name="textArea" placeholder="enter your comment" value={this.state.textArea} id="text-area" onChange={this.handleInputChange} />
+    <TextArea id="text-area" name="textArea" placeholder="enter your comment" value={this.state.textArea} id="text-area" onChange={this.handleInputChange} />
     {/* <Button > Save Comment </Button> */}
     <Input className="submit" onClick={this.onSubmitClick}  type="submit" value="Submit"/>
   </form>
