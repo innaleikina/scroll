@@ -1,18 +1,5 @@
 const db = require("../models");
 
-//             {
-//               "genre": {
-//                 "$regex": req.params.genre,
-//                 "$options": "i"
-//               }
-//             },
-//             {
-//               "type": {
-//                 "$regex": req.params.type,
-//                 "$options": "i"
-//               }
-//             }
-
 // Defining methods for the booksController
 module.exports = {
   findAll: function (req, res) {

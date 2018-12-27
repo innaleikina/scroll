@@ -9,7 +9,8 @@ import "./timeline.css";
 class Timeline extends Component {
 
     state = {
-        following: []
+        following: [],
+        followingPosts: []
      }
 
     componentWillMount() {
@@ -17,15 +18,27 @@ class Timeline extends Component {
     }
 
     mapFollowing = (res) => {
+      //  console.log(res.data);
       res.data.following.map(following => 
         API.getProfile(following)
-          .then(res => this.setState({
+          .then(res => 
+            this.setState({
             following: [...this.state.following, res.data]
-          }))
+          })
+          )
+          .then(this.mapFollowingPosts)
           // .then(this.setState({following: allFollowing}, console.log(typeof(this.state.following))))
-          .catch(err => console.log(err))
+          // .catch(err => console.log(err))
       )
       
+    }
+
+    mapFollowingPosts = () => { 
+      this.setState({followingPosts: []});
+      this.state.following.map(following => 
+        following.posts.map(followingPost => 
+          this.setState({followingPosts: [...this.state.followingPosts, followingPost]})
+          ));
     }
 
     loadPosts = () => {
@@ -36,16 +49,17 @@ class Timeline extends Component {
 
 
   render() {
+    console.log(this.state.followingPosts);
 
     return (
-        <div id="timeline-wrap" >
+        <div id="timeline-wrap">
         {/* <p>FOLLOWING THESE GUYS {this.props.user.following}</p> */}
-          {this.state.following.length === 0? <div> You don't follow anyone yet </div> :
-          this.state.following.map(result => 
-            <div className="following-wrap" key={result._id}>
-              <p className="owner-name"> <Link className="link-author" to={`/user/otherUser/${result._id}`}>{result.name} </Link>'s posts</p>
-              {result.posts.map(post => 
-              <div>
+          {this.state.followingPosts.length === 0? <div> You don't follow anyone yet </div> :
+          this.state.followingPosts.map(post => 
+            <div className="following-wrap" key={post._id}>
+              {/* <p className="owner-name"> <Link className="link-author" to={`/user/otherUser/${result._id}`}>{result.name} </Link>'s posts</p> */}
+              {/* {result.map(post =>  */}
+              
                  <PostItem  key={post._id}>
           {/* p wrapped in a with href to make going to the OpenPost page possible */}
           <div className = "post-text">
@@ -66,12 +80,14 @@ class Timeline extends Component {
                     <p className="content-text"  data-post={post._id}> {ellipsize(post.content, 300)} </p>
                 </Link>
            </div>
+           
            <div className="post-data">
               <p> <i className="far fa-heart"></i>{post.likes.length} </p>
               <p><i className="far fa-comment"></i>{post.comment.length} </p>
            </div>
            {/* <Button onClick={() => this.deleteArticle(article._id)}> delete </Button> */}
         </PostItem>
+        
  
               </div>
               )}
@@ -80,8 +96,9 @@ class Timeline extends Component {
 
           
             )}
-    </div>
-    );
+    
+    
   }
-}
+
+
 export default Timeline;
